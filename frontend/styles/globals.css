@@ -1,0 +1,697 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  --bg: #02070d;
+  --text: #ebf6ff;
+  --brand-900: #071a2d;
+  --brand-800: #0b2e4d;
+  --brand-700: #0b4d97;
+  --brand-600: #1265d6;
+  --brand-500: #35b7ff;
+  --brand-400: #6fd2ff;
+  --ink: #02070d;
+  --panel: #0b1220;
+  --panel-soft: #101b2b;
+  --surface: #111827;
+  --border: rgba(130, 180, 255, 0.18);
+  --muted: #9fb3c8;
+  --header-bg: rgba(11, 18, 32, 0.9);
+  --header-bg-strong: rgba(11, 18, 32, 0.95);
+  --header-bg-dark: rgba(11, 18, 32, 0.9);
+  --header-bg-strong-dark: rgba(11, 18, 32, 0.95);
+}
+
+html.theme-light {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --brand-900: #1e3a8a;
+  --brand-800: #2563eb;
+  --brand-700: #3b82f6;
+  --brand-600: #60a5fa;
+  --brand-500: #2563eb;
+  --brand-400: #93c5fd;
+  --ink: #f8fafc;
+  --panel: #e2e8f0;
+  --panel-soft: #ffffff;
+  --surface: #f8fafc;
+  --border: rgba(15, 23, 42, 0.12);
+  --muted: #64748b;
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --header-bg-strong: rgba(255, 255, 255, 0.98);
+}
+
+html.theme-dark {
+  color-scheme: dark;
+}
+
+html, body, #__next {
+  min-height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease, opacity .18s ease;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+select option {
+  background: #101b2b;
+  color: #ebf6ff;
+}
+
+::selection {
+  background: rgba(53,183,255,0.3);
+  color: #ffffff;
+}
+
+.glass-card {
+  background: rgba(11, 18, 32, 0.9);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(130, 180, 255, 0.18);
+  box-shadow: 0 35px 90px rgba(2,7,13,0.45);
+}
+
+.hero-panel {
+  position: relative;
+  background: radial-gradient(circle at top left, rgba(53,183,255,0.22), transparent 32%),
+              radial-gradient(circle at 90% 20%, rgba(11,77,151,0.16), transparent 18%),
+              linear-gradient(180deg, #050d1a 0%, #0a1320 100%);
+  overflow: hidden;
+}
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.04), transparent 38%);
+  pointer-events: none;
+}
+
+.glass-nav {
+  background: rgba(2,7,13,0.96) !important;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(130,180,255,0.18) !important;
+  box-shadow: 0 20px 60px rgba(2,7,13,0.55);
+}
+
+.glass-nav.scrolled {
+  background: rgba(2,7,13,0.98) !important;
+  box-shadow: 0 28px 70px rgba(2,7,13,0.7);
+}
+
+.btn-glow::before {
+  background: radial-gradient(circle at 30% 20%, rgba(53,183,255,0.28), transparent 42%);
+}
+
+.magnetic {
+  position: relative;
+  transition: transform .18s ease;
+}
+
+.magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.card-hover {
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 70px rgba(11,77,151,0.22);
+  border-color: rgba(53,183,255,0.28);
+}
+
+.card-hover:hover .card-icon {
+  transform: rotate(12deg) scale(1.02);
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s ease;
+}
+
+.card-border {
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.shadow-glow {
+  box-shadow: 0 30px 80px rgba(15,23,42,0.08);
+}
+
+.image-mask {
+  overflow: hidden;
+}
+
+.image-mask img {
+  transition: transform .8s ease;
+}
+
+.image-mask:hover img {
+  transform: scale(1.08);
+}
+
+.section-title {
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  line-height: 1.02;
+}
+
+.section-subtitle {
+  color: rgba(226,232,240,0.76);
+}
+
+html.theme-dark {
+  /* Dark theme utility remaps: convert common light utilities to dark equivalents so pages using light classes look correct */
+
+  /* Background remap */
+  --panel: #0b1220;
+  --panel-soft: #101b2b;
+}
+
+html.theme-dark .bg-white,
+html.theme-dark .bg-slate-50,
+html.theme-dark .bg-slate-100,
+html.theme-dark .bg-slate-200,
+html.theme-dark .bg-\[\#ffffff\],
+html.theme-dark .bg-\[\#f8fafc\],
+html.theme-dark .bg-\[\#eff6ff\] {
+  background-color: var(--panel) !important;
+}
+
+html.theme-dark .bg-white\/5,
+html.theme-dark .bg-white\/10,
+html.theme-dark .bg-white\/20,
+html.theme-dark .bg-white\/30,
+html.theme-dark .bg-white\/35,
+html.theme-dark .bg-white\/40,
+html.theme-dark .bg-white\/50,
+html.theme-dark .bg-white\/60,
+html.theme-dark .bg-white\/70,
+html.theme-dark .bg-white\/80,
+html.theme-dark .bg-white\/90,
+html.theme-dark .bg-white\/95,
+html.theme-dark .bg-slate-50\/95,
+html.theme-dark .bg-slate-100\/95,
+html.theme-dark .bg-slate-50\/50,
+html.theme-dark .bg-slate-100\/50 {
+  background-color: rgba(255,255,255,0.04) !important;
+}
+
+html.theme-dark .bg-slate-50,
+html.theme-dark .bg-slate-100,
+html.theme-dark .bg-slate-200 {
+  background-color: var(--panel-soft) !important;
+}
+
+html.theme-dark [class*="bg-[radial-gradient(circle_at_top_left"] {
+  background: radial-gradient(circle at top left, rgba(53,183,255,0.10), transparent 28%), #02070d !important;
+}
+
+html.theme-dark input.bg-slate-100,
+html.theme-dark select.bg-slate-100,
+html.theme-dark textarea.bg-slate-100,
+html.theme-dark .rounded-full.bg-slate-100 {
+  background-color: rgba(255,255,255,0.02) !important;
+}
+
+html.theme-dark .text-slate-900,
+html.theme-dark .text-slate-800,
+html.theme-dark .text-slate-700,
+html.theme-dark .text-gray-700,
+html.theme-dark .text-gray-600,
+html.theme-dark .text-gray-500,
+html.theme-dark .text-gray-400,
+html.theme-dark .text-slate-600 {
+  color: #dff3ff !important;
+}
+
+html.theme-dark .text-gray-300,
+html.theme-dark .text-slate-300,
+html.theme-dark .text-slate-400 {
+  color: rgba(230,243,255,0.85) !important;
+}
+
+html.theme-dark .bg-yellow-400,
+html.theme-dark .bg-yellow-500,
+html.theme-dark .bg-yellow-400\/10,
+html.theme-dark .bg-yellow-400\/15,
+html.theme-dark .bg-yellow-400\/95,
+html.theme-dark .bg-yellow-900\/20 {
+  background: linear-gradient(135deg, var(--brand-700) 0%, var(--brand-500) 100%) !important;
+}
+
+html.theme-dark .text-yellow-300,
+html.theme-dark .text-yellow-400,
+html.theme-dark .text-yellow-600,
+html.theme-dark .text-yellow-500 {
+  color: var(--brand-400) !important;
+}
+
+html.theme-dark .border-white\/10,
+html.theme-dark .border-white\/20,
+html.theme-dark .border-white\/30,
+html.theme-dark .border-slate-200,
+html.theme-dark .border-slate-100,
+html.theme-dark .border-slate-300,
+html.theme-dark .divide-white\/10 {
+  border-color: var(--border) !important;
+}
+
+html.theme-dark .rounded-full.bg-yellow-400,
+html.theme-dark .bg-gradient-to-r.from-\#0b4d97.to-\#35b7ff,
+html.theme-dark .rounded-full.bg-gradient-to-r {
+  color: #fff !important;
+}
+
+html.theme-dark h1,h2,h3,h4,h5,h6 {
+  color: #ffffff !important;
+}
+
+html.theme-dark .text-gray-500,
+html.theme-dark .text-gray-400 {
+  color: rgba(230,243,255,0.7) !important;
+}
+
+html.theme-dark a { color: var(--brand-400); }
+
+/* Keep text-white and text-yellow variants white in light mode (used on dark backgrounds) */
+html.theme-light .text-white {
+  color: #ffffff !important;
+}
+
+html.theme-light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+/* Specific mapping for hero dark background variant */
+html.theme-light .hero-panel,
+html.theme-light [class*="bg-\[\#070707\]"],
+html.theme-light [class*="bg-\[\#111111\]"] {
+  background-color: #0b0b0b !important;
+}
+
+/* Ensure dark arbitrary panels keep white text in light theme */
+html.theme-light [class*="bg-\[\#0"],
+html.theme-light [class*="bg-\[\#07"],
+html.theme-light [class*="bg-\[\#08"],
+html.theme-light [class*="bg-\[\#09"],
+html.theme-light [class*="bg-\[\#0f"],
+html.theme-light [class*="bg-\[\#11"],
+html.theme-light [class*="bg-\[\#10"] {
+  color: #ffffff !important;
+}
+
+html.theme-light [class*="bg-\[\#0"] .text-slate-100,
+html.theme-light [class*="bg-\[\#0"] .text-slate-200,
+html.theme-light [class*="bg-\[\#0"] .text-slate-300,
+html.theme-light [class*="bg-\[\#0"] .text-gray-400,
+html.theme-light [class*="bg-\[\#0"] .text-gray-300 {
+  color: #ffffff !important;
+}
+
+html.theme-light .text-slate-200 {
+  color: #475569 !important;
+}
+
+html.theme-light .text-slate-300 {
+  color: #64748b !important;
+}
+
+html.theme-light .border-white\/10,
+html.theme-light .border-white\/20,
+html.theme-light .border-white\/30,
+html.theme-light .border-slate-800\/70,
+html.theme-light .border-slate-200 {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html.theme-light a { color: #2563eb; }
+
+/* Ensure header remains dark even in light theme */
+.header-dark {
+  background-color: var(--header-bg-dark) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* Keep common dark header background classes dark inside header */
+.header-dark .bg-\[\#0b1220\],
+.header-dark .bg-\[\#101b2b\],
+.header-dark .bg-\[\#111111\],
+.header-dark .bg-\[\#090909\],
+.header-dark .bg-slate-950,
+.header-dark .bg-slate-900 {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+}
+
+.header-dark .text-white,
+.header-dark .text-slate-100,
+.header-dark .text-slate-200,
+.header-dark .text-gray-400,
+.header-dark .text-slate-300 {
+  color: var(--text) !important;
+}
+
+/* Light theme comprehensive text color remaps */
+html.theme-light .text-slate-100 { color: #0f172a !important; }
+html.theme-light .text-slate-200 { color: #475569 !important; }
+html.theme-light .text-slate-300 { color: #64748b !important; }
+html.theme-light .text-slate-400 { color: #94a3b8 !important; }
+html.theme-light .text-slate-500 { color: #64748b !important; }
+html.theme-light .text-slate-600 { color: #475569 !important; }
+
+html.theme-light .text-gray-300 { color: #1f2937 !important; }
+html.theme-light .text-gray-400 { color: #374151 !important; }
+html.theme-light .text-gray-500 { color: #6b7280 !important; }
+html.theme-light .text-gray-600 { color: #4b5563 !important; }
+
+html.theme-light .text-stone-300 { color: #57534e !important; }
+html.theme-light .text-stone-400 { color: #78716c !important; }
+
+html.theme-light .text-neutral-300 { color: #525252 !important; }
+html.theme-light .text-neutral-400 { color: #737373 !important; }
+
+/* Light theme background overrides for panels */
+html.theme-light .bg-white { background-color: #ffffff !important; }
+html.theme-light .bg-slate-50 { background-color: #f8fafc !important; }
+html.theme-light .bg-slate-100 { background-color: #f1f5f9 !important; }
+html.theme-light .bg-slate-200 { background-color: #e2e8f0 !important; }
+
+html.theme-light input.bg-slate-100,
+html.theme-light input.bg-slate-50,
+html.theme-light select.bg-slate-100,
+html.theme-light select.bg-slate-50,
+html.theme-light textarea.bg-slate-100,
+html.theme-light textarea.bg-slate-50 {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.theme-light input:focus.bg-slate-100,
+html.theme-light select:focus.bg-slate-100,
+html.theme-light textarea:focus.bg-slate-100 {
+  border-color: #fbbf24 !important;
+}
+
+/* Button text in light mode */
+html.theme-light .text-yellow-400,
+html.theme-light .text-yellow-500 { color: #0f172a !important; }
+
+/* Light mode input placeholder */
+html.theme-light input::placeholder,
+html.theme-light textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Light mode button styles */
+html.theme-light .bg-yellow-400 {
+  background-color: #facc15 !important;
+  color: #000000 !important;
+}
+
+html.theme-light .bg-blue-600 {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Light mode border fixes */
+html.theme-light .border-slate-300 { border-color: #cbd5e1 !important; }
+html.theme-light .border-slate-200 { border-color: #e2e8f0 !important; }
+
+/* Light mode card backgrounds */
+html.theme-light .rounded-lg.bg-white,
+html.theme-light .rounded-2xl.bg-white,
+html.theme-light .rounded-3xl.bg-white {
+  background-color: #ffffff !important;
+}
+
+/* Light mode text opacity classes */
+html.theme-light .text-white\/90 { color: #0f172a !important; }
+html.theme-light .text-white\/80 { color: #0f172a !important; }
+html.theme-light .text-white\/70 { color: #0f172a !important; }
+html.theme-light .text-white\/60 { color: #0f172a !important; }
+html.theme-light .text-white\/50 { color: #1e293b !important; }
+
+/* Light mode specific class fixes */
+html.theme-light .text-slate-900 { color: #0f172a !important; }
+html.theme-light .text-slate-800 { color: #1e293b !important; }
+html.theme-light .text-slate-700 { color: #334155 !important; }
+
+/* Light mode hover states */
+html.theme-light .hover\:text-white:hover { color: #0f172a !important; }
+html.theme-light .hover\:text-gray-50:hover { color: #0f172a !important; }
+
+/* Light mode group states */
+html.theme-light .group\/header:hover .text-white { color: #0f172a !important; }
+
+/* Fix heading colors in light mode */
+html.theme-light h1,
+html.theme-light h2,
+html.theme-light h3,
+html.theme-light h4,
+html.theme-light h5,
+html.theme-light h6 {
+  color: #0f172a !important;
+}
+
+/* Light mode form elements */
+html.theme-light label { color: #475569 !important; }
+html.theme-light [type="text"],
+html.theme-light [type="email"],
+html.theme-light [type="password"],
+html.theme-light [type="number"],
+html.theme-light select,
+html.theme-light textarea {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.theme-light [type="text"]:focus,
+html.theme-light [type="email"]:focus,
+html.theme-light [type="password"]:focus,
+html.theme-light [type="number"]:focus,
+html.theme-light select:focus,
+html.theme-light textarea:focus {
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1) !important;
+}
+
+/* Light mode utility classes for common elements */
+html.theme-light .hover\:text-opacity-80:hover { color: #0f172a !important; }
+html.theme-light .hover\:bg-gray-50:hover { background-color: #f8fafc !important; }
+html.theme-light .hover\:brightness-95:hover { filter: brightness(0.95); }
+
+/* Light mode box and panel styling */
+html.theme-light .rounded-\[32px\] { color: #0f172a !important; }
+html.theme-light .rounded-\[32px\].bg-\[\#111111\] { background-color: #ffffff !important; }
+
+html.theme-light .shadow-\[0_30px_80px_rgba\(255\,199\,0\,0\.12\)\]:hover {
+  box-shadow: 0 30px 80px rgba(59, 130, 246, 0.12) !important;
+}
+
+/* Light mode disabled state */
+html.theme-light [disabled] { opacity: 0.6; }
+
+/* Light mode link colors */
+html.theme-light a.hover\:text-white:hover { color: #0f172a !important; }
+
+/* Badge and pill styling for light mode */
+html.theme-light .px-3.py-2.rounded-full {
+  color: #0f172a !important;
+}
+
+/* Light mode input placeholders with focus */
+html.theme-light input:focus::placeholder,
+html.theme-light textarea:focus::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Specific style fixes for light mode sections */
+html.theme-light section { color: #0f172a !important; }
+
+/* Light mode specific dark color mappings */
+html.theme-light [style*="color: rgb(239, 246, 255)"] { color: #0f172a !important; }
+html.theme-light [style*="color: #ebf6ff"] { color: #0f172a !important; }
+
+/* Light mode grid and layout text */
+html.theme-light .grid { color: #0f172a !important; }
+html.theme-light .gap-2 > * { color: inherit; }
+
+/* Premium home page specific fixes for light mode */
+html.theme-light [class*="bg-[radial-gradient"]  {
+  background: radial-gradient(circle at top left, rgba(37,99,235,0.1), transparent 28%), #f8fafc !important;
+}
+
+/* Light mode specific gradients */
+html.theme-light .bg-gradient-to-r { background: linear-gradient(to right, #f8fafc, #f1f5f9) !important; }
+html.theme-light .bg-gradient-to-b { background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important; }
+
+/* Light mode scrollbar styling */
+html.theme-light ::-webkit-scrollbar {
+  background-color: #f1f5f9;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: fadeUp .88s ease forwards;
+}
+
+.fade-up-delay-1 { animation-delay: .12s; }
+.fade-up-delay-2 { animation-delay: .24s; }
+.fade-up-delay-3 { animation-delay: .36s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseSoft {
+  0%,100% { transform: scale(1); opacity: 0.72; }
+  50% { transform: scale(1.06); opacity: 0.9; }
+}
+
+.floating {
+  animation: pulseSoft 7s ease-in-out infinite;
+}
+
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 40%);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.ripple-btn:active::after {
+  opacity: 1;
+  transform: scale(1);
+  transition: none;
+}
+
+.best-sellers-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.best-sellers-slider::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scrollBrands {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-scrollBrands {
+  animation: scrollBrands 24s linear infinite;
+}
+
+.prefers-reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Hero headline font fix */
+.hero-headline {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif !important;
+  font-weight: 600 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Comprehensive light-mode corrections for elements that intentionally
+   use dark backgrounds (hero, product cards, promo panels, badges). This
+   ensures these sections remain readable when the site is in light theme. */
+html.theme-light [class*="bg-\[\#0"],
+html.theme-light [class*="bg-\#0"],
+html.theme-light [class*="bg-\[rgba"],
+html.theme-light .hero-panel,
+html.theme-light .best-sellers-slider,
+html.theme-light .brand-marquee,
+html.theme-light .rounded-\[36px\],
+html.theme-light .rounded-\[32px\],
+html.theme-light .rounded-\[28px\] {
+  color: var(--text) !important;
+}
+
+/* Force headings and key text inside dark panels to be white */
+html.theme-light [class*="bg-\[\#0"] h1,
+html.theme-light [class*="bg-\[\#0"] h2,
+html.theme-light [class*="bg-\[\#0"] h3,
+html.theme-light [class*="bg-\[\#0"] h4,
+html.theme-light [class*="bg-\[\#0"] h5,
+html.theme-light [class*="bg-\[\#0"] .text-white,
+html.theme-light [class*="bg-\[\#0"] .text-yellow-300,
+html.theme-light [class*="bg-\[\#0"] .text-yellow-400,
+html.theme-light [class*="bg-\[\#0"] .text-gray-400 {
+  color: #ffffff !important;
+}
+
+/* Ensure yellow badges remain visible on both themes */
+html.theme-light .bg-yellow-400 { background-color: #facc15 !important; color: #000 !important; }
+html.theme-light .bg-yellow-300 { background-color: #fbbf24 !important; color: #000 !important; }
+
+/* Buttons that rely on white backgrounds inside dark panels should keep their contrast */
+html.theme-light [class*="bg-\[\#0"] .ripple-btn,
+html.theme-light [class*="bg-\[\#0"] .inline-flex,
+html.theme-light [class*="bg-\[\#0"] a {
+  color: inherit !important;
+}
+
+/* Specific: keep product card text readable */
+html.theme-light .best-sellers-slider .p-6,
+html.theme-light .best-sellers-slider .p-4,
+html.theme-light .best-sellers-slider .p-8 {
+  color: var(--text) !important;
+}
+
+/* Remove overly broad overrides that accidentally darken white text in dark panels.
+   (If you added more specific overrides elsewhere, keep them — this prevents regressions.) */
+html.theme-light .text-white { color: #ffffff !important; }
+
