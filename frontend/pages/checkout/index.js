@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { normalizeImageUrl } from '../../lib/imageUrl';
+import { formatMoney } from '../../lib/currency';
 
 export default function Checkout(){
   const { token } = useAuth();
@@ -118,11 +119,11 @@ export default function Checkout(){
                     <div className="font-medium text-white">{it.title}</div>
                     <div className="text-sm text-gray-400">Qty: {it.quantity}</div>
                   </div>
-                  <div className="font-semibold text-white">${(parseFloat(it.price||0)*it.quantity).toFixed(2)}</div>
+                  <div className="font-semibold text-white">{formatMoney(parseFloat(it.price||0)*it.quantity)}</div>
                 </div>
               ))}
             </div>
-            <div className="mt-4 border-t border-white/10 pt-4 text-lg font-semibold text-white">Subtotal: ${subtotal.toFixed(2)}</div>
+            <div className="mt-4 border-t border-white/10 pt-4 text-lg font-semibold text-white">Subtotal: {formatMoney(subtotal)}</div>
             <div className="mt-3 text-sm text-gray-400">Shipping and taxes calculated at checkout.</div>
             <div className="mt-4">
               <Link href="/shop" className="text-yellow-300">Continue shopping</Link>

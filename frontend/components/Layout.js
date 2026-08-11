@@ -122,7 +122,6 @@ export default function Layout({ children }) {
       >
         <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-slate-300">
-            <span className="rounded-full bg-sky-500/10 px-3 py-1 text-sky-200">Free delivery on orders over $99</span>
             <span className="hidden sm:inline-flex text-slate-400">Call us: +94 74 085 8726</span>
             <span className="hidden md:inline-flex text-slate-400">24/7 support · Secure checkout</span>
           </div>
@@ -132,7 +131,7 @@ export default function Layout({ children }) {
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div className="relative flex min-h-12 items-center justify-center gap-4 lg:min-h-0 lg:flex-row lg:items-center lg:justify-between">
               <Link href="/" className="flex items-center justify-center" onClick={closeMenu}>
-                <BrandLogo className="h-12 w-[190px] sm:h-16 sm:w-[260px] lg:h-20 lg:w-[320px]" />
+                <BrandLogo className="h-16 w-[210px] sm:h-16 sm:w-[260px] lg:h-20 lg:w-[320px]" />
               </Link>
 
               {/* Desktop action buttons */}

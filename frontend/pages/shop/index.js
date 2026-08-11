@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { normalizeImageUrl } from '../../lib/imageUrl'
 import { useAuth } from '../../hooks/useAuth'
+import { formatMoney } from '../../lib/currency'
 
 export default function Shop() {
   const API = process.env.NEXT_PUBLIC_API_URL || '/api'

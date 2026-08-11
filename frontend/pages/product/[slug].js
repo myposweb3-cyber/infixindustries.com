@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 import { normalizeImageUrl } from '../../lib/imageUrl';
+import { formatMoney } from '../../lib/currency';
 
 function AuthAddToCart({ product }){
   const { token, user } = useAuth();
@@ -69,7 +70,7 @@ export default function ProductPage({ data }){
                 <div className="flex-1">
                   <h1 className="text-2xl font-semibold text-slate-900">{product.title}</h1>
                   <p className="mt-2 text-sm text-gray-500">SKU: {product.sku || '—'}</p>
-                  <div className="mt-4 text-3xl font-semibold text-yellow-300">${parseFloat(product.discount_price || product.price).toFixed(2)}</div>
+                  <div className="mt-4 text-3xl font-semibold text-yellow-300">{formatMoney(product.discount_price || product.price)}</div>
                   <p className="mt-4 text-sm leading-7 text-gray-600">{product.description}</p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <AuthAddToCart product={product} />
@@ -105,7 +106,7 @@ export default function ProductPage({ data }){
                     <img src={normalizeImageUrl(r.image)} className="h-16 w-16 rounded-2xl object-cover" />
                     <div>
                       <div className="font-medium text-slate-900">{r.title}</div>
-                      <div className="text-sm text-yellow-300">${parseFloat(r.discount_price || r.price).toFixed(2)}</div>
+                      <div className="text-sm text-yellow-300">{formatMoney(r.discount_price || r.price)}</div>
                     </div>
                   </div>
                 </Link>

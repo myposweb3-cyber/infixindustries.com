@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import axios from 'axios'
 import { normalizeImageUrl } from '../lib/imageUrl'
+import { formatMoney } from '../lib/currency'
 import { useAuth } from '../hooks/useAuth'
 
 const defaultCategoryCards = [
@@ -280,8 +281,8 @@ function ProductCard({ item }) {
         <p className="mt-4 text-sm text-gray-400">{item.stock}</p>
         <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-2xl font-semibold text-white">${item.price}</p>
-            <p className="text-sm text-gray-500 line-through">${item.oldPrice}</p>
+            <p className="text-2xl font-semibold text-white">{formatMoney(item.price)}</p>
+            <p className="text-sm text-gray-500 line-through">{formatMoney(item.oldPrice)}</p>
           </div>
           <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
             <Link href={productHref} className="inline-flex min-w-[116px] items-center justify-center whitespace-nowrap rounded-full border border-sky-400/50 bg-sky-400/10 px-3 py-2 text-sm font-semibold text-sky-300 shadow-[0_10px_24px_rgba(14,165,233,0.12)] transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-400 hover:text-slate-950">
@@ -688,7 +689,7 @@ export default function Home() {
                       <h3 className="text-lg font-semibold text-white">{item.title}</h3>
                       <div className="flex items-center gap-2 text-sm text-yellow-300">★★★★☆</div>
                       <div className="mt-3 flex items-center justify-between gap-3">
-                        <span className="text-xl font-semibold text-white">${item.price}</span>
+                        <span className="text-xl font-semibold text-white">{formatMoney(item.price)}</span>
                         <button className="rounded-full bg-yellow-400 px-4 py-2 text-sm font-semibold text-black transition hover:brightness-95">Add</button>
                       </div>
                     </div>

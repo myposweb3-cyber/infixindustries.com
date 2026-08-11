@@ -166,7 +166,7 @@ const AdminDashboard = () => {
                       <tr key={order.id} className="hover:bg-white/5 transition">
                         <td className="px-6 py-3 text-sm font-medium text-yellow-300">{order.order_number}</td>
                         <td className="px-6 py-3 text-sm text-gray-300">{order.shipping_name}</td>
-                        <td className="px-6 py-3 text-sm font-semibold text-white">${order.total.toFixed(2)}</td>
+                        <td className="px-6 py-3 text-sm font-semibold text-white">{formatMoney(order.total)}</td>
                         <td className="px-6 py-3 text-sm">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                             order.status === 'paid' || order.status === 'completed' ? 'bg-emerald-900/20 text-emerald-300' :
@@ -577,7 +577,7 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                   <div key={prod.id} className="rounded-3xl border border-white/10 bg-[#111111] p-4">
                     <img src={normalizeImageUrl(prod.image)} alt={prod.title} className="w-full h-32 object-cover rounded-2xl mb-3" />
                     <h4 className="font-semibold text-white text-sm truncate">{prod.title}</h4>
-                    <p className="text-xs text-gray-400 mt-1">Price: ${prod.price}</p>
+                    <p className="text-xs text-gray-400 mt-1">Price: {formatMoney(prod.price)}</p>
                     <p className="text-xs text-gray-400 mt-1">Stock: {prod.stock}</p>
                     <p className="text-xs text-gray-400 mt-1">Featured: {prod.is_featured ? 'Yes' : 'No'}</p>
                     <p className="text-xs text-gray-400 mt-1">Best Seller: {prod.is_best_seller ? 'Yes' : 'No'}</p>
@@ -780,9 +780,9 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                   products.map((product) => (
                     <tr key={product.id} className="hover:bg-white/5 transition">
                       <td className="px-4 py-3 text-white">{product.name}</td>
-                      <td className="px-4 py-3 text-yellow-300">${product.price || '0.00'}</td>
+                      <td className="px-4 py-3 text-yellow-300">{formatMoney(product.price || 0)}</td>
                       <td className="px-4 py-3 text-gray-300">{product.quantity_sold || 0}</td>
-                      <td className="px-4 py-3 text-green-300">${(product.revenue || 0).toFixed(2)}</td>
+                      <td className="px-4 py-3 text-green-300">{formatMoney(product.revenue || 0)}</td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap gap-2">
                           <button

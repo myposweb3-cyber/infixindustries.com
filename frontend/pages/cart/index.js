@@ -3,6 +3,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
 import { normalizeImageUrl } from '../../lib/imageUrl';
+import { formatMoney } from '../../lib/currency';
 
 function readCart() {
   try {
@@ -92,7 +93,7 @@ export default function CartPage(){
                 <img src={normalizeImageUrl(it.image)} className="h-24 w-24 rounded-2xl object-cover" />
                 <div className="flex-1">
                   <Link href={`/product/${it.slug}`} className="font-semibold text-slate-900">{it.title}</Link>
-                  <div className="mt-1 text-sm text-gray-500">${parseFloat(it.price).toFixed(2)}</div>
+                  <div className="mt-1 text-sm text-gray-500">{formatMoney(it.price)}</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <input type="number" value={it.quantity} min="1" onChange={e=> updateQty(idx, parseInt(e.target.value||1,10))} className="w-16 rounded-2xl border border-slate-200 bg-slate-100 px-2 py-2 text-slate-900 outline-none" />
@@ -105,7 +106,7 @@ export default function CartPage(){
             <h3 className="text-xl font-semibold text-slate-900">Order Summary</h3>
             <div className="mt-4 space-y-3 text-sm text-gray-600">
               <div className="flex items-center justify-between">Items: <span className="text-slate-900">{items.length}</span></div>
-              <div className="flex items-center justify-between">Subtotal: <span className="text-slate-900">${subtotal.toFixed(2)}</span></div>
+              <div className="flex items-center justify-between">Subtotal: <span className="text-slate-900">{formatMoney(subtotal)}</span></div>
             </div>
             <Link href="/checkout" className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-yellow-400 px-4 py-3 text-center font-semibold text-black transition hover:brightness-95">Proceed to Checkout</Link>
           </aside>
