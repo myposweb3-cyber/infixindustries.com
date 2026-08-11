@@ -1,1 +1,9 @@
 node_modules
+
+.env
+.env.*
+!.env.example
+.next/
+frontend/.next/
+backend/uploads/*
+!backend/uploads/.gitkeep

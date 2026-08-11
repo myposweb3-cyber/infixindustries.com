@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"pages\\\\premium-home.js -> gsap\":{\"id\":\"pages\\\\premium-home.js -> gsap\",\"files\":[\"static/chunks/node_modules_gsap_index_js.js\"]},\"pages\\\\premium-home.js -> gsap/dist/ScrollTrigger\":{\"id\":\"pages\\\\premium-home.js -> gsap/dist/ScrollTrigger\",\"files\":[\"static/chunks/node_modules_gsap_dist_ScrollTrigger_js.js\"]}}"
