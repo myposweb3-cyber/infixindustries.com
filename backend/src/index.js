@@ -18,7 +18,8 @@ app.use(cors({ origin: ['http://localhost:3000', 'http://127.0.0.1:3000'] }));
 // Stripe webhook needs the raw body to verify signature
 app.post('/api/checkout/webhook', express.raw({ type: 'application/json' }), require('./routes/webhook').handler);
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // serve uploaded files
 app.use('/uploads', helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));

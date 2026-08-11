@@ -5,6 +5,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { formatMoney } from '../../lib/currency';
 import { useRouter } from 'next/router';
 import { normalizeImageUrl } from '../../lib/imageUrl';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../../lib/getCroppedImg';
 
 const AdminDashboard = () => {
   const router = useRouter();
@@ -886,14 +888,54 @@ const HeroSlidesTab = ({
   editingHeroSlide,
   setEditingHeroSlide
 }) => {
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setHeroImage(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreviewUrl(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const uploadHeroSlide = async () => {
     if (!heroImage) {
       alert('Please select an image');
       return;
     }
+    if (!previewUrl) {
+      alert('Image preview failed');
+      return;
+    }
+
+    setUploading(true);
     try {
+      let imageToUpload = heroImage;
+
+      // If crop was applied, use the cropped image
+      if (croppedAreaPixels) {
+        try {
+          const croppedBlob = await getCroppedImg(previewUrl, croppedAreaPixels);
+          imageToUpload = new File([croppedBlob], heroImage.name, { type: 'image/jpeg' });
+        } catch (cropErr) {
+          console.warn('Crop failed, using original image:', cropErr);
+        }
+      }
+
       const fd = new FormData();
-      fd.append('image', heroImage);
+      fd.append('image', imageToUpload);
       fd.append('title', heroSlideTitle || '');
       fd.append('link', heroSlideLink || '');
 
@@ -908,10 +950,16 @@ const HeroSlidesTab = ({
       setHeroSlideTitle('');
       setHeroSlideLink('');
       setHeroImage(null);
+      setPreviewUrl(null);
+      setCrop({ x: 0, y: 0 });
+      setZoom(1);
+      setCroppedAreaPixels(null);
       if (heroImageRef.current) heroImageRef.current.value = '';
       await fetchHeroSlides();
     } catch (err) {
       alert('Failed to upload hero slide: ' + (err.response?.data?.error || err.message));
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -920,6 +968,7 @@ const HeroSlidesTab = ({
       alert('Title is required');
       return;
     }
+    setUploading(true);
     try {
       const res = await axios.put(`/api/admin/hero-slides/${editingHeroSlide.id}`, {
         title: heroSlideTitle,
@@ -932,9 +981,15 @@ const HeroSlidesTab = ({
       setHeroSlideTitle('');
       setHeroSlideLink('');
       setEditingHeroSlide(null);
+      setPreviewUrl(null);
+      setCrop({ x: 0, y: 0 });
+      setZoom(1);
+      setCroppedAreaPixels(null);
       await fetchHeroSlides();
     } catch (err) {
       alert('Failed to update hero slide: ' + (err.response?.data?.error || err.message));
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -955,7 +1010,7 @@ const HeroSlidesTab = ({
     <div className="space-y-6">
       <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
         <h2 className="text-xl font-bold text-white mb-4">Hero Slides Management</h2>
-        <p className="text-sm text-gray-400 mb-6">Manage banner images shown on the homepage. Images are auto-cropped to 1920x600 (16:9 aspect ratio).</p>
+        <p className="text-sm text-gray-400 mb-6">Manage banner images shown on the homepage. Images are cropped to 1920x600 (16:9). You can adjust the crop area before uploading.</p>
 
         <div className="mb-8 p-6 rounded-3xl border border-yellow-400/20 bg-[#0c0c0c]">
           <h3 className="font-semibold text-white mb-4">{editingHeroSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}</h3>
@@ -975,26 +1030,62 @@ const HeroSlidesTab = ({
               className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
             />
           </div>
+
           {!editingHeroSlide && (
             <div className="mt-4">
               <input
                 ref={heroImageRef}
                 type="file"
                 accept="image/*"
-                onChange={(e) => setHeroImage(e.target.files?.[0] || null)}
+                onChange={handleImageSelect}
                 className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white w-full"
               />
-              <p className="mt-2 text-xs text-gray-400">Image will be auto-cropped to 1920x600. Recommended: high-resolution landscape image.</p>
+              <p className="mt-2 text-xs text-gray-400">Select a high-resolution landscape image. You'll be able to crop it to 16:9 aspect ratio.</p>
             </div>
           )}
-          <div className="mt-4 flex gap-2">
+
+          {previewUrl && !editingHeroSlide && (
+            <div className="mt-6 space-y-4">
+              <div className="relative w-full h-96 bg-black/50 rounded-2xl overflow-hidden border border-white/10">
+                <Cropper
+                  image={previewUrl}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={16 / 9}
+                  cropShape="rect"
+                  showGrid={true}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <label className="text-sm text-gray-300">Zoom: {zoom.toFixed(1)}x</label>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    value={zoom}
+                    onChange={(e) => setZoom(parseFloat(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-6 flex gap-2 flex-wrap">
             {editingHeroSlide ? (
               <>
                 <button
                   onClick={updateHeroSlide}
-                  className="px-4 py-2 bg-sky-600 text-white rounded-xl font-semibold hover:bg-sky-700"
+                  disabled={uploading}
+                  className="px-4 py-2 bg-sky-600 text-white rounded-xl font-semibold hover:bg-sky-700 disabled:opacity-50"
                 >
-                  Update Slide
+                  {uploading ? 'Updating...' : 'Update Slide'}
                 </button>
                 <button
                   onClick={() => {
@@ -1002,6 +1093,7 @@ const HeroSlidesTab = ({
                     setHeroSlideTitle('');
                     setHeroSlideLink('');
                     setHeroImage(null);
+                    setPreviewUrl(null);
                   }}
                   className="px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700"
                 >
@@ -1009,12 +1101,30 @@ const HeroSlidesTab = ({
                 </button>
               </>
             ) : (
-              <button
-                onClick={uploadHeroSlide}
-                className="px-4 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700"
-              >
-                Upload Slide
-              </button>
+              <>
+                {previewUrl && (
+                  <button
+                    onClick={() => {
+                      setPreviewUrl(null);
+                      setHeroImage(null);
+                      setCrop({ x: 0, y: 0 });
+                      setZoom(1);
+                      setCroppedAreaPixels(null);
+                      if (heroImageRef.current) heroImageRef.current.value = '';
+                    }}
+                    className="px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700"
+                  >
+                    Clear
+                  </button>
+                )}
+                <button
+                  onClick={uploadHeroSlide}
+                  disabled={uploading || !heroImage}
+                  className="px-4 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 disabled:opacity-50"
+                >
+                  {uploading ? 'Uploading...' : 'Upload Slide'}
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -1048,6 +1158,7 @@ const HeroSlidesTab = ({
                         setHeroSlideTitle(slide.title || '');
                         setHeroSlideLink(slide.link || '');
                         setHeroImage(null);
+                        setPreviewUrl(null);
                       }}
                       className="flex-1 px-3 py-2 bg-yellow-500 text-black rounded-lg font-semibold hover:bg-yellow-400 text-xs"
                     >
