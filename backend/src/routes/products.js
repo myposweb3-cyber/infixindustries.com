@@ -6,8 +6,8 @@ const { authorize } = require('../middleware/authorize');
 const upload = require('../middleware/multer');
 
 router.get('/', productCtrl.list);
-router.get('/:id', productCtrl.getById);
 router.get('/slug/:slug', productCtrl.getBySlug);
+router.get('/:id', productCtrl.getById);
 
 // Protected routes for admins
 router.post('/', authenticate, authorize('admin'), upload.single('image'), productCtrl.create);

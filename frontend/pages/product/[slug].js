@@ -127,7 +127,11 @@ export default function ProductPage({ data }){
 
 export async function getServerSideProps(ctx){
   const { slug } = ctx.params;
-  const API = process.env.NEXT_PUBLIC_API_URL || '/api';
+  const requestHost = ctx.req?.headers?.host || '';
+  const isLocalRequest = requestHost.startsWith('localhost') || requestHost.startsWith('127.0.0.1');
+  const API = isLocalRequest
+    ? 'http://localhost:4000/api'
+    : `http${ctx.req?.headers?.['x-forwarded-proto'] === 'https' ? 's' : ''}://${requestHost}/api`;
   try{
     // Try fetch by slug first
     const res = await axios.get(`${API}/products/slug/${slug}`);
