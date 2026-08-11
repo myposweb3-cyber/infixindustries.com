@@ -43,8 +43,8 @@ const ProductsManagement = () => {
     const fetchLists = async () => {
       try {
         const [catRes, brandRes] = await Promise.all([
-          axios.get('http://localhost:4000/api/home/categories'),
-          axios.get('http://localhost:4000/api/home/brands')
+          axios.get('/api/home/categories'),
+          axios.get('/api/home/brands')
         ]);
         setCategories(catRes.data || []);
         setBrands(brandRes.data || []);
@@ -62,7 +62,7 @@ const ProductsManagement = () => {
       if (search) params.append('search', search);
       if (categoryFilter) params.append('category', categoryFilter);
 
-      const response = await axios.get(`http://localhost:4000/api/admin/products?${params}`, {
+      const response = await axios.get(`/api/admin/products?${params}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -128,7 +128,7 @@ const ProductsManagement = () => {
     try {
       const results = await Promise.allSettled(
         selectedProducts.map((id) =>
-          axios.delete(`http://localhost:4000/api/admin/products/${id}`, {
+          axios.delete(`/api/admin/products/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         )
@@ -203,7 +203,7 @@ const ProductsManagement = () => {
       });
       createImages.forEach((file) => data.append('images', file));
 
-      await axios.post('http://localhost:4000/api/admin/products', data, {
+      await axios.post('/api/admin/products', data, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -225,7 +225,7 @@ const ProductsManagement = () => {
     // fetch full product details to include images
     (async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/admin/products/${product.id}`, { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`/api/admin/products/${product.id}`, { headers: { Authorization: `Bearer ${token}` } });
         setSelectedProduct(product);
         setEditForm(res.data);
       } catch (err) {
@@ -242,7 +242,7 @@ const ProductsManagement = () => {
 
     try {
       await axios.put(
-        `http://localhost:4000/api/admin/products/${editForm.id}`,
+        `/api/admin/products/${editForm.id}`,
         {
           name: editForm.name,
           description: editForm.description,
@@ -271,7 +271,7 @@ const ProductsManagement = () => {
 
     try {
       await axios.delete(
-        `http://localhost:4000/api/admin/products/${id}`,
+        `/api/admin/products/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -293,7 +293,7 @@ const ProductsManagement = () => {
     try {
       const fd = new FormData();
       newImages.forEach(f => fd.append('images', f));
-      const res = await axios.post(`http://localhost:4000/api/admin/products/${editForm.id}/images`, fd, { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } });
+      const res = await axios.post(`/api/admin/products/${editForm.id}/images`, fd, { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } });
       setEditForm({ ...editForm, images: res.data.images });
       setNewImages([]);
     } catch (err) {
@@ -305,7 +305,7 @@ const ProductsManagement = () => {
     if (!editForm) return;
     if (!confirm('Delete this image?')) return;
     try {
-      await axios.delete(`http://localhost:4000/api/admin/products/${editForm.id}/images`, { headers: { Authorization: `Bearer ${token}` }, data: { image: img } });
+      await axios.delete(`/api/admin/products/${editForm.id}/images`, { headers: { Authorization: `Bearer ${token}` }, data: { image: img } });
       // Filter out by URL regardless of format (string or object)
       const updated = (editForm.images || []).filter(i => getImageUrl(i) !== img);
       setEditForm({ ...editForm, images: updated });
@@ -342,7 +342,7 @@ const ProductsManagement = () => {
     // Reorder via backend API
     try {
       const imageUrls = newOrder.map(img => getImageUrl(img));
-      await axios.patch(`http://localhost:4000/api/admin/products/${editForm.id}/images/reorder`, { imageOrder: imageUrls }, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.patch(`/api/admin/products/${editForm.id}/images/reorder`, { imageOrder: imageUrls }, { headers: { Authorization: `Bearer ${token}` } });
       setEditForm({ ...editForm, images: newOrder });
       setMessage('Images reordered successfully!');
       setTimeout(() => setMessage(''), 3000);

@@ -56,7 +56,7 @@ export default function CreateProduct() {
       // append multiple images
       imageFiles.forEach((f) => data.append('images', f));
 
-      const res = await axios.post('http://localhost:4000/api/admin/products', data, {
+      const res = await axios.post('/api/admin/products', data, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -76,8 +76,8 @@ export default function CreateProduct() {
     const fetchLists = async () => {
       try {
         const [catRes, brandRes] = await Promise.all([
-          axios.get('http://localhost:4000/api/home/categories'),
-          axios.get('http://localhost:4000/api/home/brands')
+          axios.get('/api/home/categories'),
+          axios.get('/api/home/brands')
         ]);
         setCategories(catRes.data || []);
         setBrands(brandRes.data || []);

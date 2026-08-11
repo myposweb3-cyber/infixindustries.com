@@ -23,7 +23,7 @@ const ReviewsManagement = () => {
   const fetchReviews = async (pageNumber = page) => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:4000/api/admin/reviews', {
+      const res = await axios.get('/api/admin/reviews', {
         params: { page: pageNumber, limit: 20, search },
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -62,7 +62,7 @@ const ReviewsManagement = () => {
     try {
       setSaving(true);
       const res = await axios.put(
-        `http://localhost:4000/api/admin/reviews/${selectedReview.id}`,
+        `/api/admin/reviews/${selectedReview.id}`,
         {
           rating: editForm.rating,
           title: editForm.title,
@@ -84,7 +84,7 @@ const ReviewsManagement = () => {
   const handleDelete = async (review) => {
     if (!confirm('Delete this review?')) return;
     try {
-      await axios.delete(`http://localhost:4000/api/admin/reviews/${review.id}`, {
+      await axios.delete(`/api/admin/reviews/${review.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews((prev) => prev.filter((r) => r.id !== review.id));

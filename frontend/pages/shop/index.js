@@ -6,7 +6,7 @@ import { normalizeImageUrl } from '../../lib/imageUrl'
 import { useAuth } from '../../hooks/useAuth'
 
 export default function Shop() {
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api'
   const router = useRouter()
   const { token } = useAuth()
   const [products, setProducts] = useState([])

@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     setLoginError('');
     setLoginLoading(true);
     try {
-      const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+      const base = process.env.NEXT_PUBLIC_API_URL || '/api';
       const res = await axios.post(`${base}/auth/login`, { email: adminEmail, password: adminPassword });
       const { user, token: accessToken, refreshToken } = res.data;
       // store via AuthContext
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
   const fetchStats = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:4000/api/admin/stats', {
+      const response = await axios.get('/api/admin/stats', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(response.data);
@@ -95,7 +95,7 @@ const AdminDashboard = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/categories');
+      const res = await axios.get('/api/categories');
       setCategories(res.data || []);
     } catch (err) {
       console.error('Fetch categories failed', err.message);
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/products?featured=true');
+      const res = await axios.get('/api/products?featured=true');
       setFeaturedProducts(res.data.items || []);
     } catch (err) {
       console.error('Fetch featured products failed', err.message);
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
 
   const fetchBestSellers = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/products?best_seller=true');
+      const res = await axios.get('/api/products?best_seller=true');
       setBestSellers(res.data.items || []);
     } catch (err) {
       console.error('Fetch best sellers failed', err.message);
@@ -267,11 +267,11 @@ const CategoriesTab = ({
 
     try {
       if (editingCategory) {
-        await axios.put(`http://localhost:4000/api/admin/categories/${editingCategory.id}`, fd, {
+        await axios.put(`/api/admin/categories/${editingCategory.id}`, fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await axios.post('http://localhost:4000/api/admin/categories', fd, {
+        await axios.post('/api/admin/categories', fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       }
@@ -367,7 +367,7 @@ const CategoriesTab = ({
                     onClick={async () => {
                       if (!confirm('Delete this category?')) return;
                       try {
-                        await axios.delete(`http://localhost:4000/api/admin/categories/${cat.id}`, {
+                        await axios.delete(`/api/admin/categories/${cat.id}`, {
                           headers: { Authorization: `Bearer ${token}` }
                         });
                         fetchCategories();
@@ -441,11 +441,11 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
 
     try {
       if (editingProduct) {
-        await axios.put(`http://localhost:4000/api/products/${editingProduct.id}`, fd, {
+        await axios.put(`/api/products/${editingProduct.id}`, fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await axios.post('http://localhost:4000/api/products', fd, {
+        await axios.post('/api/products', fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       }
@@ -459,7 +459,7 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
   const deleteProduct = async (id) => {
     if (!confirm('Delete this product?')) return;
     try {
-      await axios.delete(`http://localhost:4000/api/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchProducts();
     } catch (err) {
       alert('Delete failed');
@@ -607,7 +607,7 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                         onClick={async () => {
                           if (!confirm('Delete this product?')) return;
                           try {
-                            await axios.delete(`http://localhost:4000/api/products/${prod.id}`, {
+                            await axios.delete(`/api/products/${prod.id}`, {
                               headers: { Authorization: `Bearer ${token}` }
                             });
                             fetchProducts();
@@ -679,11 +679,11 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
 
     try {
       if (editingProduct) {
-        await axios.put(`http://localhost:4000/api/products/${editingProduct.id}`, fd, {
+        await axios.put(`/api/products/${editingProduct.id}`, fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       } else {
-        await axios.post('http://localhost:4000/api/products', fd, {
+        await axios.post('/api/products', fd, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
         });
       }
@@ -697,7 +697,7 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
   const deleteProduct = async (id) => {
     if (!confirm('Delete this product?')) return;
     try {
-      await axios.delete(`http://localhost:4000/api/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       refreshAll();
     } catch (err) {
       alert('Delete failed');
@@ -788,7 +788,7 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                           <button
                             onClick={async () => {
                               try {
-                                const { data } = await axios.get(`http://localhost:4000/api/products/${product.id}`,
+                                const { data } = await axios.get(`/api/products/${product.id}`,
                                   { headers: { Authorization: `Bearer ${token}` } }
                                 );
                                 setEditingProduct(product);

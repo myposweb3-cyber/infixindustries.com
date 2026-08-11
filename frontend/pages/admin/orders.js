@@ -29,7 +29,7 @@ const OrdersManagement = () => {
       if (status) params.append('status', status);
       if (search) params.append('search', search);
 
-      const response = await axios.get(`http://localhost:4000/api/admin/orders?${params}`, {
+      const response = await axios.get(`/api/admin/orders?${params}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -51,7 +51,7 @@ const OrdersManagement = () => {
   const viewOrder = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:4000/api/admin/orders/${id}`, {
+      const response = await axios.get(`/api/admin/orders/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -76,7 +76,7 @@ const OrdersManagement = () => {
 
     try {
       await axios.patch(
-        `http://localhost:4000/api/admin/orders/${selectedOrder.id}/status`,
+        `/api/admin/orders/${selectedOrder.id}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

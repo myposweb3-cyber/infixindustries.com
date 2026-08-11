@@ -7,7 +7,7 @@ import { normalizeImageUrl } from '../../lib/imageUrl';
 function AuthAddToCart({ product }){
   const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api';
 
   async function handleAdd(){
     if (token) {
@@ -127,7 +127,7 @@ export default function ProductPage({ data }){
 
 export async function getServerSideProps(ctx){
   const { slug } = ctx.params;
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api';
   try{
     // Try fetch by slug first
     const res = await axios.get(`${API}/products/slug/${slug}`);

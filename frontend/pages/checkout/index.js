@@ -8,7 +8,7 @@ import { normalizeImageUrl } from '../../lib/imageUrl';
 
 export default function Checkout(){
   const { token } = useAuth();
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api';
   const [items, setItems] = useState([]);
   const [shipping, setShipping] = useState({ name: '', address: '', city: '', zip: '', phone: '' });
   const [method, setMethod] = useState('cod');

@@ -80,7 +80,7 @@ export default function Layout({ children }) {
   }, [router.pathname])
 
   useEffect(() => {
-    const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+    const API = process.env.NEXT_PUBLIC_API_URL || '/api'
 
     async function loadCategories() {
       try {

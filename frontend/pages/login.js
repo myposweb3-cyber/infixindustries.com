@@ -19,7 +19,7 @@ export default function Login() {
     try {
       const guestCart = JSON.parse(localStorage.getItem('cart') || '[]');
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_URL || '/api'}/auth/login`,
         { email, password, cart: guestCart }
       );
       const { user, token, refreshToken } = res.data;

@@ -31,7 +31,7 @@ export default function CartPage(){
   const { token } = useAuth();
   const [items, setItems] = useState([]);
 
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api';
 
   useEffect(()=>{
     async function load(){

@@ -213,7 +213,7 @@ function CategoryCard({ card }) {
 function ProductCard({ item }) {
   const { token } = useAuth()
   const [adding, setAdding] = useState(false)
-  const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+  const API = process.env.NEXT_PUBLIC_API_URL || '/api'
   const productId = item.id || item.product_id
   const productHref = item.slug ? `/product/${item.slug}` : '/shop'
 
@@ -331,7 +331,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+    const API = process.env.NEXT_PUBLIC_API_URL || '/api'
 
     async function loadHeroSlides() {
       try {
