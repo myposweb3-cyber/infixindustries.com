@@ -25,6 +25,7 @@ const AdminLayout = ({ children }) => {
     { label: 'Products', href: '/admin/products', icon: '🛍️' },
     { label: 'Reviews', href: '/admin/reviews', icon: '⭐' },
     { label: 'Categories', href: '/admin?tab=categories', icon: '📂' },
+    { label: 'Hero Slides', href: '/admin?tab=hero-slides', icon: '🎬' },
     { label: 'Featured Products', href: '/admin?tab=featured', icon: '✨' },
     { label: 'Best Sellers', href: '/admin?tab=bestsellers', icon: '🔥' },
     { label: 'Top Selling', href: '/admin?tab=topselling', icon: '📈' },

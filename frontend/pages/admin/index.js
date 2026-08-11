@@ -25,6 +25,12 @@ const AdminDashboard = () => {
   const [newCategoryDescription, setNewCategoryDescription] = useState('');
   const [categoryImage, setCategoryImage] = useState(null);
   const categoryImageRef = useRef();
+  const [heroSlides, setHeroSlides] = useState([]);
+  const [heroSlideTitle, setHeroSlideTitle] = useState('');
+  const [heroSlideLink, setHeroSlideLink] = useState('');
+  const [heroImage, setHeroImage] = useState(null);
+  const heroImageRef = useRef();
+  const [editingHeroSlide, setEditingHeroSlide] = useState(null);
   const activeTab = router.query.tab || 'dashboard';
 
   // If not authenticated, show inline admin login form
@@ -53,6 +59,7 @@ const AdminDashboard = () => {
     fetchCategories();
     fetchFeaturedProducts();
     fetchBestSellers();
+    fetchHeroSlides();
   }, [token]);
 
   if (!token) {
@@ -117,6 +124,17 @@ const AdminDashboard = () => {
       setBestSellers(res.data.items || []);
     } catch (err) {
       console.error('Fetch best sellers failed', err.message);
+    }
+  };
+
+  const fetchHeroSlides = async () => {
+    try {
+      const res = await axios.get('/api/admin/hero-slides', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setHeroSlides(res.data || []);
+    } catch (err) {
+      console.error('Fetch hero slides failed', err.message);
     }
   };
 
@@ -232,6 +250,23 @@ const AdminDashboard = () => {
 
         {activeTab === 'topselling' && (
           <TopSellingTab token={token} products={topProducts} refreshAll={() => { fetchStats(); fetchFeaturedProducts(); fetchBestSellers(); }} />
+        )}
+
+        {activeTab === 'hero-slides' && (
+          <HeroSlidesTab
+            token={token}
+            heroSlides={heroSlides}
+            fetchHeroSlides={fetchHeroSlides}
+            heroSlideTitle={heroSlideTitle}
+            setHeroSlideTitle={setHeroSlideTitle}
+            heroSlideLink={heroSlideLink}
+            setHeroSlideLink={setHeroSlideLink}
+            heroImage={heroImage}
+            setHeroImage={setHeroImage}
+            heroImageRef={heroImageRef}
+            editingHeroSlide={editingHeroSlide}
+            setEditingHeroSlide={setEditingHeroSlide}
+          />
         )}
       </div>
     </AdminLayout>
@@ -832,6 +867,204 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
             </table>
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const HeroSlidesTab = ({
+  token,
+  heroSlides,
+  fetchHeroSlides,
+  heroSlideTitle,
+  setHeroSlideTitle,
+  heroSlideLink,
+  setHeroSlideLink,
+  heroImage,
+  setHeroImage,
+  heroImageRef,
+  editingHeroSlide,
+  setEditingHeroSlide
+}) => {
+  const uploadHeroSlide = async () => {
+    if (!heroImage) {
+      alert('Please select an image');
+      return;
+    }
+    try {
+      const fd = new FormData();
+      fd.append('image', heroImage);
+      fd.append('title', heroSlideTitle || '');
+      fd.append('link', heroSlideLink || '');
+
+      const res = await axios.post('/api/admin/hero-slides', fd, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      alert('Hero slide uploaded successfully');
+      setHeroSlideTitle('');
+      setHeroSlideLink('');
+      setHeroImage(null);
+      if (heroImageRef.current) heroImageRef.current.value = '';
+      await fetchHeroSlides();
+    } catch (err) {
+      alert('Failed to upload hero slide: ' + (err.response?.data?.error || err.message));
+    }
+  };
+
+  const updateHeroSlide = async () => {
+    if (!editingHeroSlide || !heroSlideTitle) {
+      alert('Title is required');
+      return;
+    }
+    try {
+      const res = await axios.put(`/api/admin/hero-slides/${editingHeroSlide.id}`, {
+        title: heroSlideTitle,
+        link: heroSlideLink
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      alert('Hero slide updated successfully');
+      setHeroSlideTitle('');
+      setHeroSlideLink('');
+      setEditingHeroSlide(null);
+      await fetchHeroSlides();
+    } catch (err) {
+      alert('Failed to update hero slide: ' + (err.response?.data?.error || err.message));
+    }
+  };
+
+  const deleteHeroSlide = async (id) => {
+    if (!window.confirm('Delete this hero slide?')) return;
+    try {
+      await axios.delete(`/api/admin/hero-slides/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert('Hero slide deleted');
+      await fetchHeroSlides();
+    } catch (err) {
+      alert('Failed to delete hero slide: ' + (err.response?.data?.error || err.message));
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+        <h2 className="text-xl font-bold text-white mb-4">Hero Slides Management</h2>
+        <p className="text-sm text-gray-400 mb-6">Manage banner images shown on the homepage. Images are auto-cropped to 1920x600 (16:9 aspect ratio).</p>
+
+        <div className="mb-8 p-6 rounded-3xl border border-yellow-400/20 bg-[#0c0c0c]">
+          <h3 className="font-semibold text-white mb-4">{editingHeroSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              placeholder="Slide Title"
+              value={heroSlideTitle}
+              onChange={(e) => setHeroSlideTitle(e.target.value)}
+              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Link (optional)"
+              value={heroSlideLink}
+              onChange={(e) => setHeroSlideLink(e.target.value)}
+              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+            />
+          </div>
+          {!editingHeroSlide && (
+            <div className="mt-4">
+              <input
+                ref={heroImageRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => setHeroImage(e.target.files?.[0] || null)}
+                className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white w-full"
+              />
+              <p className="mt-2 text-xs text-gray-400">Image will be auto-cropped to 1920x600. Recommended: high-resolution landscape image.</p>
+            </div>
+          )}
+          <div className="mt-4 flex gap-2">
+            {editingHeroSlide ? (
+              <>
+                <button
+                  onClick={updateHeroSlide}
+                  className="px-4 py-2 bg-sky-600 text-white rounded-xl font-semibold hover:bg-sky-700"
+                >
+                  Update Slide
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingHeroSlide(null);
+                    setHeroSlideTitle('');
+                    setHeroSlideLink('');
+                    setHeroImage(null);
+                  }}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700"
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={uploadHeroSlide}
+                className="px-4 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700"
+              >
+                Upload Slide
+              </button>
+            )}
+          </div>
+        </div>
+
+        <h3 className="font-semibold text-white mb-4">Current Hero Slides</h3>
+        {heroSlides.length === 0 ? (
+          <p className="text-gray-400">No hero slides created yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {heroSlides.map((slide) => (
+              <div key={slide.id} className="rounded-2xl border border-white/10 bg-[#0c0c0c] overflow-hidden">
+                {slide.image && (
+                  <img
+                    src={normalizeImageUrl(slide.image)}
+                    alt={slide.title}
+                    className="w-full h-32 object-cover"
+                  />
+                )}
+                <div className="p-4">
+                  <h4 className="font-semibold text-white">{slide.title || '(No title)'}</h4>
+                  {slide.link && (
+                    <p className="text-xs text-gray-400 mt-1 truncate">Link: {slide.link}</p>
+                  )}
+                  <p className="text-xs text-gray-500 mt-2">
+                    Created: {new Date(slide.created_at).toLocaleDateString()}
+                  </p>
+                  <div className="mt-4 flex gap-2">
+                    <button
+                      onClick={() => {
+                        setEditingHeroSlide(slide);
+                        setHeroSlideTitle(slide.title || '');
+                        setHeroSlideLink(slide.link || '');
+                        setHeroImage(null);
+                      }}
+                      className="flex-1 px-3 py-2 bg-yellow-500 text-black rounded-lg font-semibold hover:bg-yellow-400 text-xs"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteHeroSlide(slide.id)}
+                      className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xs"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
