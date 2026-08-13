@@ -1,0 +1,29 @@
+# go to repo
+cd /home/infixindustries.com
+
+# pull latest changes
+git pull origin main
+
+# remove frontend build cache
+rm -rf frontend/.next
+
+# rebuild & recreate frontend container
+docker compose up -d --build --force-recreate frontend
+
+# rebuild & recreate backend container
+docker compose up -d --build --force-recreate backend
+
+# (Optional) rebuild both at once
+docker compose up -d --build --force-recreate frontend backend
+
+# check running containers
+docker compose ps
+
+# follow logs to verify startup
+docker compose logs -f frontend
+# in another terminal:
+docker compose logs -f backend
+
+# quick HTTP health checks (from the Droplet)
+curl -I http://localhost:3000/      # frontend (if exposed)
+curl -I http://localhost:4000/health   # backend health endpoint
