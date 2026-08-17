@@ -358,15 +358,15 @@ const ProductsManagement = () => {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+        <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
           <div className="flex flex-col gap-4 mb-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-300">
+              <label className="inline-flex items-center gap-2 text-sm text-slate-700">
                 <input
                   type="checkbox"
                   checked={selectAll}
                   onChange={handleSelectAll}
-                  className="h-4 w-4 rounded border-white/20 bg-[#0c0c0c]"
+                  className="h-4 w-4 rounded border-slate-300 bg-slate-50"
                 />
                 Select all visible
               </label>
@@ -383,35 +383,35 @@ const ProductsManagement = () => {
             <button
               type="button"
               onClick={openCreateModal}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-400/30 bg-gradient-to-r from-[#0b4d97] to-[#35b7ff] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(53,183,255,0.25)] transition hover:brightness-110"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-300/30 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(37,99,235,0.25)] transition hover:brightness-110"
             >
               Add Product
             </button>
           </div>
 
           {message && (
-            <div className="mb-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-100 flex justify-between items-center">
+            <div className="mb-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 flex justify-between items-center">
               {message}
-              <button onClick={() => setMessage('')} className="text-xl font-bold text-emerald-100">✕</button>
+              <button onClick={() => setMessage('')} className="text-xl font-bold text-emerald-800">✕</button>
             </div>
           )}
           <form onSubmit={handleSearch} className="flex flex-col gap-3 md:flex-row md:items-end mb-6">
             <div className="flex-1 min-w-0">
-              <label className="block text-sm font-medium text-gray-300 mb-1">Search</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Search</label>
               <input
                 type="text"
                 placeholder="Search product name..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
               />
             </div>
             <div className="w-full md:w-64">
-              <label className="block text-sm font-medium text-gray-300 mb-1">Category</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Category</label>
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+                className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
               >
                 <option value="">All categories</option>
                 {categories.map((c) => (
@@ -434,7 +434,7 @@ const ProductsManagement = () => {
                   setPage(1);
                   fetchProducts();
                 }}
-                className="px-6 py-2 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 transition"
+                className="px-6 py-2 rounded-full border border-slate-300 bg-slate-50 text-slate-700 hover:bg-slate-100 transition"
               >
                 Clear
               </button>
@@ -446,13 +446,13 @@ const ProductsManagement = () => {
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map((product) => (
-              <div key={product.id} className="relative rounded-[28px] border border-white/10 bg-[#0c0c0c] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:border-yellow-400/20 hover:shadow-[0_25px_80px_rgba(0,0,0,0.32)]">
-                <label className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/5 px-2 py-1 text-sm text-gray-200 shadow">
+              <div key={product.id} className="relative rounded-[28px] border border-slate-200 bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition hover:border-blue-300/40 hover:shadow-[0_25px_80px_rgba(15,23,42,0.12)]">
+                <label className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-2 py-1 text-sm text-slate-700 shadow">
                   <input
                     type="checkbox"
                     checked={selectedProducts.includes(product.id)}
                     onChange={() => toggleSelectProduct(product.id)}
-                    className="h-4 w-4 rounded border-white/20 bg-[#0c0c0c]"
+                    className="h-4 w-4 rounded border-slate-300 bg-slate-50"
                   />
                   Select
                 </label>
@@ -461,17 +461,17 @@ const ProductsManagement = () => {
                   alt={product.name}
                   className="w-full h-32 object-cover rounded-3xl mb-3"
                 />
-                <h3 className="font-semibold text-white line-clamp-2">{product.name}</h3>
-                <p className="text-sm text-gray-400 mt-1">Category: {product.category_name || 'N/A'}</p>
+                <h3 className="font-semibold text-slate-900 line-clamp-2">{product.name}</h3>
+                <p className="text-sm text-slate-600 mt-1">Category: {product.category_name || 'N/A'}</p>
                 
                 <div className="mt-3 flex justify-between items-center">
                   <div>
-                    <p className="text-sm text-gray-500">Price</p>
-                    <p className="font-bold text-green-400">{formatMoney(product.price)}</p>
+                    <p className="text-sm text-slate-500">Price</p>
+                    <p className="font-bold text-green-600">{formatMoney(product.price)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Stock</p>
-                    <p className="font-bold text-sky-400">{product.stock}</p>
+                    <p className="text-sm text-slate-500">Stock</p>
+                    <p className="font-bold text-blue-600">{product.stock}</p>
                   </div>
                 </div>
 

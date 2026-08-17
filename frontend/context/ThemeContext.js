@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 
 export const ThemeContext = createContext({
-  theme: 'dark',
+  theme: 'light',
   setTheme: () => {}
 })
 
@@ -15,9 +15,9 @@ export function ThemeProvider({ children }) {
 
     const root = document.documentElement
     root.classList.remove('theme-light', 'theme-dark')
-    root.classList.add('theme-dark')
-    root.style.colorScheme = 'dark'
-    window.localStorage.setItem('theme', 'dark')
+    root.classList.add('theme-light')
+    root.style.colorScheme = 'light'
+    window.localStorage.setItem('theme', 'light')
   }, [])
 
   useEffect(() => {
@@ -25,12 +25,12 @@ export function ThemeProvider({ children }) {
 
     const root = document.documentElement
     root.classList.remove('theme-light', 'theme-dark')
-    root.classList.add('theme-dark')
-    root.style.colorScheme = 'dark'
-    window.localStorage.setItem('theme', 'dark')
+    root.classList.add('theme-light')
+    root.style.colorScheme = 'light'
+    window.localStorage.setItem('theme', 'light')
   }, [mounted])
 
-  const value = useMemo(() => ({ theme: 'dark', setTheme: () => {} }), [])
+  const value = useMemo(() => ({ theme: 'light', setTheme: () => {} }), [])
 
   if (!mounted) {
     return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

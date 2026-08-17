@@ -38,14 +38,14 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="flex min-h-screen overflow-hidden bg-[var(--bg)] text-[var(--text)]">
-      <aside className={`${sidebarOpen ? 'w-72' : 'w-24'} relative flex-shrink-0 border-r border-[var(--border)] bg-[var(--surface)] transition-all duration-300`}>
-        <div className="flex items-center justify-between gap-3 border-b border-slate-200 p-4">
+      <aside className={`${sidebarOpen ? 'w-72' : 'w-24'} relative flex-shrink-0 border-r border-[var(--border)] bg-white transition-all duration-300`}>
+        <div className="flex items-center justify-between gap-3 border-b border-slate-300 p-4">
           <Link href="/" className="flex min-w-0 items-center gap-3">
             <BrandLogo className="h-16 w-[320px] sm:h-20 sm:w-[380px]" />
           </Link>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="rounded-full border border-slate-800/70 bg-[#0b1220] p-2 text-sm text-slate-100 transition hover:border-sky-400 hover:text-white"
+            className="rounded-full border border-slate-300 bg-white p-2 text-sm text-slate-900 transition hover:border-blue-400 hover:text-slate-700"
             aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
           >
             {sidebarOpen ? '«' : '»'}
@@ -64,8 +64,8 @@ const AdminLayout = ({ children }) => {
                 <div
                   className={`flex cursor-pointer items-center gap-3 rounded-2xl px-4 py-3 transition ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#0b4d97] to-[#35b7ff] text-white shadow-lg shadow-sky-500/20'
-                      : 'bg-[#0d172b] text-slate-200 hover:bg-slate-950/90 hover:text-sky-200'
+                      ? 'bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white shadow-lg shadow-blue-500/20'
+                      : 'bg-slate-50 text-slate-700 hover:bg-slate-100 hover:text-blue-600'
                   }`}
                 >
                   <span>{item.icon}</span>
@@ -76,10 +76,10 @@ const AdminLayout = ({ children }) => {
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 p-4">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-slate-300 p-4">
           <button
             onClick={handleLogout}
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-500/20"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-red-400/50 bg-red-100 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-200"
           >
             <span className="text-lg">⏏️</span>
             {sidebarOpen && 'Logout'}
@@ -94,7 +94,7 @@ const AdminLayout = ({ children }) => {
               <BrandLogo className="h-14 w-[320px]" />
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/" className="inline-flex items-center justify-center rounded-full border border-sky-400 bg-slate-950/70 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-slate-900">
+              <Link href="/" className="inline-flex items-center justify-center rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition hover:bg-blue-100">
                 View Store
               </Link>
             </div>

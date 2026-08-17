@@ -67,21 +67,21 @@ const AdminDashboard = () => {
   if (!token) {
     return (
       <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex items-center justify-center p-8">
-        <div className="w-full max-w-md rounded-[24px] bg-[#08111f] p-8 border border-white/5">
-          <h2 className="text-2xl font-semibold text-white mb-4">Admin Sign In</h2>
-          {loginError && <div className="mb-4 rounded-md bg-rose-900/30 p-3 text-sm text-rose-300">{loginError}</div>}
+        <div className="w-full max-w-md rounded-[24px] bg-white p-8 border border-slate-200">
+          <h2 className="text-2xl font-semibold text-slate-900 mb-4">Admin Sign In</h2>
+          {loginError && <div className="mb-4 rounded-md bg-red-100 p-3 text-sm text-red-700">{loginError}</div>}
           <form onSubmit={handleAdminLogin} className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm text-slate-300">Email</label>
-              <input value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} type="email" required className="w-full rounded-2xl border border-white/10 bg-[#0b1220] px-3 py-3 text-white outline-none" />
+              <label className="mb-1 block text-sm text-slate-700">Email</label>
+              <input value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} type="email" required className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none" />
             </div>
             <div>
-              <label className="mb-1 block text-sm text-slate-300">Password</label>
-              <input value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} type="password" required className="w-full rounded-2xl border border-white/10 bg-[#0b1220] px-3 py-3 text-white outline-none" />
+              <label className="mb-1 block text-sm text-slate-700">Password</label>
+              <input value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} type="password" required className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none" />
             </div>
-            <button type="submit" disabled={loginLoading} className="w-full rounded-full bg-gradient-to-r from-[#0b4d97] to-[#35b7ff] py-3 font-semibold text-white">{loginLoading ? 'Signing in...' : 'Sign in'}</button>
+            <button type="submit" disabled={loginLoading} className="w-full rounded-full bg-gradient-to-r from-[#2563eb] to-[#3b82f6] py-3 font-semibold text-white">{loginLoading ? 'Signing in...' : 'Sign in'}</button>
           </form>
-          <p className="mt-4 text-sm text-slate-400">Use the seeded admin account (admin@infix.local / admin123) or create an admin user in the database.</p>
+          <p className="mt-4 text-sm text-slate-600">Use the seeded admin account (admin@infix.local / admin123) or create an admin user in the database.</p>
         </div>
       </div>
     );
@@ -141,13 +141,13 @@ const AdminDashboard = () => {
   };
 
   const StatCard = ({ title, value, icon, color }) => (
-    <div className={`rounded-[28px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.28)] ${color}`}>
+    <div className={`rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)] ${color}`}>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.24em] text-gray-400">{title}</p>
-          <p className="mt-3 text-3xl font-semibold text-white">{value}</p>
+          <p className="text-sm font-medium uppercase tracking-[0.24em] text-slate-600">{title}</p>
+          <p className="mt-3 text-3xl font-semibold text-slate-900">{value}</p>
         </div>
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-400/10 text-2xl text-yellow-300">{icon}</div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-2xl text-blue-600">{icon}</div>
       </div>
     </div>
   );
@@ -163,43 +163,43 @@ const AdminDashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatCard title="Total Orders" value={stats.stats.totalOrders} icon="📦" color="border-blue-500" />
               <StatCard title="Total Revenue" value={formatMoney(stats.stats.totalRevenue)} icon="💰" color="border-green-500" />
-              <StatCard title="Pending Orders" value={stats.stats.pendingOrders} icon="⏳" color="border-yellow-500" />
+              <StatCard title="Pending Orders" value={stats.stats.pendingOrders} icon="⏳" color="border-blue-500" />
               <StatCard title="Total Products" value={stats.stats.totalProducts} icon="🛍️" color="border-purple-500" />
             </div>
-            <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-              <div className="p-6 border-b border-white/10">
-                <h2 className="text-xl font-bold text-white">Recent Orders</h2>
+            <div className="rounded-[32px] border border-slate-200 bg-white shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+              <div className="p-6 border-b border-slate-200">
+                <h2 className="text-xl font-bold text-slate-900">Recent Orders</h2>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#0c0c0c] border-b border-white/10">
+                  <thead className="bg-slate-50 border-b border-slate-200">
                     <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Order ID</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Customer</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Total</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Status</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Date</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Order ID</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Customer</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Total</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Status</th>
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Date</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/10">
+                  <tbody className="divide-y divide-slate-200">
                     {stats.recentOrders.map((order) => (
-                      <tr key={order.id} className="hover:bg-white/5 transition">
-                        <td className="px-6 py-3 text-sm font-medium text-yellow-300">{order.order_number}</td>
-                        <td className="px-6 py-3 text-sm text-gray-300">{order.shipping_name}</td>
-                        <td className="px-6 py-3 text-sm font-semibold text-white">{formatMoney(order.total)}</td>
+                      <tr key={order.id} className="hover:bg-slate-50 transition">
+                        <td className="px-6 py-3 text-sm font-medium text-blue-600">{order.order_number}</td>
+                        <td className="px-6 py-3 text-sm text-slate-700">{order.shipping_name}</td>
+                        <td className="px-6 py-3 text-sm font-semibold text-slate-900">{formatMoney(order.total)}</td>
                         <td className="px-6 py-3 text-sm">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                             order.status === 'paid' || order.status === 'completed' ? 'bg-emerald-900/20 text-emerald-300' :
-                            order.status === 'pending' ? 'bg-yellow-900/20 text-yellow-300' :
+                            order.status === 'pending' ? 'bg-blue-900/20 text-blue-300' :
                             order.status === 'processing' ? 'bg-sky-900/20 text-sky-300' :
                             order.status === 'shipped' ? 'bg-violet-900/20 text-violet-300' :
                             order.status === 'cancelled' ? 'bg-rose-900/20 text-rose-300' :
-                            'bg-white/10 text-gray-200'
+                            'bg-slate-100 text-slate-700'
                           }`}>
                             {order.status}
                           </span>
                         </td>
-                        <td className="px-6 py-3 text-sm text-gray-400">{new Date(order.created_at).toLocaleDateString()}</td>
+                        <td className="px-6 py-3 text-sm text-slate-600">{new Date(order.created_at).toLocaleDateString()}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -330,31 +330,31 @@ const CategoriesTab = ({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-        <h2 className="text-xl font-bold text-white mb-4">Browse & Manage Categories</h2>
-        <div className="mb-8 p-6 rounded-3xl border border-yellow-400/20 bg-[#0c0c0c]">
-          <h3 className="font-semibold text-white mb-4">{editingCategory ? 'Edit Category' : 'Add New Category'}</h3>
+      <div className="rounded-[32px] border border-slate-300 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Browse & Manage Categories</h2>
+        <div className="mb-8 p-6 rounded-3xl border border-blue-300/20 bg-slate-50">
+          <h3 className="font-semibold text-slate-900 mb-4">{editingCategory ? 'Edit Category' : 'Add New Category'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
               placeholder="Category Name"
               value={newCategoryName}
               onChange={(e) => setNewCategoryName(e.target.value)}
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+              className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
             />
             <input
               type="text"
               placeholder="Slug"
               value={newCategorySlug}
               onChange={(e) => setNewCategorySlug(e.target.value)}
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+              className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
             />
           </div>
           <textarea
             placeholder="Description"
             value={newCategoryDescription}
             onChange={(e) => setNewCategoryDescription(e.target.value)}
-            className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none"
+            className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none"
             rows={4}
           />
           <div className="mt-4">
@@ -363,13 +363,13 @@ const CategoriesTab = ({
               type="file"
               accept="image/*"
               onChange={(e) => setCategoryImage(e.target.files?.[0] || null)}
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white w-full"
+              className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 w-full"
             />
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
-            <button onClick={saveCategory} className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-400/30 bg-gradient-to-r from-[#0b4d97] to-[#35b7ff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(53,183,255,0.25)] transition hover:brightness-110">{editingCategory ? 'Save Category' : 'Add Category'}</button>
+            <button onClick={saveCategory} className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-300/30 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(37,99,235,0.25)] transition hover:brightness-110">{editingCategory ? 'Save Category' : 'Add Category'}</button>
             {editingCategory && (
-              <button onClick={reset} className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-medium text-slate-200 backdrop-blur-sm transition hover:bg-white/20">
+              <button onClick={reset} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-700 backdrop-blur-sm transition hover:bg-slate-200">
                 Cancel
               </button>
             )}
@@ -378,14 +378,14 @@ const CategoriesTab = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.length === 0 ? (
-            <p className="text-gray-400 col-span-full">No categories found.</p>
+            <p className="text-slate-600 col-span-full">No categories found.</p>
           ) : (
             categories.map((cat) => (
-              <div key={cat.id} className="rounded-3xl border border-white/10 bg-[#0c0c0c] p-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
+              <div key={cat.id} className="rounded-3xl border border-slate-300 bg-white p-4 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
                 {cat.image && <img src={normalizeImageUrl(cat.image)} alt={cat.name} className="w-full h-32 object-cover rounded-2xl mb-3" />}
-                <h3 className="font-semibold text-white">{cat.name}</h3>
-                <p className="text-xs text-gray-400 mt-1">Slug: {cat.slug}</p>
-                <p className="text-xs text-gray-400 mt-1">{cat.description || 'No description'}</p>
+                <h3 className="font-semibold text-slate-900">{cat.name}</h3>
+                <p className="text-xs text-slate-600 mt-1">Slug: {cat.slug}</p>
+                <p className="text-xs text-slate-600 mt-1">{cat.description || 'No description'}</p>
                 <div className="mt-4 flex gap-2">
                   <button
                     onClick={() => {
@@ -396,7 +396,7 @@ const CategoriesTab = ({
                       setCategoryImage(null);
                       if (categoryImageRef.current) categoryImageRef.current.value = '';
                     }}
-                    className="flex-1 rounded-full bg-yellow-500 px-3 py-1 text-sm font-semibold text-black hover:bg-yellow-400"
+                    className="flex-1 rounded-full bg-blue-400 px-3 py-1 text-sm font-semibold text-white hover:bg-blue-500"
                   >
                     Edit
                   </button>
@@ -505,31 +505,31 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+      <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
         <div className="flex items-center justify-between gap-4 mb-4">
           <div>
-            <h2 className="text-xl font-bold text-white">{heading}</h2>
-            <p className="text-sm text-gray-400 mt-1">{subheading}</p>
+            <h2 className="text-xl font-bold text-slate-900">{heading}</h2>
+            <p className="text-sm text-slate-600 mt-1">{subheading}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#0c0c0c] p-6">
-            <h3 className="font-semibold text-white mb-4">{editingProduct ? 'Edit Product' : 'Add Product'}</h3>
+          <div className="rounded-3xl border border-slate-300 bg-white p-6">
+            <h3 className="font-semibold text-slate-900 mb-4">{editingProduct ? 'Edit Product' : 'Add Product'}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <input
                 type="text"
                 placeholder="Title"
                 value={productForm.title}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, title: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
               <input
                 type="text"
                 placeholder="Slug"
                 value={productForm.slug}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, slug: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -538,14 +538,14 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                 placeholder="Price"
                 value={productForm.price}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
               <input
                 type="text"
                 placeholder="Stock"
                 value={productForm.stock}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, stock: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -554,21 +554,21 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                 placeholder="Category ID"
                 value={productForm.category}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, category: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
               <input
                 type="text"
                 placeholder="Brand ID"
                 value={productForm.brand}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, brand: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
             </div>
             <textarea
               placeholder="Description"
               value={productForm.description}
               onChange={(e) => setProductForm((prev) => ({ ...prev, description: e.target.value }))}
-              className="w-full rounded-2xl border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none"
+              className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none"
               rows={4}
             />
             <div className="mt-4">
@@ -577,11 +577,11 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white w-full"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 w-full"
               />
             </div>
             <div className="mt-4 flex flex-wrap gap-3 items-center">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-300">
+              <label className="inline-flex items-center gap-2 text-sm text-slate-700">
                 <input
                   type="checkbox"
                   checked={productForm.is_featured}
@@ -589,7 +589,7 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                 />
                 Featured
               </label>
-              <label className="inline-flex items-center gap-2 text-sm text-gray-300">
+              <label className="inline-flex items-center gap-2 text-sm text-slate-700">
                 <input
                   type="checkbox"
                   checked={productForm.is_best_seller}
@@ -599,25 +599,25 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
               </label>
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <button onClick={saveProduct} className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-400/30 bg-gradient-to-r from-[#0b4d97] to-[#35b7ff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(53,183,255,0.25)] transition hover:brightness-110">{editingProduct ? 'Save Product' : 'Add Product'}</button>
-              {editingProduct && <button onClick={resetForm} className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-medium text-slate-200 backdrop-blur-sm transition hover:bg-white/20">Cancel</button>}
+              <button onClick={saveProduct} className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-400/30 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(37,99,235,0.25)] transition hover:brightness-110">{editingProduct ? 'Save Product' : 'Add Product'}</button>
+              {editingProduct && <button onClick={resetForm} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-700 backdrop-blur-sm transition hover:bg-slate-200">Cancel</button>}
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-[#0c0c0c] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.2)]">
-            <h3 className="font-semibold text-white mb-4">{heading}</h3>
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_15px_40px_rgba(15,23,42,0.1)]">
+            <h3 className="font-semibold text-slate-900 mb-4">{heading}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {products.length === 0 ? (
-                <p className="text-gray-400">No products found.</p>
+                <p className="text-slate-600">No products found.</p>
               ) : (
                 products.map((prod) => (
-                  <div key={prod.id} className="rounded-3xl border border-white/10 bg-[#111111] p-4">
+                  <div key={prod.id} className="rounded-3xl border border-slate-300 bg-white p-4">
                     <img src={normalizeImageUrl(prod.image)} alt={prod.title} className="w-full h-32 object-cover rounded-2xl mb-3" />
-                    <h4 className="font-semibold text-white text-sm truncate">{prod.title}</h4>
-                    <p className="text-xs text-gray-400 mt-1">Price: {formatMoney(prod.price)}</p>
-                    <p className="text-xs text-gray-400 mt-1">Stock: {prod.stock}</p>
-                    <p className="text-xs text-gray-400 mt-1">Featured: {prod.is_featured ? 'Yes' : 'No'}</p>
-                    <p className="text-xs text-gray-400 mt-1">Best Seller: {prod.is_best_seller ? 'Yes' : 'No'}</p>
+                    <h4 className="font-semibold text-slate-900 text-sm truncate">{prod.title}</h4>
+                    <p className="text-xs text-slate-600 mt-1">Price: {formatMoney(prod.price)}</p>
+                    <p className="text-xs text-slate-600 mt-1">Stock: {prod.stock}</p>
+                    <p className="text-xs text-slate-600 mt-1">Featured: {prod.is_featured ? 'Yes' : 'No'}</p>
+                    <p className="text-xs text-slate-600 mt-1">Best Seller: {prod.is_best_seller ? 'Yes' : 'No'}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       <button
                         onClick={() => {
@@ -636,7 +636,7 @@ const ProductManagementTab = ({ token, products, fetchProducts, defaultFlags, he
                           if (imageRef.current) imageRef.current.value = '';
                           setImageFile(null);
                         }}
-                        className="flex-1 rounded-full bg-yellow-500 px-3 py-1 text-sm font-semibold text-black hover:bg-yellow-400"
+                        className="flex-1 rounded-full bg-blue-400 px-3 py-1 text-sm font-semibold text-white hover:bg-blue-500"
                       >
                         Edit
                       </button>
@@ -743,25 +743,25 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-        <h2 className="text-xl font-bold text-white mb-4">Top Selling Hardware Products</h2>
+      <div className="rounded-[32px] border border-slate-300 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Top Selling Hardware Products</h2>
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#0c0c0c] p-6">
-            <h3 className="font-semibold text-white mb-4">{editingProduct ? 'Edit Product' : 'Add Product'}</h3>
+          <div className="rounded-3xl border border-slate-300 bg-white p-6">
+            <h3 className="font-semibold text-slate-900 mb-4">{editingProduct ? 'Edit Product' : 'Add Product'}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <input
                 type="text"
                 placeholder="Title"
                 value={productForm.title}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, title: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
               <input
                 type="text"
                 placeholder="Slug"
                 value={productForm.slug}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, slug: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -770,21 +770,21 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                 placeholder="Price"
                 value={productForm.price}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
               <input
                 type="text"
                 placeholder="Stock"
                 value={productForm.stock}
                 onChange={(e) => setProductForm((prev) => ({ ...prev, stock: e.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white outline-none"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 outline-none"
               />
             </div>
             <textarea
               placeholder="Description"
               value={productForm.description}
               onChange={(e) => setProductForm((prev) => ({ ...prev, description: e.target.value }))}
-              className="w-full rounded-2xl border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none"
+              className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none"
               rows={4}
             />
             <div className="mt-4">
@@ -793,33 +793,33 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-                className="rounded-2xl border border-white/10 bg-[#111111] px-4 py-2 text-white w-full"
+                className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 w-full"
               />
             </div>
             <div className="mt-4 flex flex-wrap gap-3 items-center">
               <button onClick={saveProduct} className="rounded-full bg-blue-600 px-5 py-2 text-white hover:bg-blue-700">{editingProduct ? 'Save Product' : 'Add Product'}</button>
-              {editingProduct && <button onClick={resetForm} className="rounded-full bg-white/10 px-5 py-2 text-white hover:bg-white/20">Cancel</button>}
+              {editingProduct && <button onClick={resetForm} className="rounded-full bg-slate-200 px-5 py-2 text-slate-700 hover:bg-slate-300">Cancel</button>}
             </div>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-[#0c0c0c] p-6 overflow-x-auto">
+          <div className="rounded-3xl border border-slate-300 bg-white p-6 overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-[#111111] border-b border-white/10">
+              <thead className="bg-slate-50 border-b border-slate-300">
                 <tr>
-                  <th className="px-4 py-3 text-left text-gray-300">Product</th>
-                  <th className="px-4 py-3 text-left text-gray-300">Price</th>
-                  <th className="px-4 py-3 text-left text-gray-300">Sold</th>
-                  <th className="px-4 py-3 text-left text-gray-300">Revenue</th>
-                  <th className="px-4 py-3 text-left text-gray-300">Actions</th>
+                  <th className="px-4 py-3 text-left text-slate-700">Product</th>
+                  <th className="px-4 py-3 text-left text-slate-700">Price</th>
+                  <th className="px-4 py-3 text-left text-slate-700">Sold</th>
+                  <th className="px-4 py-3 text-left text-slate-700">Revenue</th>
+                  <th className="px-4 py-3 text-left text-slate-700">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-slate-200">
                 {products && products.length > 0 ? (
                   products.map((product) => (
-                    <tr key={product.id} className="hover:bg-white/5 transition">
-                      <td className="px-4 py-3 text-white">{product.name}</td>
-                      <td className="px-4 py-3 text-yellow-300">{formatMoney(product.price || 0)}</td>
-                      <td className="px-4 py-3 text-gray-300">{product.quantity_sold || 0}</td>
-                      <td className="px-4 py-3 text-green-300">{formatMoney(product.revenue || 0)}</td>
+                    <tr key={product.id} className="hover:bg-slate-50 transition">
+                      <td className="px-4 py-3 text-slate-900">{product.name}</td>
+                      <td className="px-4 py-3 text-blue-600">{formatMoney(product.price || 0)}</td>
+                      <td className="px-4 py-3 text-slate-600">{product.quantity_sold || 0}</td>
+                      <td className="px-4 py-3 text-green-600">{formatMoney(product.revenue || 0)}</td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap gap-2">
                           <button
@@ -846,7 +846,7 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                                 alert('Failed to load product details for edit');
                               }
                             }}
-                            className="rounded-full bg-yellow-500 px-3 py-1 text-xs font-semibold text-black hover:bg-yellow-400"
+                            className="rounded-full bg-blue-400 px-3 py-1 text-xs font-semibold text-white hover:bg-blue-500"
                           >
                             Edit
                           </button>
@@ -862,7 +862,7 @@ const TopSellingTab = ({ token, products, refreshAll }) => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="px-4 py-8 text-center text-gray-400">No top selling products found.</td>
+                    <td colSpan="5" className="px-4 py-8 text-center text-slate-600">No top selling products found.</td>
                   </tr>
                 )}
               </tbody>
@@ -1008,26 +1008,26 @@ const HeroSlidesTab = ({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-        <h2 className="text-xl font-bold text-white mb-4">Hero Slides Management</h2>
-        <p className="text-sm text-gray-400 mb-6">Manage banner images shown on the homepage. Images are cropped to 1920x600 (16:9). You can adjust the crop area before uploading.</p>
+      <div className="rounded-[32px] border border-slate-300 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Hero Slides Management</h2>
+        <p className="text-sm text-slate-600 mb-6">Manage banner images shown on the homepage. Images are cropped to 1920x600 (16:9). You can adjust the crop area before uploading.</p>
 
-        <div className="mb-8 p-6 rounded-3xl border border-yellow-400/20 bg-[#0c0c0c]">
-          <h3 className="font-semibold text-white mb-4">{editingHeroSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}</h3>
+        <div className="mb-8 p-6 rounded-3xl border border-blue-400/20 bg-slate-50">
+          <h3 className="font-semibold text-slate-900 mb-4">{editingHeroSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
               placeholder="Slide Title"
               value={heroSlideTitle}
               onChange={(e) => setHeroSlideTitle(e.target.value)}
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+              className="rounded-2xl border border-slate-300 bg-slate-100 px-4 py-2 text-slate-900 outline-none"
             />
             <input
               type="text"
               placeholder="Link (optional)"
               value={heroSlideLink}
               onChange={(e) => setHeroSlideLink(e.target.value)}
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white outline-none"
+              className="rounded-2xl border border-slate-300 bg-slate-100 px-4 py-2 text-slate-900 outline-none"
             />
           </div>
 
@@ -1038,15 +1038,15 @@ const HeroSlidesTab = ({
                 type="file"
                 accept="image/*"
                 onChange={handleImageSelect}
-                className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 text-white w-full"
+                className="rounded-2xl border border-slate-300 bg-slate-100 px-4 py-2 text-slate-900 w-full"
               />
-              <p className="mt-2 text-xs text-gray-400">Select a high-resolution landscape image. You'll be able to crop it to 16:9 aspect ratio.</p>
+              <p className="mt-2 text-xs text-slate-600">Select a high-resolution landscape image. You'll be able to crop it to 16:9 aspect ratio.</p>
             </div>
           )}
 
           {previewUrl && !editingHeroSlide && (
             <div className="mt-6 space-y-4">
-              <div className="relative w-full h-96 bg-black/50 rounded-2xl overflow-hidden border border-white/10">
+              <div className="relative w-full h-96 bg-slate-100 rounded-2xl overflow-hidden border border-slate-300">
                 <Cropper
                   image={previewUrl}
                   crop={crop}
@@ -1062,7 +1062,7 @@ const HeroSlidesTab = ({
 
               <div className="space-y-3">
                 <div>
-                  <label className="text-sm text-gray-300">Zoom: {zoom.toFixed(1)}x</label>
+                  <label className="text-sm text-slate-700">Zoom: {zoom.toFixed(1)}x</label>
                   <input
                     type="range"
                     min={1}
@@ -1129,13 +1129,13 @@ const HeroSlidesTab = ({
           </div>
         </div>
 
-        <h3 className="font-semibold text-white mb-4">Current Hero Slides</h3>
+        <h3 className="font-semibold text-slate-900 mb-4">Current Hero Slides</h3>
         {heroSlides.length === 0 ? (
-          <p className="text-gray-400">No hero slides created yet.</p>
+          <p className="text-slate-600">No hero slides created yet.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {heroSlides.map((slide) => (
-              <div key={slide.id} className="rounded-2xl border border-white/10 bg-[#0c0c0c] overflow-hidden">
+              <div key={slide.id} className="rounded-2xl border border-slate-300 bg-white overflow-hidden">
                 {slide.image && (
                   <img
                     src={normalizeImageUrl(slide.image)}
@@ -1144,9 +1144,9 @@ const HeroSlidesTab = ({
                   />
                 )}
                 <div className="p-4">
-                  <h4 className="font-semibold text-white">{slide.title || '(No title)'}</h4>
+                  <h4 className="font-semibold text-slate-900">{slide.title || '(No title)'}</h4>
                   {slide.link && (
-                    <p className="text-xs text-gray-400 mt-1 truncate">Link: {slide.link}</p>
+                    <p className="text-xs text-slate-600 mt-1 truncate">Link: {slide.link}</p>
                   )}
                   <p className="text-xs text-gray-500 mt-2">
                     Created: {new Date(slide.created_at).toLocaleDateString()}
@@ -1160,7 +1160,7 @@ const HeroSlidesTab = ({
                         setHeroImage(null);
                         setPreviewUrl(null);
                       }}
-                      className="flex-1 px-3 py-2 bg-yellow-500 text-black rounded-lg font-semibold hover:bg-yellow-400 text-xs"
+                      className="flex-1 px-3 py-2 bg-blue-400 text-white rounded-lg font-semibold hover:bg-blue-500 text-xs"
                     >
                       Edit
                     </button>

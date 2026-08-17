@@ -81,7 +81,7 @@ export default function CartPage(){
 
   const subtotal = items.reduce((s,i)=> s + (parseFloat(i.price||0) * (i.quantity||1)), 0);
 
-  if (!items.length) return <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]"><div className="mx-auto max-w-6xl px-6 py-16"><div className="rounded-[32px] border border-slate-200 bg-slate-50 p-10 shadow-[0_24px_70px_rgba(148,163,184,0.06)]"><h1 className="text-3xl font-semibold text-slate-900">Your cart is empty</h1><p className="mt-3 text-gray-500">Add some premium tools and hardware to get started.</p><Link href="/shop" className="mt-6 inline-flex rounded-full bg-yellow-400 px-6 py-3 font-semibold text-black transition hover:brightness-95">Shop now</Link></div></div></div>
+  if (!items.length) return <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]"><div className="mx-auto max-w-6xl px-6 py-16"><div className="rounded-[32px] border border-slate-200 bg-slate-50 p-10 shadow-[0_24px_70px_rgba(148,163,184,0.06)]"><h1 className="text-3xl font-semibold text-slate-900">Your cart is empty</h1><p className="mt-3 text-gray-500">Add some premium tools and hardware to get started.</p><Link href="/shop" className="mt-6 inline-flex rounded-full bg-blue-400 px-6 py-3 font-semibold text-white transition hover:brightness-95">Shop now</Link></div></div></div>
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
@@ -108,7 +108,7 @@ export default function CartPage(){
               <div className="flex items-center justify-between">Items: <span className="text-slate-900">{items.length}</span></div>
               <div className="flex items-center justify-between">Subtotal: <span className="text-slate-900">{formatMoney(subtotal)}</span></div>
             </div>
-            <Link href="/checkout" className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-yellow-400 px-4 py-3 text-center font-semibold text-black transition hover:brightness-95">Proceed to Checkout</Link>
+            <Link href="/checkout" className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-blue-400 px-4 py-3 text-center font-semibold text-white transition hover:brightness-95">Proceed to Checkout</Link>
           </aside>
         </div>
       </div>

@@ -70,11 +70,11 @@ export default function ProductPage({ data }){
                 <div className="flex-1">
                   <h1 className="text-2xl font-semibold text-slate-900">{product.title}</h1>
                   <p className="mt-2 text-sm text-gray-500">SKU: {product.sku || '—'}</p>
-                  <div className="mt-4 text-3xl font-semibold text-yellow-300">{formatMoney(product.discount_price || product.price)}</div>
+                  <div className="mt-4 text-3xl font-semibold text-blue-400">{formatMoney(product.discount_price || product.price)}</div>
                   <p className="mt-4 text-sm leading-7 text-gray-600">{product.description}</p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <AuthAddToCart product={product} />
-                    <button onClick={() => { window.location.href = '/cart'; }} className="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm text-slate-900 transition hover:border-yellow-400">View Cart</button>
+                    <button onClick={() => { window.location.href = '/cart'; }} className="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm text-slate-900 transition hover:border-blue-400">View Cart</button>
                   </div>
                   <div className="mt-4 text-sm text-gray-400">Stock: {product.stock}</div>
                 </div>
@@ -85,13 +85,13 @@ export default function ProductPage({ data }){
               <h2 className="text-xl font-semibold text-slate-900">Customer Reviews</h2>
               {reviews.length === 0 && <p className="mt-3 text-sm text-gray-400">No reviews yet.</p>}
               {reviews.map(r => (
-                <div key={r.id} className="border-b border-white/10 py-4">
+                <div key={r.id} className="border-b border-slate-200 py-4">
                   <div className="flex items-center justify-between">
-                    <strong className="text-white">{r.user_name || 'Anonymous'}</strong>
-                    <span className="text-yellow-400">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</span>
+                    <strong className="text-slate-900">{r.user_name || 'Anonymous'}</strong>
+                    <span className="text-blue-400">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</span>
                   </div>
-                  <div className="mt-1 text-sm text-gray-300">{r.title}</div>
-                  <p className="mt-2 text-sm text-gray-400">{r.comment}</p>
+                  <div className="mt-1 text-sm text-slate-700">{r.title}</div>
+                  <p className="mt-2 text-sm text-slate-600">{r.comment}</p>
                 </div>
               ))}
             </div>
@@ -106,18 +106,18 @@ export default function ProductPage({ data }){
                     <img src={normalizeImageUrl(r.image)} className="h-16 w-16 rounded-2xl object-cover" />
                     <div>
                       <div className="font-medium text-slate-900">{r.title}</div>
-                      <div className="text-sm text-yellow-300">{formatMoney(r.discount_price || r.price)}</div>
+                      <div className="text-sm text-blue-400">{formatMoney(r.discount_price || r.price)}</div>
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-              <h3 className="text-lg font-semibold text-white">Product Details</h3>
-              <p className="mt-3 text-sm text-gray-400">Category ID: {product.category}</p>
-              <p className="mt-2 text-sm text-gray-400">Brand ID: {product.brand}</p>
-              <p className="mt-2 text-sm text-gray-400">Rating: {product.rating}</p>
+            <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+              <h3 className="text-lg font-semibold text-slate-900">Product Details</h3>
+              <p className="mt-3 text-sm text-slate-600">Category ID: {product.category}</p>
+              <p className="mt-2 text-sm text-slate-600">Brand ID: {product.brand}</p>
+              <p className="mt-2 text-sm text-slate-600">Rating: {product.rating}</p>
             </div>
           </aside>
         </div>

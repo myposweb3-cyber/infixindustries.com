@@ -59,7 +59,7 @@ function DashboardContent() {
         {dashboardItems.map((item, idx) => (
           <div
             key={item.title}
-            className="glass-card rounded-3xl border border-white/20 bg-white/35 p-6 shadow-2xl shadow-slate-900/5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-blue-500/20 scroll-reveal"
+            className="glass-card rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl shadow-slate-900/5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-blue-500/20 scroll-reveal"
             style={{ animationDelay: `${idx * 80}ms` }}
           >
             <div className="flex items-center justify-between">

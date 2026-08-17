@@ -97,8 +97,8 @@ const OrdersManagement = () => {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-          <h2 className="text-2xl font-semibold mb-4 text-white">Order Management</h2>
+        <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+          <h2 className="text-2xl font-semibold mb-4 text-slate-900">Order Management</h2>
 
           {/* Search & Filter */}
           <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -107,7 +107,7 @@ const OrdersManagement = () => {
               placeholder="Search order ID or customer name..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="px-4 py-2 rounded-2xl border border-white/10 bg-[#0c0c0c] text-white outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+              className="px-4 py-2 rounded-2xl border border-slate-200 bg-slate-50 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
             />
             <select
               value={status}
@@ -115,7 +115,7 @@ const OrdersManagement = () => {
                 setStatus(e.target.value);
                 setPage(1);
               }}
-              className="px-4 py-2 rounded-2xl border border-white/10 bg-[#0c0c0c] text-white outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+              className="px-4 py-2 rounded-2xl border border-slate-200 bg-slate-50 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
             >
               <option value="">All Statuses</option>
               {statusOptions.map(s => <option key={s} value={s}>{s}</option>)}
@@ -128,31 +128,31 @@ const OrdersManagement = () => {
             </button>
           </form>
 
-          {error && <div className="mb-4 rounded-2xl border border-red-500/20 bg-red-500/10 p-4 text-red-200">{error}</div>}
+          {error && <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
 
           {/* Orders Table */}
-          <div className="overflow-x-auto rounded-3xl border border-white/10 bg-[#0c0c0c]/95">
+          <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white">
             <table className="w-full">
-              <thead className="bg-[#111111] border-b border-white/10">
+              <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Order ID</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Customer</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Total</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Status</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Date</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-300">Action</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Order ID</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Customer</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Total</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Status</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Date</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-slate-200">
                 {orders.map((order) => (
-                  <tr key={order.id} className="hover:bg-white/5 transition">
-                    <td className="px-6 py-3 text-sm font-medium text-yellow-300">{order.order_number}</td>
-                    <td className="px-6 py-3 text-sm text-gray-300">{order.shipping_name}</td>
-                    <td className="px-6 py-3 text-sm font-semibold text-white">{formatMoney(order.total)}</td>
+                  <tr key={order.id} className="hover:bg-slate-50 transition">
+                    <td className="px-6 py-3 text-sm font-medium text-blue-600">{order.order_number}</td>
+                    <td className="px-6 py-3 text-sm text-slate-700">{order.shipping_name}</td>
+                    <td className="px-6 py-3 text-sm font-semibold text-slate-900">{formatMoney(order.total)}</td>
                     <td className="px-6 py-3 text-sm">
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         order.status === 'paid' || order.status === 'completed' ? 'bg-emerald-900/20 text-emerald-300' :
-                        order.status === 'pending' ? 'bg-yellow-900/20 text-yellow-300' :
+                        order.status === 'pending' ? 'bg-blue-900/20 text-blue-300' :
                         order.status === 'processing' ? 'bg-sky-900/20 text-sky-300' :
                         order.status === 'shipped' ? 'bg-violet-900/20 text-violet-300' :
                         order.status === 'delivered' ? 'bg-emerald-900/20 text-emerald-300' :
@@ -162,13 +162,13 @@ const OrdersManagement = () => {
                         {order.status}
                       </span>
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-400">
+                    <td className="px-6 py-3 text-sm text-slate-600">
                       {new Date(order.created_at).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-3 text-sm">
                       <button
                         onClick={() => viewOrder(order.id)}
-                        className="text-yellow-300 hover:text-yellow-100 font-medium"
+                        className="text-blue-600 hover:text-blue-700 font-medium"
                       >
                         View/Edit
                       </button>
@@ -184,7 +184,7 @@ const OrdersManagement = () => {
             <button
               onClick={() => setPage(Math.max(1, page - 1))}
               disabled={page === 1}
-              className="px-3 py-1 border border-gray-300 rounded disabled:opacity-50"
+              className="px-3 py-1 border border-slate-300 rounded disabled:opacity-50"
             >
               Previous
             </button>
@@ -202,16 +202,16 @@ const OrdersManagement = () => {
         {/* Order Detail Modal */}
         {selectedOrder && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="rounded-[32px] border border-white/10 bg-[#111111]/95 max-w-2xl w-full mx-4 p-6 max-h-screen overflow-y-auto shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
+            <div className="rounded-[32px] border border-slate-300 bg-white max-w-2xl w-full mx-4 p-6 max-h-screen overflow-y-auto shadow-[0_30px_90px_rgba(15,23,42,0.15)]">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-bold text-white">Order #{selectedOrder.order_number}</h3>
+                <h3 className="text-2xl font-bold text-slate-900">Order #{selectedOrder.order_number}</h3>
                 <button
                   onClick={() => {
                     setSelectedOrder(null);
                     setNewStatus('');
                     setItems([]);
                   }}
-                  className="text-2xl font-bold text-gray-300 hover:text-white"
+                  className="text-2xl font-bold text-slate-400 hover:text-slate-600"
                 >
                   ✕
                 </button>
@@ -220,47 +220,47 @@ const OrdersManagement = () => {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-gray-400">Total Amount</p>
-                    <p className="text-2xl font-bold text-yellow-300">{formatMoney(selectedOrder.total)}</p>
+                    <p className="text-sm text-slate-600">Total Amount</p>
+                    <p className="text-2xl font-bold text-blue-400">{formatMoney(selectedOrder.total)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Current Status</p>
-                    <p className="text-lg font-semibold capitalize text-white">{selectedOrder.status}</p>
+                    <p className="text-sm text-slate-600">Current Status</p>
+                    <p className="text-lg font-semibold capitalize text-slate-900">{selectedOrder.status}</p>
                   </div>
                 </div>
 
                 {/* Customer details */}
-                <div className="border-t border-gray-200 pt-4">
-                  <h4 className="text-sm text-gray-400 mb-2">Customer</h4>
-                  <div className="text-sm text-gray-200">
+                <div className="border-t border-slate-300 pt-4">
+                  <h4 className="text-sm text-slate-600 mb-2">Customer</h4>
+                  <div className="text-sm text-slate-700">
                     <p className="font-semibold">{selectedOrder.customer_name || (selectedOrder.shipping && selectedOrder.shipping.name) || selectedOrder.shipping_name}</p>
-                    <p className="text-gray-400">{selectedOrder.customer_email || ''}</p>
-                    <p className="text-gray-400">{selectedOrder.customer_phone || ''}</p>
+                    <p className="text-slate-600">{selectedOrder.customer_email || ''}</p>
+                    <p className="text-slate-600">{selectedOrder.customer_phone || ''}</p>
                   </div>
                 </div>
 
                 {/* Items list */}
-                <div className="border-t border-gray-200 pt-4">
-                  <h4 className="text-sm text-gray-400 mb-2">Items</h4>
+                <div className="border-t border-slate-300 pt-4">
+                  <h4 className="text-sm text-slate-600 mb-2">Items</h4>
                   <div className="space-y-2">
                     {items.length ? items.map(it => (
-                      <div key={it.id} className="flex items-center gap-3 bg-[#0b0b0b] rounded p-3">
+                      <div key={it.id} className="flex items-center gap-3 bg-slate-50 rounded p-3">
                         {it.product_image && (
                           <img src={it.product_image} alt={it.product_title} className="h-12 w-12 rounded object-cover" />
                         )}
                         <div className="flex-1">
-                          <div className="text-sm font-semibold text-white">{it.product_title || 'Unknown product'}</div>
-                          <div className="text-xs text-gray-400">Qty: {it.quantity} · {formatMoney(it.price)}</div>
+                          <div className="text-sm font-semibold text-slate-900">{it.product_title || 'Unknown product'}</div>
+                          <div className="text-xs text-slate-600">Qty: {it.quantity} · {formatMoney(it.price)}</div>
                         </div>
                       </div>
                     )) : (
-                      <div className="text-sm text-gray-400">No items found for this order.</div>
+                      <div className="text-sm text-slate-600">No items found for this order.</div>
                     )}
                   </div>
                 </div>
 
-                <div className="border-t border-gray-200 pt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Update Status</label>
+                <div className="border-t border-slate-300 pt-4">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Update Status</label>
                   <div className="flex gap-2">
                     <select
                       value={newStatus}

@@ -105,8 +105,8 @@ const ReviewsManagement = () => {
       <div className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Customer Reviews</h1>
-            <p className="text-sm text-gray-400">Manage and update customer reviews for products.</p>
+            <h1 className="text-2xl font-bold text-slate-900">Customer Reviews</h1>
+            <p className="text-sm text-slate-600">Manage and update customer reviews for products.</p>
           </div>
           <form onSubmit={handleSearch} className="flex gap-2">
             <input
@@ -114,21 +114,21 @@ const ReviewsManagement = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by product, user, title or comment"
-              className="rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-2 w-full md:w-96 text-white outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+              className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 w-full md:w-96 text-slate-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
             />
             <button className="rounded-2xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Search</button>
           </form>
         </div>
 
-        {error && <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-4 text-rose-100">{error}</div>}
+        {error && <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-800">{error}</div>}
 
-        <div className="rounded-3xl border border-white/10 bg-[#111111]/95 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+        <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
           {loading ? (
             <div className="p-8 text-center text-gray-400">Loading reviews...</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full text-left text-sm text-gray-300">
-                <thead className="border-b border-white/10 bg-[#0c0c0c]">
+              <table className="min-w-full text-left text-sm text-slate-700">
+                <thead className="border-b border-slate-200 bg-slate-50">
                   <tr>
                     <th className="px-4 py-3">Product</th>
                     <th className="px-4 py-3">Customer</th>
@@ -142,14 +142,14 @@ const ReviewsManagement = () => {
                 <tbody>
                   {reviews.length === 0 ? (
                     <tr>
-                      <td colSpan="7" className="px-4 py-8 text-center text-gray-500">No reviews found.</td>
+                      <td colSpan="7" className="px-4 py-8 text-center text-slate-500">No reviews found.</td>
                     </tr>
                   ) : (
                     reviews.map((review) => (
-                      <tr key={review.id} className="border-b border-white/10 hover:bg-white/5">
-                        <td className="px-4 py-3 font-medium text-white">{review.product_title || 'Unknown'}</td>
+                      <tr key={review.id} className="border-b border-slate-200 hover:bg-slate-50">
+                        <td className="px-4 py-3 font-medium text-slate-900">{review.product_title || 'Unknown'}</td>
                         <td className="px-4 py-3">{review.user_name || 'Anonymous'}</td>
-                        <td className="px-4 py-3 text-yellow-300">{renderStars(review.rating)}</td>
+                        <td className="px-4 py-3 text-blue-400">{renderStars(review.rating)}</td>
                         <td className="px-4 py-3">{review.title || '—'}</td>
                         <td className="px-4 py-3 max-w-xs truncate">{review.comment || '—'}</td>
                         <td className="px-4 py-3">{new Date(review.created_at).toLocaleString()}</td>
@@ -177,19 +177,19 @@ const ReviewsManagement = () => {
         </div>
 
         {pages > 1 && (
-          <div className="flex items-center justify-between rounded-3xl border border-white/10 bg-[#111111]/95 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+          <div className="flex items-center justify-between rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
             <button
               disabled={page <= 1}
               onClick={() => setPage((prev) => Math.max(1, prev - 1))}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white disabled:opacity-50"
+              className="rounded-xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 disabled:opacity-50"
             >
               Previous
             </button>
-            <span className="text-sm text-gray-300">Page {page} of {pages}</span>
+            <span className="text-sm text-slate-700">Page {page} of {pages}</span>
             <button
               disabled={page >= pages}
               onClick={() => setPage((prev) => Math.min(pages, prev + 1))}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white disabled:opacity-50"
+              className="rounded-xl border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 disabled:opacity-50"
             >
               Next
             </button>
@@ -197,16 +197,16 @@ const ReviewsManagement = () => {
         )}
 
         {selectedReview && (
-          <div className="rounded-3xl border border-white/10 bg-[#111111]/95 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-white">Edit Review</h2>
-                <p className="text-sm text-gray-400">Product: {selectedReview.product_title || 'Unknown'}</p>
-                <p className="text-sm text-gray-400">Customer: {selectedReview.user_name || 'Anonymous'}</p>
+                <h2 className="text-xl font-semibold text-slate-900">Edit Review</h2>
+                <p className="text-sm text-slate-600">Product: {selectedReview.product_title || 'Unknown'}</p>
+                <p className="text-sm text-slate-600">Customer: {selectedReview.user_name || 'Anonymous'}</p>
               </div>
               <button
                 onClick={closeEditor}
-                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white hover:bg-white/10"
+                className="rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200"
               >
                 Close
               </button>
@@ -235,11 +235,11 @@ const ReviewsManagement = () => {
               </label>
             </div>
             <label className="mt-4 space-y-2 block">
-              <span className="text-sm font-medium text-gray-300">Comment</span>
+              <span className="text-sm font-medium text-slate-700">Comment</span>
               <textarea
                 value={editForm.comment}
                 onChange={(e) => setEditForm((prev) => ({ ...prev, comment: e.target.value }))}
-                className="w-full rounded-xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-sm text-white outline-none"
+                className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none"
                 rows={6}
               />
             </label>

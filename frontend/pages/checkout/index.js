@@ -66,33 +66,33 @@ export default function Checkout(){
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
-        <h1 className="text-3xl font-semibold text-white">Checkout</h1>
+        <h1 className="text-3xl font-semibold text-slate-900">Checkout</h1>
         {message && <div className="mt-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm text-emerald-300">{message}</div>}
         {error && <div className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">{error}</div>}
 
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <form onSubmit={handleSubmit} className="space-y-4 rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] lg:col-span-2">
+          <form onSubmit={handleSubmit} className="space-y-4 rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:col-span-2">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <input name="name" value={shipping.name} onChange={updateField} placeholder="Full name" className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none focus:border-yellow-400" required />
-              <input name="phone" value={shipping.phone} onChange={updateField} placeholder="Phone" className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none focus:border-yellow-400" />
+              <input name="name" value={shipping.name} onChange={updateField} placeholder="Full name" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-400" required />
+              <input name="phone" value={shipping.phone} onChange={updateField} placeholder="Phone" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-400" />
             </div>
 
-            <input name="address" value={shipping.address} onChange={updateField} placeholder="Address" className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none focus:border-yellow-400" required />
+            <input name="address" value={shipping.address} onChange={updateField} placeholder="Address" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-400" required />
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <input name="city" value={shipping.city} onChange={updateField} placeholder="City" className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none focus:border-yellow-400" required />
-              <input name="zip" value={shipping.zip} onChange={updateField} placeholder="ZIP" className="w-full rounded-2xl border border-white/10 bg-[#0c0c0c] px-4 py-3 text-white outline-none focus:border-yellow-400" required />
-              <label className="inline-flex items-center text-sm text-gray-300"><input type="radio" name="method" value="cod" checked={method==='cod'} onChange={()=>setMethod('cod')} className="mr-2" /> Cash on Delivery</label>
+              <input name="city" value={shipping.city} onChange={updateField} placeholder="City" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-400" required />
+              <input name="zip" value={shipping.zip} onChange={updateField} placeholder="ZIP" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-400" required />
+              <label className="inline-flex items-center text-sm text-slate-600"><input type="radio" name="method" value="cod" checked={method==='cod'} onChange={()=>setMethod('cod')} className="mr-2" /> Cash on Delivery</label>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <label className="inline-flex items-center text-sm text-gray-300"><input type="radio" name="method" value="stripe" checked={method==='stripe'} onChange={()=>setMethod('stripe')} className="mr-2" /> Pay with Card (Stripe)</label>
-              <div className="text-sm text-gray-500">Secure payments powered by Stripe</div>
+              <label className="inline-flex items-center text-sm text-slate-600"><input type="radio" name="method" value="stripe" checked={method==='stripe'} onChange={()=>setMethod('stripe')} className="mr-2" /> Pay with Card (Stripe)</label>
+              <div className="text-sm text-slate-500">Secure payments powered by Stripe</div>
             </div>
 
             {method === 'cod' && (
               <div className="flex justify-end">
-                <button type="submit" disabled={loading} className="rounded-full bg-yellow-400 px-6 py-3 font-semibold text-black transition hover:brightness-95">{loading ? 'Processing...' : 'Place Order (COD)'}</button>
+                <button type="submit" disabled={loading} className="rounded-full bg-blue-400 px-6 py-3 font-semibold text-white transition hover:brightness-95">{loading ? 'Processing...' : 'Place Order (COD)'}</button>
               </div>
             )}
 
@@ -109,24 +109,24 @@ export default function Checkout(){
             )}
           </form>
 
-          <aside className="rounded-[32px] border border-white/10 bg-[#111111]/95 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
-            <h3 className="text-xl font-semibold text-white">Order Summary</h3>
+          <aside className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+            <h3 className="text-xl font-semibold text-slate-900">Order Summary</h3>
             <div className="mt-4 space-y-3">
               {items.map((it, idx)=>(
                 <div key={idx} className="flex items-center gap-3">
                   <img src={normalizeImageUrl(it.image)} className="h-14 w-14 rounded-2xl object-cover" />
                   <div className="flex-1">
-                    <div className="font-medium text-white">{it.title}</div>
-                    <div className="text-sm text-gray-400">Qty: {it.quantity}</div>
+                    <div className="font-medium text-slate-900">{it.title}</div>
+                    <div className="text-sm text-slate-600">Qty: {it.quantity}</div>
                   </div>
-                  <div className="font-semibold text-white">{formatMoney(parseFloat(it.price||0)*it.quantity)}</div>
+                  <div className="font-semibold text-slate-900">{formatMoney(parseFloat(it.price||0)*it.quantity)}</div>
                 </div>
               ))}
             </div>
-            <div className="mt-4 border-t border-white/10 pt-4 text-lg font-semibold text-white">Subtotal: {formatMoney(subtotal)}</div>
-            <div className="mt-3 text-sm text-gray-400">Shipping and taxes calculated at checkout.</div>
+            <div className="mt-4 border-t border-slate-200 pt-4 text-lg font-semibold text-slate-900">Subtotal: {formatMoney(subtotal)}</div>
+            <div className="mt-3 text-sm text-slate-600">Shipping and taxes calculated at checkout.</div>
             <div className="mt-4">
-              <Link href="/shop" className="text-yellow-300">Continue shopping</Link>
+              <Link href="/shop" className="text-blue-400">Continue shopping</Link>
             </div>
           </aside>
         </div>
@@ -168,11 +168,11 @@ function CardPaymentForm({ items, shipping, token, API, setMessage, setItems }){
   }
 
   return (
-    <div className="mt-4 rounded-2xl border border-white/10 bg-[#0c0c0c] p-4">
-      <div className="mb-3 rounded-2xl border border-white/10 p-3">
+    <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div className="mb-3 rounded-2xl border border-slate-200 p-3">
         <CardElement options={{ hidePostalCode: true }} />
       </div>
-      <button onClick={pay} disabled={processing || !stripe} className="rounded-full bg-yellow-400 px-4 py-2 font-semibold text-black">{processing ? 'Paying...' : 'Pay Now'}</button>
+      <button onClick={pay} disabled={processing || !stripe} className="rounded-full bg-blue-400 px-4 py-2 font-semibold text-white">{processing ? 'Paying...' : 'Pay Now'}</button>
     </div>
   );
 }

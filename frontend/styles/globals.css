@@ -3,8 +3,30 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --brand-900: #1e3a8a;
+  --brand-800: #2563eb;
+  --brand-700: #1d4ed8;
+  --brand-600: #2563eb;
+  --brand-500: #3b82f6;
+  --brand-400: #60a5fa;
+  --ink: #f8fafc;
+  --panel: #e2e8f0;
+  --panel-soft: #ffffff;
+  --surface: #f8fafc;
+  --border: rgba(15, 23, 42, 0.12);
+  --muted: #64748b;
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --header-bg-strong: rgba(255, 255, 255, 0.98);
+  --header-bg-dark: rgba(255, 255, 255, 0.9);
+  --header-bg-strong-dark: rgba(255, 255, 255, 0.98);
+}
+
+html.theme-dark {
+  color-scheme: dark;
   --bg: #02070d;
   --text: #ebf6ff;
   --brand-900: #071a2d;
@@ -23,30 +45,6 @@
   --header-bg-strong: rgba(11, 18, 32, 0.95);
   --header-bg-dark: rgba(11, 18, 32, 0.9);
   --header-bg-strong-dark: rgba(11, 18, 32, 0.95);
-}
-
-html.theme-light {
-  color-scheme: light;
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --brand-900: #1e3a8a;
-  --brand-800: #2563eb;
-  --brand-700: #3b82f6;
-  --brand-600: #60a5fa;
-  --brand-500: #2563eb;
-  --brand-400: #93c5fd;
-  --ink: #f8fafc;
-  --panel: #e2e8f0;
-  --panel-soft: #ffffff;
-  --surface: #f8fafc;
-  --border: rgba(15, 23, 42, 0.12);
-  --muted: #64748b;
-  --header-bg: rgba(255, 255, 255, 0.9);
-  --header-bg-strong: rgba(255, 255, 255, 0.98);
-}
-
-html.theme-dark {
-  color-scheme: dark;
 }
 
 html, body, #__next {
@@ -79,51 +77,51 @@ button, input, textarea, select {
 }
 
 select option {
-  background: #101b2b;
-  color: #ebf6ff;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
 ::selection {
-  background: rgba(53,183,255,0.3);
-  color: #ffffff;
+  background: rgba(59, 130, 246, 0.2);
+  color: #0f172a;
 }
 
 .glass-card {
-  background: rgba(11, 18, 32, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(130, 180, 255, 0.18);
-  box-shadow: 0 35px 90px rgba(2,7,13,0.45);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .hero-panel {
   position: relative;
-  background: radial-gradient(circle at top left, rgba(53,183,255,0.22), transparent 32%),
-              radial-gradient(circle at 90% 20%, rgba(11,77,151,0.16), transparent 18%),
-              linear-gradient(180deg, #050d1a 0%, #0a1320 100%);
+  background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 32%),
+              radial-gradient(circle at 90% 20%, rgba(59, 130, 246, 0.06), transparent 18%),
+              linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
   overflow: hidden;
 }
 .hero-panel::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.04), transparent 38%);
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.03), transparent 38%);
   pointer-events: none;
 }
 
 .glass-nav {
-  background: rgba(2,7,13,0.96) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(130,180,255,0.18) !important;
-  box-shadow: 0 20px 60px rgba(2,7,13,0.55);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .glass-nav.scrolled {
-  background: rgba(2,7,13,0.98) !important;
-  box-shadow: 0 28px 70px rgba(2,7,13,0.7);
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .btn-glow::before {
-  background: radial-gradient(circle at 30% 20%, rgba(53,183,255,0.28), transparent 42%);
+  background: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.15), transparent 42%);
 }
 
 .magnetic {
@@ -141,8 +139,8 @@ select option {
 
 .card-hover:hover {
   transform: translateY(-10px);
-  box-shadow: 0 30px 70px rgba(11,77,151,0.22);
-  border-color: rgba(53,183,255,0.28);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.08);
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 .card-hover:hover .card-icon {
@@ -157,11 +155,11 @@ select option {
 }
 
 .card-border {
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .shadow-glow {
-  box-shadow: 0 30px 80px rgba(15,23,42,0.08);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
 }
 
 .image-mask {
@@ -179,14 +177,15 @@ select option {
 .section-title {
   font-size: clamp(2rem, 3vw, 3.25rem);
   line-height: 1.02;
+  color: #0f172a;
 }
 
 .section-subtitle {
-  color: rgba(226,232,240,0.76);
+  color: rgba(15, 23, 42, 0.68);
 }
 
 html.theme-dark {
-  /* Dark theme utility remaps: convert common light utilities to dark equivalents so pages using light classes look correct */
+  /* Dark theme utility remaps */
 
   /* Background remap */
   --panel: #0b1220;
@@ -299,74 +298,15 @@ html.theme-dark .text-gray-400 {
 
 html.theme-dark a { color: var(--brand-400); }
 
-/* Keep text-white and text-yellow variants white in light mode (used on dark backgrounds) */
-html.theme-light .text-white {
-  color: #ffffff !important;
+html.theme-dark select option {
+  background: #101b2b;
+  color: #ebf6ff;
 }
 
-html.theme-light .text-slate-100 {
-  color: #0f172a !important;
-}
-
-/* Specific mapping for hero dark background variant */
-html.theme-light .hero-panel,
-html.theme-light [class*="bg-\[\#070707\]"],
-html.theme-light [class*="bg-\[\#111111\]"] {
-  background-color: #0b0b0b !important;
-}
-
-/* Ensure dark arbitrary panels keep white text in light theme */
-html.theme-light [class*="bg-\[\#0"],
-html.theme-light [class*="bg-\[\#07"],
-html.theme-light [class*="bg-\[\#08"],
-html.theme-light [class*="bg-\[\#09"],
-html.theme-light [class*="bg-\[\#0f"],
-html.theme-light [class*="bg-\[\#11"],
-html.theme-light [class*="bg-\[\#10"] {
-  color: #ffffff !important;
-}
-
-html.theme-light [class*="bg-\[\#0"] .text-slate-100,
-html.theme-light [class*="bg-\[\#0"] .text-slate-200,
-html.theme-light [class*="bg-\[\#0"] .text-slate-300,
-html.theme-light [class*="bg-\[\#0"] .text-gray-400,
-html.theme-light [class*="bg-\[\#0"] .text-gray-300 {
-  color: #ffffff !important;
-}
-
-html.theme-light .text-slate-200 {
-  color: #475569 !important;
-}
-
-html.theme-light .text-slate-300 {
-  color: #64748b !important;
-}
-
-html.theme-light .border-white\/10,
-html.theme-light .border-white\/20,
-html.theme-light .border-white\/30,
-html.theme-light .border-slate-800\/70,
-html.theme-light .border-slate-200 {
-  border-color: rgba(15, 23, 42, 0.12) !important;
-}
-
-html.theme-light a { color: #2563eb; }
-
-/* Ensure header remains dark even in light theme */
+/* HEADER-DARK CLASS: For headers that should remain light in any theme */
 .header-dark {
-  background-color: var(--header-bg-dark) !important;
+  background-color: var(--header-bg) !important;
   border-color: var(--border) !important;
-  color: var(--text) !important;
-}
-
-/* Keep common dark header background classes dark inside header */
-.header-dark .bg-\[\#0b1220\],
-.header-dark .bg-\[\#101b2b\],
-.header-dark .bg-\[\#111111\],
-.header-dark .bg-\[\#090909\],
-.header-dark .bg-slate-950,
-.header-dark .bg-slate-900 {
-  background-color: var(--panel) !important;
   color: var(--text) !important;
 }
 
@@ -378,100 +318,13 @@ html.theme-light a { color: #2563eb; }
   color: var(--text) !important;
 }
 
-/* Light theme comprehensive text color remaps */
-html.theme-light .text-slate-100 { color: #0f172a !important; }
-html.theme-light .text-slate-200 { color: #475569 !important; }
-html.theme-light .text-slate-300 { color: #64748b !important; }
-html.theme-light .text-slate-400 { color: #94a3b8 !important; }
-html.theme-light .text-slate-500 { color: #64748b !important; }
-html.theme-light .text-slate-600 { color: #475569 !important; }
-
-html.theme-light .text-gray-300 { color: #1f2937 !important; }
-html.theme-light .text-gray-400 { color: #374151 !important; }
-html.theme-light .text-gray-500 { color: #6b7280 !important; }
-html.theme-light .text-gray-600 { color: #4b5563 !important; }
-
-html.theme-light .text-stone-300 { color: #57534e !important; }
-html.theme-light .text-stone-400 { color: #78716c !important; }
-
-html.theme-light .text-neutral-300 { color: #525252 !important; }
-html.theme-light .text-neutral-400 { color: #737373 !important; }
-
-/* Light theme background overrides for panels */
-html.theme-light .bg-white { background-color: #ffffff !important; }
-html.theme-light .bg-slate-50 { background-color: #f8fafc !important; }
-html.theme-light .bg-slate-100 { background-color: #f1f5f9 !important; }
-html.theme-light .bg-slate-200 { background-color: #e2e8f0 !important; }
-
-html.theme-light input.bg-slate-100,
-html.theme-light input.bg-slate-50,
-html.theme-light select.bg-slate-100,
-html.theme-light select.bg-slate-50,
-html.theme-light textarea.bg-slate-100,
-html.theme-light textarea.bg-slate-50 {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-}
-
-html.theme-light input:focus.bg-slate-100,
-html.theme-light select:focus.bg-slate-100,
-html.theme-light textarea:focus.bg-slate-100 {
-  border-color: #fbbf24 !important;
-}
-
-/* Button text in light mode */
-html.theme-light .text-yellow-400,
-html.theme-light .text-yellow-500 { color: #0f172a !important; }
-
-/* Light mode input placeholder */
-html.theme-light input::placeholder,
-html.theme-light textarea::placeholder {
-  color: #64748b !important;
-}
-
-/* Light mode button styles */
-html.theme-light .bg-yellow-400 {
-  background-color: #facc15 !important;
-  color: #000000 !important;
-}
-
-html.theme-light .bg-blue-600 {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-}
-
-/* Light mode border fixes */
-html.theme-light .border-slate-300 { border-color: #cbd5e1 !important; }
-html.theme-light .border-slate-200 { border-color: #e2e8f0 !important; }
-
-/* Light mode card backgrounds */
-html.theme-light .rounded-lg.bg-white,
-html.theme-light .rounded-2xl.bg-white,
-html.theme-light .rounded-3xl.bg-white {
-  background-color: #ffffff !important;
-}
-
-/* Light mode text opacity classes */
-html.theme-light .text-white\/90 { color: #0f172a !important; }
-html.theme-light .text-white\/80 { color: #0f172a !important; }
-html.theme-light .text-white\/70 { color: #0f172a !important; }
-html.theme-light .text-white\/60 { color: #0f172a !important; }
-html.theme-light .text-white\/50 { color: #1e293b !important; }
-
-/* Light mode specific class fixes */
-html.theme-light .text-slate-900 { color: #0f172a !important; }
-html.theme-light .text-slate-800 { color: #1e293b !important; }
-html.theme-light .text-slate-700 { color: #334155 !important; }
-
-/* Light mode hover states */
-html.theme-light .hover\:text-white:hover { color: #0f172a !important; }
-html.theme-light .hover\:text-gray-50:hover { color: #0f172a !important; }
-
-/* Light mode group states */
-html.theme-light .group\/header:hover .text-white { color: #0f172a !important; }
-
-/* Fix heading colors in light mode */
+html.theme-light .text-white,
+html.theme-light .text-slate-100,
+html.theme-light .text-slate-200,
+html.theme-light .text-slate-300,
+html.theme-light .text-gray-300,
+html.theme-light .text-gray-400,
+html.theme-light .text-gray-500,
 html.theme-light h1,
 html.theme-light h2,
 html.theme-light h3,
@@ -481,17 +334,45 @@ html.theme-light h6 {
   color: #0f172a !important;
 }
 
-/* Light mode form elements */
-html.theme-light label { color: #475569 !important; }
-html.theme-light [type="text"],
-html.theme-light [type="email"],
-html.theme-light [type="password"],
-html.theme-light [type="number"],
-html.theme-light select,
-html.theme-light textarea {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
+html.theme-light .text-yellow-400,
+html.theme-light .text-yellow-500 { 
+  color: #000000 !important; 
+}
+
+html.theme-light .bg-yellow-400 {
+  background-color: #facc15 !important;
+  color: #000000 !important;
+}
+
+html.theme-light input::placeholder,
+html.theme-light textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Keep dark panels readable even in light theme (hero sections, etc) */
+html.theme-light [class*="bg-\[\#0"],
+html.theme-light [class*="bg-\#0"],
+html.theme-light .bg-slate-950,
+html.theme-light .bg-slate-900 {
+  background-color: #111627 !important;
+  color: #ffffff !important;
+}
+
+html.theme-light [class*="bg-\[\#0"] h1,
+html.theme-light [class*="bg-\[\#0"] h2,
+html.theme-light [class*="bg-\[\#0"] h3,
+html.theme-light [class*="bg-\[\#0"] h4,
+html.theme-light [class*="bg-\[\#0"] h5,
+html.theme-light [class*="bg-\#0"] h1,
+html.theme-light [class*="bg-\#0"] h2,
+html.theme-light [class*="bg-\#0"] h3,
+html.theme-light .bg-slate-950 h1,
+html.theme-light .bg-slate-950 h2,
+html.theme-light .bg-slate-950 h3,
+html.theme-light .bg-slate-900 h1,
+html.theme-light .bg-slate-900 h2,
+html.theme-light .bg-slate-900 h3 {
+  color: #ffffff !important;
 }
 
 html.theme-light [type="text"]:focus,
@@ -645,53 +526,13 @@ html.theme-light ::-webkit-scrollbar-thumb:hover {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Comprehensive light-mode corrections for elements that intentionally
-   use dark backgrounds (hero, product cards, promo panels, badges). This
-   ensures these sections remain readable when the site is in light theme. */
-html.theme-light [class*="bg-\[\#0"],
-html.theme-light [class*="bg-\#0"],
-html.theme-light [class*="bg-\[rgba"],
-html.theme-light .hero-panel,
-html.theme-light .best-sellers-slider,
-html.theme-light .brand-marquee,
-html.theme-light .rounded-\[36px\],
-html.theme-light .rounded-\[32px\],
-html.theme-light .rounded-\[28px\] {
-  color: var(--text) !important;
+/* Light scrollbar for light theme */
+html {
+  scrollbar-color: #cbd5e1 #f8fafc;
+  scrollbar-width: thin;
 }
 
-/* Force headings and key text inside dark panels to be white */
-html.theme-light [class*="bg-\[\#0"] h1,
-html.theme-light [class*="bg-\[\#0"] h2,
-html.theme-light [class*="bg-\[\#0"] h3,
-html.theme-light [class*="bg-\[\#0"] h4,
-html.theme-light [class*="bg-\[\#0"] h5,
-html.theme-light [class*="bg-\[\#0"] .text-white,
-html.theme-light [class*="bg-\[\#0"] .text-yellow-300,
-html.theme-light [class*="bg-\[\#0"] .text-yellow-400,
-html.theme-light [class*="bg-\[\#0"] .text-gray-400 {
-  color: #ffffff !important;
+html.theme-dark {
+  scrollbar-color: #0b1220 #02070d;
 }
-
-/* Ensure yellow badges remain visible on both themes */
-html.theme-light .bg-yellow-400 { background-color: #facc15 !important; color: #000 !important; }
-html.theme-light .bg-yellow-300 { background-color: #fbbf24 !important; color: #000 !important; }
-
-/* Buttons that rely on white backgrounds inside dark panels should keep their contrast */
-html.theme-light [class*="bg-\[\#0"] .ripple-btn,
-html.theme-light [class*="bg-\[\#0"] .inline-flex,
-html.theme-light [class*="bg-\[\#0"] a {
-  color: inherit !important;
-}
-
-/* Specific: keep product card text readable */
-html.theme-light .best-sellers-slider .p-6,
-html.theme-light .best-sellers-slider .p-4,
-html.theme-light .best-sellers-slider .p-8 {
-  color: var(--text) !important;
-}
-
-/* Remove overly broad overrides that accidentally darken white text in dark panels.
-   (If you added more specific overrides elsewhere, keep them — this prevents regressions.) */
-html.theme-light .text-white { color: #ffffff !important; }
 

@@ -51,7 +51,7 @@ export default function Register() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-yellow-400"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-blue-400"
             />
           </div>
           <div>
@@ -60,7 +60,7 @@ export default function Register() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-yellow-400"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-blue-400"
               required
             />
           </div>
@@ -70,7 +70,7 @@ export default function Register() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-yellow-400"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-blue-400"
               required
             />
           </div>
@@ -80,21 +80,21 @@ export default function Register() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-yellow-400"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-slate-900 outline-none focus:border-blue-400"
               required
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-yellow-400 py-3 font-semibold text-slate-900 transition hover:brightness-95 disabled:opacity-50"
+            className="w-full rounded-full bg-blue-400 py-3 font-semibold text-white transition hover:brightness-95 disabled:opacity-50"
           >
             {loading ? 'Creating account...' : 'Register'}
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-slate-600">
           Already have an account?{' '}
-          <Link href="/login" className="font-medium text-yellow-600 underline">Login</Link>
+          <Link href="/login" className="font-medium text-blue-600 underline">Login</Link>
         </p>
       </div>
     </div>
