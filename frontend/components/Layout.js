@@ -292,8 +292,8 @@ export default function Layout({ children }) {
       <footer className="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-4">
           <div>
-            <h3 className="text-xl font-semibold text-slate-900">HardPro</h3>
-            <p className="mt-4 text-sm leading-6 text-slate-600">Premium hardware marketplace with fast checkout, authentic brands, and expert service for every build.</p>
+            <BrandLogo className="h-12 w-auto" />
+            <p className="mt-4 text-sm leading-6 text-slate-600">Infix Industries — Manufacturers • Importers • Distributors</p>
           </div>
           <div>
             <h4 className="text-sm uppercase tracking-[0.3em] text-blue-400">Company</h4>
