@@ -288,6 +288,44 @@ export default function Layout({ children }) {
       </header>
 
       <main className="page-fade bg-[var(--bg)]">{children}</main>
+
+      <footer className="bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-4">
+          <div>
+            <h3 className="text-xl font-semibold text-slate-900">HardPro</h3>
+            <p className="mt-4 text-sm leading-6 text-slate-600">Premium hardware marketplace with fast checkout, authentic brands, and expert service for every build.</p>
+          </div>
+          <div>
+            <h4 className="text-sm uppercase tracking-[0.3em] text-blue-400">Company</h4>
+            <ul className="mt-5 space-y-3 text-sm text-slate-600">
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/about">Careers</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm uppercase tracking-[0.3em] text-blue-400">Quick Links</h4>
+            <ul className="mt-5 space-y-3 text-sm text-slate-600">
+              <li><Link href="/shop">Shop</Link></li>
+              <li><Link href="/shop?view=brands">Brands</Link></li>
+              <li><Link href="/shop">Categories</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm uppercase tracking-[0.3em] text-blue-400">Contact</h4>
+            <p className="mt-5 text-sm leading-6 text-slate-600">103/3 farm road<br />Dalupotha, Negombo<br />+94 74 085 8726<br />info@infix.lk</p>
+          </div>
+        </div>
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-300 pt-8 text-sm text-slate-600 sm:flex-row">
+          <p>© 2026 codilight (Pvt) Ltd. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <span>Visa</span>
+            <span>Mastercard</span>
+            <span>PayPal</span>
+            <span>Apple Pay</span>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
