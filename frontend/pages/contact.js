@@ -54,6 +54,19 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            <div className="rounded-[20px] border border-slate-200 bg-white p-0 overflow-hidden shadow-[0_24px_70px_rgba(15,23,42,0.04)]">
+              <iframe
+                title="Infix Industries Location"
+                src="https://www.google.com/maps?q=103/3+Prison+Road,+Dalupotha,+Negombo,+Sri+Lanka&output=embed"
+                width="100%"
+                height="320"
+                className="block"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
 
           <div className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
