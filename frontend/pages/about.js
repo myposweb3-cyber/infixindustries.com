@@ -54,20 +54,20 @@ export default function About() {
               <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Why buyers choose us</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                  <p className="text-3xl font-semibold text-slate-900">24/7</p>
-                  <p className="mt-2 text-sm text-slate-600">Expert support whenever you need it</p>
+                  <p className="text-lg font-semibold text-slate-900">Quality Products</p>
+                  <p className="mt-2 text-sm text-slate-600">Reliable products for everyday business needs</p>
                 </div>
                 <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                  <p className="text-3xl font-semibold text-slate-900">98%</p>
-                  <p className="mt-2 text-sm text-slate-600">Customer satisfaction on repeat orders</p>
+                  <p className="text-lg font-semibold text-slate-900">Competitive Pricing</p>
+                  <p className="mt-2 text-sm text-slate-600">Value-focused pricing for dealers and customers</p>
                 </div>
                 <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                  <p className="text-3xl font-semibold text-slate-900">2-day</p>
-                  <p className="mt-2 text-sm text-slate-600">Fast dispatch for high-demand essentials</p>
+                  <p className="text-lg font-semibold text-slate-900">Reliable Supply</p>
+                  <p className="mt-2 text-sm text-slate-600">Consistent sourcing and dependable distribution</p>
                 </div>
                 <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                  <p className="text-3xl font-semibold text-slate-900">100+</p>
-                  <p className="mt-2 text-sm text-slate-600">Trusted brands in the catalog</p>
+                  <p className="text-lg font-semibold text-slate-900">Growing Product Range</p>
+                  <p className="mt-2 text-sm text-slate-600">PVC, hardware, industrial and future product solutions</p>
                 </div>
               </div>
             </div>
