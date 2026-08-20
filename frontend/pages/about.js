@@ -23,16 +23,28 @@ export default function About() {
             <h2 className="text-2xl font-semibold text-slate-900">Our values</h2>
             <div className="mt-6 space-y-4 text-slate-700">
               <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                <p className="text-lg font-semibold text-slate-900">Quality products from trusted suppliers</p>
-                <p className="mt-2 text-sm leading-7 text-slate-600">We only stock brand partners known for durability, performance, and professional-grade quality.</p>
+                <p className="text-lg font-semibold text-slate-900">Quality</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We are committed to delivering products that meet high standards of quality, reliability, and performance.</p>
               </div>
               <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                <p className="text-lg font-semibold text-slate-900">Transparent pricing and fair returns</p>
-                <p className="mt-2 text-sm leading-7 text-slate-600">Every purchase comes with clear pricing, dependable support, and simple return options.</p>
+                <p className="text-lg font-semibold text-slate-900">Integrity</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We conduct our business with honesty, transparency, and responsibility in everything we do.</p>
               </div>
               <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
-                <p className="text-lg font-semibold text-slate-900">Committed customer support</p>
-                <p className="mt-2 text-sm leading-7 text-slate-600">Our team is made up of construction professionals and retail experts who care about fast shipping and responsive service.</p>
+                <p className="text-lg font-semibold text-slate-900">Customer Focus</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We put our customers and business partners at the center of our decisions and strive to provide dependable service.</p>
+              </div>
+              <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
+                <p className="text-lg font-semibold text-slate-900">Innovation</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We continuously seek better products, technologies, and ways of working to meet changing market needs.</p>
+              </div>
+              <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
+                <p className="text-lg font-semibold text-slate-900">Reliability</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We believe in keeping our commitments and building trust through consistent products and service.</p>
+              </div>
+              <div className="rounded-2xl border border-slate-300 bg-slate-50 p-4">
+                <p className="text-lg font-semibold text-slate-900">Continuous Growth</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">We focus on learning, improving, and expanding our capabilities to build a stronger business for the future.</p>
               </div>
             </div>
           </div>
