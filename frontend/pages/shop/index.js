@@ -224,15 +224,6 @@ export default function Shop() {
     )
   }
 
-  const categoryChips = categories.length ? categories.slice(0, 6) : [
-    { slug: 'power-tools', name: 'Power Tools' },
-    { slug: 'hand-tools', name: 'Hand Tools' },
-    { slug: 'building-materials', name: 'Building Materials' },
-    { slug: 'plumbing', name: 'Plumbing' },
-    { slug: 'electrical', name: 'Electrical' },
-    { slug: 'safety-equipment', name: 'Safety Equipment' }
-  ]
-
   return (
     <div className="shop-page min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <section className="shop-intro border-b border-slate-200 bg-white">
@@ -247,12 +238,6 @@ export default function Shop() {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 font-bold text-blue-700">✓</span>
               <span><strong className="block text-slate-950">Trusted supply</strong>Serving Sri Lanka</span>
             </div>
-          </div>
-          <div className="mt-8 flex gap-2 overflow-x-auto pb-1">
-            <Link href="/shop" className={`shop-chip shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${!filters.category ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-700'}`}>All products</Link>
-            {categoryChips.map((category) => (
-              <Link key={category.slug || category.id} href={`/shop?category=${category.slug}`} className="shop-chip shrink-0 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700">{category.name}</Link>
-            ))}
           </div>
         </div>
       </section>
