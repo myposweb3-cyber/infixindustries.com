@@ -80,6 +80,18 @@ const eventCards = [
   { date: '03', label: 'Continuous growth', title: 'A stronger Sri Lankan network', text: 'Expanding our capabilities and distribution network to serve more industries and communities.' }
 ]
 
+const processSteps = [
+  { number: '01', title: 'Understand the need', text: 'We listen to the requirements of dealers, contractors, businesses, and customers.' },
+  { number: '02', title: 'Source with care', text: 'We manufacture and import products with quality, reliability, and value in mind.' },
+  { number: '03', title: 'Deliver with confidence', text: 'We connect the right products to the right people through dependable distribution.' }
+]
+
+const faqItems = [
+  { question: 'What products does Infix Industries work with?', answer: 'Our current focus includes PVC, hardware, industrial, and related products, with additional categories planned as we grow.' },
+  { question: 'Who do you serve?', answer: 'We work with dealers, contractors, businesses, suppliers, partners, and customers across Sri Lanka.' },
+  { question: 'How can I discuss a product or partnership?', answer: 'Use our contact page or call 077 231 0421. Our team can help with product, supply, and partnership enquiries.' }
+]
+
 function StarRating({ value }) {
   return (
     <div className="flex items-center gap-1 text-blue-400 text-xs">
@@ -300,6 +312,7 @@ function ProductCard({ item }) {
 export default function Home() {
   const [progress, setProgress] = useState(0)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const [openFaq, setOpenFaq] = useState(0)
   const [heroSlides, setHeroSlides] = useState([])
   const [categories, setCategories] = useState([])
   const [featuredProducts, setFeaturedProducts] = useState([])
@@ -712,6 +725,66 @@ export default function Home() {
                   <div key={`${brand}-${index}`} className="flex min-w-[150px] items-center justify-center rounded-3xl bg-white p-5 text-center text-sm uppercase tracking-[0.24em] text-slate-600 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">{brand}</div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="fade-up bg-[#f4f8fc] px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">How we work</p>
+                <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">From a clear need to dependable supply.</h2>
+              </div>
+              <p className="max-w-2xl text-base leading-8 text-slate-600">Our approach is practical and partnership-led: understand what matters, build or source with care, then deliver solutions people can rely on.</p>
+            </div>
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {processSteps.map((step) => (
+                <article key={step.number} className="group rounded-[32px] border border-blue-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_30px_80px_rgba(37,99,235,0.12)]">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-sm font-bold text-white transition duration-300 group-hover:rotate-6">{step.number}</span>
+                  <h3 className="mt-8 text-2xl font-semibold text-slate-950">{step.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="fade-up px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Frequently asked</p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">A clearer way to get started.</h2>
+              <p className="mt-5 max-w-lg text-base leading-8 text-slate-600">Have a question about our products, services, or partnerships? Start here, then reach out when you are ready.</p>
+            </div>
+            <div className="space-y-3">
+              {faqItems.map((item, index) => {
+                const isOpen = openFaq === index
+                return (
+                  <div key={item.question} className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm">
+                    <button type="button" aria-expanded={isOpen} onClick={() => setOpenFaq(isOpen ? -1 : index)} className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-base font-semibold text-slate-950 transition hover:bg-slate-50">
+                      <span>{item.question}</span>
+                      <span className={`flex h-8 w-8 flex-none items-center justify-center rounded-full bg-blue-50 text-blue-700 transition ${isOpen ? 'rotate-45' : ''}`}>+</span>
+                    </button>
+                    <div className={`grid transition-[grid-template-rows] duration-300 ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                      <div className="overflow-hidden"><p className="px-6 pb-6 text-sm leading-7 text-slate-600">{item.answer}</p></div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="fade-up px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+          <div className="mx-auto max-w-7xl overflow-hidden rounded-[40px] bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500 p-8 text-white shadow-[0_40px_100px_rgba(37,99,235,0.25)] sm:p-12 lg:p-16">
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-100">Let&apos;s build what&apos;s next</p>
+                <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">Ready to find a more dependable way forward?</h2>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-blue-50">Talk to Infix Industries about products, supply, distribution, or your next business partnership.</p>
+              </div>
+              <Link href="/contact" className="inline-flex w-max items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-semibold text-blue-700 shadow-xl transition hover:-translate-y-0.5 hover:bg-blue-50">Talk to our team</Link>
             </div>
           </div>
         </section>
