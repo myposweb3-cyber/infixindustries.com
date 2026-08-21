@@ -8,8 +8,8 @@ export default function Contact() {
   function submit(e) { e.preventDefault(); setSent(true); }
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      <header className="border-b border-slate-200 bg-gradient-to-r from-white to-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <main className="contact-page min-h-screen bg-[var(--bg)] text-[var(--text)]">
+      <header className="contact-hero border-b border-slate-200 bg-gradient-to-r from-white to-slate-50 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-widest text-blue-600">Contact</p>
@@ -24,7 +24,7 @@ export default function Contact() {
 
           {/* Left: Contact cards + map */}
           <div className="space-y-6">
-            <div className="rounded-2xl bg-white p-6 shadow-md border border-slate-100">
+            <div className="contact-light-surface rounded-2xl bg-white p-6 shadow-md border border-slate-100">
               <h2 className="text-sm font-semibold uppercase text-slate-500 tracking-wider">Contact Information</h2>
               <div className="mt-4 space-y-4 text-slate-700">
                 <div className="flex items-start gap-4 rounded-lg border border-slate-100 bg-slate-50 p-4">
@@ -68,7 +68,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 shadow-sm border border-slate-100 text-sm text-slate-700">
+            <div className="contact-light-surface rounded-2xl bg-white p-6 shadow-sm border border-slate-100 text-sm">
               <h3 className="font-semibold text-slate-900">Business Enquiries</h3>
               <ul className="mt-3 space-y-2">
                 <li><strong>Product Enquiries:</strong> PVC, hardware, industrial and related products.</li>
@@ -80,7 +80,7 @@ export default function Contact() {
 
           {/* Right: Contact form */}
           <div>
-            <div className="sticky top-24 rounded-2xl bg-white p-8 shadow-md border border-slate-100">
+            <div className="contact-light-surface sticky top-24 rounded-2xl bg-white p-8 shadow-md border border-slate-100">
               <h2 className="text-xl font-semibold text-slate-900">Send an Enquiry</h2>
               <p className="mt-2 text-sm text-slate-600">Fill out the form and we'll get back to you within 1-2 business days.</p>
 

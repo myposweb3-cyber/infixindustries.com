@@ -21,11 +21,11 @@ const values = [
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+    <main className="about-page min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <section className="relative overflow-hidden border-b border-slate-200 bg-[radial-gradient(circle_at_top_right,_rgba(37,99,235,0.15),_transparent_38%),linear-gradient(135deg,_#eff6ff_0%,_#f8fafc_55%,_#e0f2fe_100%)] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="absolute -left-24 top-20 h-56 w-56 rounded-full bg-blue-400/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl">
-          <div className="max-w-4xl fade-up">
+          <div className="about-hero-copy max-w-4xl fade-up">
             <span className="inline-flex items-center rounded-full border border-blue-200 bg-white/75 px-4 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-blue-700">Infix Industries</span>
             <p className="mt-6 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Manufacturers • Importers • Distributors</p>
             <h1 className="mt-5 text-4xl font-semibold tracking-tight text-slate-950 sm:text-6xl">Building a trusted future for quality products in Sri Lanka.</h1>
@@ -40,7 +40,7 @@ export default function About() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          <div className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-[0_28px_80px_rgba(15,23,42,0.07)] sm:p-10 fade-up">
+          <div className="about-light-surface rounded-[36px] border border-slate-200 bg-white p-8 shadow-[0_28px_80px_rgba(15,23,42,0.07)] sm:p-10 fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">About Us</p>
             <h2 className="about-us-heading mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Reliable products. Competitive solutions. Professional service.</h2>
             <div className="mt-7 space-y-5 text-base leading-8 text-slate-600">
@@ -63,7 +63,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <section className="about-values border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-2xl fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">What guides us</p>
@@ -71,7 +71,7 @@ export default function About() {
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, index) => (
-              <article key={value.title} className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_24px_60px_rgba(37,99,235,0.1)] fade-up">
+              <article key={value.title} className="about-light-surface group rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_24px_60px_rgba(37,99,235,0.1)] fade-up">
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-sm font-bold text-blue-700">0{index + 1}</span>
                 <h3 className="mt-6 text-xl font-semibold text-slate-950">{value.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600">{value.text}</p>

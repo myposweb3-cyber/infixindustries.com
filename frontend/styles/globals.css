@@ -245,6 +245,40 @@ select option {
   opacity: 1 !important;
 }
 
+.about-page .about-hero-copy h1,
+.about-page .about-hero-copy p,
+.about-page .about-light-surface h2,
+.about-page .about-light-surface p,
+.about-page .about-values h2,
+.about-page .about-values h3,
+.about-page .about-values p,
+.contact-page .contact-hero h1,
+.contact-page .contact-hero p,
+.contact-page .contact-light-surface h2,
+.contact-page .contact-light-surface h3,
+.contact-page .contact-light-surface p,
+.contact-page .contact-light-surface li,
+.contact-page .contact-light-surface label,
+.contact-page .contact-light-surface strong {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+.about-page .about-light-surface p,
+.about-page .about-values p,
+.contact-page .contact-light-surface p,
+.contact-page .contact-light-surface li {
+  color: #475569 !important;
+}
+
+.contact-page .contact-light-surface input,
+.contact-page .contact-light-surface select,
+.contact-page .contact-light-surface textarea {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
 .section-subtitle {
   color: rgba(15, 23, 42, 0.68);
 }
