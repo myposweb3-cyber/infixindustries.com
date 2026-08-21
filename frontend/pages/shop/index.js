@@ -114,7 +114,8 @@ export default function Shop() {
   function ProductTile({ p }) {
     const [wishlisted, setWishlisted] = useState(false)
     const [compared, setCompared] = useState(false)
-    const safeId = String(p.id || p.slug || p.title)
+    const productName = p.title || p.name || p.product_name || 'Infix Industries product'
+    const safeId = String(p.id || p.slug || productName)
 
     const syncListStates = () => {
       try {
@@ -172,10 +173,10 @@ export default function Shop() {
         tabIndex={0}
         onClick={goToProduct}
         onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); goToProduct() } }}
-        className="product-card-surface group relative cursor-pointer overflow-hidden rounded-[30px] border border-slate-200/80 bg-white"
+        className="shop-product-card product-card-surface group relative flex cursor-pointer flex-col overflow-hidden rounded-[30px] border border-slate-200/80 bg-white"
       >
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-          <img src={normalizeImageUrl(p.image)} alt={p.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <img src={normalizeImageUrl(p.image || p.image_url)} alt={productName} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-80"></div>
           {discount > 0 && (<div className="absolute right-4 top-4 rounded-full bg-blue-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg">Save {discount}%</div>)}
           <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-slate-950/55 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">{p.brand || 'Infix selection'}</span>
@@ -183,9 +184,9 @@ export default function Shop() {
         <div className="flex flex-col gap-4 p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h3 className="min-h-[3.25rem] text-xl font-semibold leading-tight text-slate-950 line-clamp-2 group-hover:text-blue-600 transition-colors">{p.title}</h3>
+              <h3 className="shop-product-title min-h-[3.25rem] text-xl font-semibold leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">{productName}</h3>
               <div className="flex items-baseline gap-2">
-                <p className="text-2xl font-bold text-blue-600">{formatMoney(p.discount_price || p.price || 0)}</p>
+                <p className="shop-product-price text-2xl font-bold">{formatMoney(p.discount_price || p.price || 0)}</p>
                 {discount > 0 && <p className="text-sm text-slate-500 line-through">{formatMoney(p.price || 0)}</p>}
               </div>
             </div>
@@ -195,9 +196,9 @@ export default function Shop() {
             </div>
           </div>
           <div className="h-px bg-gradient-to-r from-blue-400/30 via-blue-400/15 to-transparent"></div>
-          <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-2 items-center justify-between">
+          <div className="mt-auto flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="line-clamp-2 text-sm leading-6 text-slate-500">{p.short_description || 'Reliable product selection for professional and everyday projects.'}</p>
+              <p className="min-h-[3rem] line-clamp-2 text-sm leading-6 text-slate-600">{p.short_description || p.description || 'Reliable product selection for professional and everyday projects.'}</p>
             </div>
             <div className="flex gap-2">
               <button onClick={(ev) => { ev.preventDefault(); ev.stopPropagation(); addToCart(p) }} disabled={addingProductId === p.id} className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-blue-600 disabled:opacity-70">{addingProductId === p.id ? 'Adding...' : 'Add'}</button>

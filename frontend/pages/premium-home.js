@@ -591,7 +591,7 @@ export default function Home() {
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Browse Categories</p>
-                <h2 className="mt-3 text-4xl font-semibold text-slate-900">Explore premium categories for every project</h2>
+                <h2 className="home-section-heading mt-3 text-4xl font-semibold">Explore premium categories for every project</h2>
             </div>
                 <p className="max-w-xl text-sm leading-6 text-slate-600">From power tools to garden gear, shop categories built for productivity, safety, and quality.</p>
           </div>
