@@ -68,10 +68,10 @@ export default function ProductPage({ data }){
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h1 className="text-2xl font-semibold text-slate-900">{product.title}</h1>
+                  <h1 className="product-detail-title text-2xl font-semibold">{product.title}</h1>
                   <p className="mt-2 text-sm text-gray-500">SKU: {product.sku || '—'}</p>
-                  <div className="mt-4 text-3xl font-semibold text-blue-400">{formatMoney(product.discount_price || product.price)}</div>
-                  <p className="mt-4 text-sm leading-7 text-gray-600">{product.description}</p>
+                  <div className="shop-product-price mt-4 text-3xl font-semibold">{formatMoney(product.discount_price || product.price)}</div>
+                  <p className="product-detail-copy mt-4 text-sm leading-7">{product.description}</p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <AuthAddToCart product={product} />
                     <button onClick={() => { window.location.href = '/cart'; }} className="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm text-slate-900 transition hover:border-blue-400">View Cart</button>
@@ -82,7 +82,7 @@ export default function ProductPage({ data }){
             </div>
 
             <div className="rounded-[32px] border border-slate-200 bg-slate-50 p-6 shadow-[0_24px_70px_rgba(148,163,184,0.06)]">
-              <h2 className="text-xl font-semibold text-slate-900">Customer Reviews</h2>
+              <h2 className="product-detail-heading text-xl font-semibold">Customer Reviews</h2>
               {reviews.length === 0 && <p className="mt-3 text-sm text-gray-400">No reviews yet.</p>}
               {reviews.map(r => (
                 <div key={r.id} className="border-b border-slate-200 py-4">
@@ -99,13 +99,13 @@ export default function ProductPage({ data }){
 
           <aside className="space-y-6">
             <div className="rounded-[32px] border border-slate-200 bg-slate-50 p-6 shadow-[0_24px_70px_rgba(148,163,184,0.06)]">
-              <h3 className="text-lg font-semibold text-slate-900">Related Products</h3>
+              <h3 className="product-detail-heading text-lg font-semibold">Related Products</h3>
               {related.map(r => (
                 <Link key={r.id} href={`/product/${r.slug}`} className="mt-4 block">
                   <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-100 p-3">
                     <img src={normalizeImageUrl(r.image)} className="h-16 w-16 rounded-2xl object-cover" />
                     <div>
-                      <div className="font-medium text-slate-900">{r.title}</div>
+                      <div className="product-detail-title font-medium">{r.title}</div>
                       <div className="text-sm text-blue-400">{formatMoney(r.discount_price || r.price)}</div>
                     </div>
                   </div>
@@ -114,10 +114,10 @@ export default function ProductPage({ data }){
             </div>
 
             <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
-              <h3 className="text-lg font-semibold text-slate-900">Product Details</h3>
-              <p className="mt-3 text-sm text-slate-600">Category ID: {product.category}</p>
-              <p className="mt-2 text-sm text-slate-600">Brand ID: {product.brand}</p>
-              <p className="mt-2 text-sm text-slate-600">Rating: {product.rating}</p>
+              <h3 className="product-detail-heading text-lg font-semibold">Product Details</h3>
+              <p className="product-detail-copy mt-3 text-sm">Category ID: {product.category}</p>
+              <p className="product-detail-copy mt-2 text-sm">Brand ID: {product.brand}</p>
+              <p className="product-detail-copy mt-2 text-sm">Rating: {product.rating}</p>
             </div>
           </aside>
         </div>

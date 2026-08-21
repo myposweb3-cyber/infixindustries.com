@@ -196,6 +196,49 @@ select option {
   opacity: 1 !important;
 }
 
+.category-card-surface {
+  background: #0f172a !important;
+}
+
+.category-card-copy,
+.category-card-copy h3 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.category-card-label {
+  color: #bfdbfe !important;
+}
+
+.home-light-card,
+.home-light-card h2,
+.home-light-card h3,
+.home-light-card p,
+.home-light-card span {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+.home-dark-card,
+.home-dark-card h2,
+.home-dark-card h3,
+.home-dark-card p,
+.home-dark-card span {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.product-detail-title,
+.product-detail-heading {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+.product-detail-copy {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
 .section-subtitle {
   color: rgba(15, 23, 42, 0.68);
 }

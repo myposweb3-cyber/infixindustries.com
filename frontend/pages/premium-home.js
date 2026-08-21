@@ -108,11 +108,11 @@ function CategoryCard({ card }) {
   const label = card.count ? `${card.count}+ items` : 'Shop collection'
 
   return (
-    <article className="group relative overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.12)]">
+    <article className="category-card-surface group relative min-h-[300px] overflow-hidden rounded-[30px] border border-slate-800 shadow-[0_24px_60px_rgba(15,23,42,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.2)]">
       <img src={normalizeImageUrl(image)} alt={title} loading="lazy" decoding="async" className="h-64 w-full object-cover transition duration-700 group-hover:scale-105" />
-      <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/20 to-transparent opacity-95" />
-      <div className="absolute inset-x-6 bottom-6 text-slate-900">
-        <span className="text-sm uppercase tracking-[0.26em] text-blue-600">{label}</span>
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/25 to-transparent opacity-95" />
+      <div className="category-card-copy absolute inset-x-6 bottom-6">
+        <span className="category-card-label text-sm uppercase tracking-[0.26em]">{label}</span>
         <h3 className="mt-3 text-2xl font-semibold">{title}</h3>
       </div>
     </article>
@@ -649,7 +649,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-6 lg:grid-cols-4">
               {trustCards.map((card) => (
-                <div key={card.title} className="rounded-[32px] border border-slate-200 bg-white p-6 text-slate-900 transition hover:-translate-y-1 hover:border-blue-300/30 hover:shadow-[0_30px_80px_rgba(96,165,250,0.08)]"> 
+                <div key={card.title} className="home-light-card rounded-[32px] border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-blue-300/30 hover:shadow-[0_30px_80px_rgba(96,165,250,0.08)]">
                   <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-400 text-white text-xl">{card.icon}</div>
                   <h3 className="mt-6 text-xl font-semibold">{card.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-600">{card.content}</p>
@@ -664,7 +664,7 @@ export default function Home() {
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Best Sellers</p>
-                <h2 className="mt-3 text-4xl font-semibold text-slate-900">Top selling hardware products</h2>
+                <h2 className="home-light-card mt-3 text-4xl font-semibold">Top selling hardware products</h2>
               </div>
               <div className="flex gap-3">
                 <button
@@ -688,7 +688,7 @@ export default function Home() {
               <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent" />
               <div ref={bestSellersRef} className="best-sellers-slider flex gap-6 overflow-x-auto pb-4 pr-6 scroll-smooth">
                 {Array.from({ length: 2 }).flatMap(() => currentBestSellers).map((item, index) => (
-                  <div key={`${item.slug || item.title}-${index}`} className="min-w-[280px] max-w-[280px] rounded-[26px] bg-slate-50 p-4 shadow-[0_28px_60px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(15,23,42,0.12)]">
+                  <div key={`${item.slug || item.title}-${index}`} className="home-light-card min-w-[280px] max-w-[280px] rounded-[26px] bg-slate-50 p-4 shadow-[0_28px_60px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_35px_90px_rgba(15,23,42,0.12)]">
                     <div className="overflow-hidden rounded-[26px] bg-slate-200">
                       <img src={normalizeImageUrl(item.image)} alt={item.title} loading="lazy" decoding="async" className="h-52 w-full object-cover transition duration-700 group-hover:scale-105" />
                     </div>
@@ -716,7 +716,7 @@ export default function Home() {
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Top Brands</p>
-                <h2 className="mt-3 text-4xl font-semibold text-slate-900">Trusted professional brands</h2>
+                <h2 className="home-light-card mt-3 text-4xl font-semibold">Trusted professional brands</h2>
               </div>
               <p className="max-w-lg text-sm leading-6 text-slate-600">Shop top manufacturers with premium product selection and rapid shipping.</p>
             </div>
@@ -735,13 +735,13 @@ export default function Home() {
             <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">How we work</p>
-                <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">From a clear need to dependable supply.</h2>
+                <h2 className="home-light-card mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">From a clear need to dependable supply.</h2>
               </div>
               <p className="max-w-2xl text-base leading-8 text-slate-600">Our approach is practical and partnership-led: understand what matters, build or source with care, then deliver solutions people can rely on.</p>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {processSteps.map((step) => (
-                <article key={step.number} className="group rounded-[32px] border border-blue-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_30px_80px_rgba(37,99,235,0.12)]">
+                <article key={step.number} className="home-light-card group rounded-[32px] border border-blue-100 bg-white p-7 shadow-[0_24px_60px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_30px_80px_rgba(37,99,235,0.12)]">
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-sm font-bold text-white transition duration-300 group-hover:rotate-6">{step.number}</span>
                   <h3 className="mt-8 text-2xl font-semibold text-slate-950">{step.title}</h3>
                   <p className="mt-4 text-sm leading-7 text-slate-600">{step.text}</p>
@@ -794,7 +794,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="rounded-[36px] border border-slate-300 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
                 <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Customer Reviews</p>
-              <h2 className="mt-4 text-4xl font-semibold text-slate-900">Trusted by pros and serious DIYers</h2>
+              <h2 className="home-light-card mt-4 text-4xl font-semibold">Trusted by pros and serious DIYers</h2>
               <div className="mt-8 rounded-[28px] bg-slate-50 p-6">
                 <div className="flex items-center gap-4">
                   <img src={normalizeImageUrl(testimonials[activeTestimonial].image)} alt={testimonials[activeTestimonial].name} loading="lazy" decoding="async" className="h-16 w-16 rounded-full object-cover" />
@@ -820,9 +820,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="rounded-[36px] border border-slate-300 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
-                <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Newsletter</p>
-              <h2 className="mt-4 text-4xl font-semibold text-slate-900">Subscribe for exclusive offers</h2>
+            <div className="home-light-card rounded-[36px] border border-slate-300 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
+                <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Newsletter</p>
+              <h2 className="mt-4 text-4xl font-semibold">Subscribe for exclusive offers</h2>
               <p className="mt-4 text-sm leading-6 text-slate-600">Be first to receive new arrivals, special discounts and premium hardware insights.</p>
               <form className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <input
