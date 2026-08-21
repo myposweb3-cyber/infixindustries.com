@@ -81,7 +81,7 @@ export default function Layout({ children }) {
     router.push({ pathname: '/shop', query })
   }
 
-  const headerBgDark = scrolled ? 'var(--header-bg-strong-dark)' : 'var(--header-bg-dark)'
+  const headerBgDark = '#ffffff'
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
@@ -89,29 +89,29 @@ export default function Layout({ children }) {
         className={`sticky top-0 z-50 border-b backdrop-blur-xl header-dark transition-[transform,box-shadow,background-color] duration-300 ${headerVisible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? 'shadow-[0_16px_40px_rgba(15,23,42,0.10)]' : 'shadow-none'}`}
         style={{
           backgroundColor: headerBgDark,
-          borderColor: 'var(--border)',
+          borderColor: '#e2e8f0',
           transition: 'background-color .3s ease'
         }}
       >
         <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-slate-300">
-            <span className="hidden sm:inline-flex text-slate-400">Call us: 077 231 0421</span>
-            <span className="hidden md:inline-flex text-slate-400">24/7 support · Secure checkout</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] uppercase tracking-[0.28em] text-slate-400">
+            <span className="inline-flex">Call us: 077 231 0421</span>
+            <span className="hidden sm:inline-flex">24/7 support · Secure checkout</span>
           </div>
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-            <div className="relative flex min-h-12 items-center justify-center gap-4 lg:min-h-0 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div className="grid gap-4 lg:grid-cols-[230px_auto_minmax(420px,1fr)] lg:items-center">
+            <div className="relative flex min-h-12 items-center justify-center gap-4 lg:contents">
               <Link href="/" className="flex items-center justify-center" onClick={closeMenu}>
                 <BrandLogo className="h-12 w-[190px] sm:h-14 sm:w-[220px] lg:h-16 lg:w-[250px]" />
               </Link>
 
               {/* Desktop action buttons */}
-              <div className="hidden lg:flex flex-wrap items-center gap-2 text-sm text-slate-600 lg:gap-3">
+              <div className="hidden lg:flex items-center justify-center gap-2 text-sm text-slate-600 lg:gap-3">
                 <Link href="/shop?view=wishlist" className="rounded-full border border-slate-300 bg-white px-3 py-2 text-slate-900 transition hover:border-blue-400 hover:bg-slate-50" onClick={closeMenu}>Wishlist</Link>
                 <Link href="/shop?view=compare" className="rounded-full border border-slate-300 bg-white px-3 py-2 text-slate-900 transition hover:border-blue-400 hover:bg-slate-50" onClick={closeMenu}>Compare</Link>
-                <Link href="/cart" className="relative rounded-full bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:brightness-110" onClick={closeMenu}>
+                <Link href="/cart" className="relative rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_28px_rgba(37,99,235,0.14)] transition hover:-translate-y-0.5 hover:border-blue-300" onClick={closeMenu}>
                   Cart
                   <span className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-slate-900">3</span>
                 </Link>
@@ -162,7 +162,7 @@ export default function Layout({ children }) {
                     className="w-full rounded-full bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 outline-none border-0"
                   />
                 </div>
-                <button type="submit" className="rounded-full bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-110">
+                <button type="submit" className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
                   Search
                 </button>
               </div>
@@ -172,7 +172,7 @@ export default function Layout({ children }) {
         </div>
 
         <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-3 border-t border-slate-300 pt-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 border-t border-slate-200 pt-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-3">
               <button
                 type="button"

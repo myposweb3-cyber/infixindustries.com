@@ -306,17 +306,13 @@ html.theme-dark select option {
 
 /* HEADER-DARK CLASS: For headers that should remain light in any theme */
 .header-dark {
-  background-color: var(--header-bg) !important;
-  border-color: var(--border) !important;
-  color: var(--text) !important;
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
 }
 
-.header-dark .text-white,
-.header-dark .text-slate-100,
-.header-dark .text-slate-200,
-.header-dark .text-gray-400,
-.header-dark .text-slate-300 {
-  color: var(--text) !important;
+.header-dark .text-white {
+  color: #ffffff !important;
 }
 
 html.theme-light .text-gray-500,
