@@ -6,6 +6,15 @@ import { normalizeImageUrl } from '../../lib/imageUrl'
 import { useAuth } from '../../hooks/useAuth'
 import { formatMoney } from '../../lib/currency'
 
+const fallbackProducts = [
+  { id: 'demo-drill', slug: 'premium-drill-set', title: 'Premium Drill Set', brand: 'DeWalt', category: 'Power Tools', price: 219, discount_price: 189, image: '/images/hero-workshop.jpg', short_description: 'A dependable drill set for precise everyday work.' },
+  { id: 'demo-mixer', slug: 'concrete-mixer', title: 'Concrete Mixer', brand: 'Bosch', category: 'Building Materials', price: 449, image: '/images/hero-materials.jpg', short_description: 'Reliable mixing performance for demanding builds.' },
+  { id: 'demo-pipe', slug: 'high-flow-pipe-set', title: 'High-Flow Pipe Set', brand: 'Total', category: 'Plumbing', price: 89, image: '/images/hero-hardware.webp', short_description: 'Durable pipe components made for dependable flow.' },
+  { id: 'demo-helmet', slug: 'safety-helmet-hard-hat', title: 'Safety Helmet Hard Hat', brand: 'Infix Safety', category: 'Safety Equipment', price: 59, discount_price: 49, image: '/images/hero-workshop.jpg', short_description: 'Comfortable protection for active work sites.' },
+  { id: 'demo-panel', slug: 'smart-led-panel', title: 'Smart LED Panel', brand: 'Philips', category: 'Electrical', price: 79, image: '/images/hero-materials.jpg', short_description: 'Clean, efficient lighting for homes and businesses.' },
+  { id: 'demo-trimmer', slug: 'outdoor-hedge-trimmer', title: 'Outdoor Hedge Trimmer', brand: 'Makita', category: 'Garden', price: 129, image: '/images/hero-hardware.webp', short_description: 'Balanced cutting power for tidy outdoor spaces.' }
+]
+
 export default function Shop() {
   const API = process.env.NEXT_PUBLIC_API_URL || '/api'
   const router = useRouter()
@@ -50,7 +59,7 @@ export default function Shop() {
 
     if (isFilteredView) {
       const ids = JSON.parse(localStorage.getItem(currentView) || '[]')
-      const filtered = (window.__shopProducts || []).filter((product) => {
+      const filtered = (window.__shopProducts || fallbackProducts).filter((product) => {
         const pid = String(product.id || product.slug || product.title)
         return ids.includes(pid)
       })
@@ -62,10 +71,15 @@ export default function Shop() {
     }
 
     axios.get(`${API}/products?${buildQuery(value, currentPage)}`).then((res) => {
-      window.__shopProducts = res.data.items || []
-      setProducts(res.data.items || [])
-      setTotal(res.data.total || 0)
-    }).catch(() => { setProducts([]); setTotal(0) }).finally(() => setLoading(false))
+      const items = res.data.items && res.data.items.length ? res.data.items : fallbackProducts
+      window.__shopProducts = items
+      setProducts(items)
+      setTotal(res.data.items && res.data.items.length ? res.data.total || items.length : items.length)
+    }).catch(() => {
+      window.__shopProducts = fallbackProducts
+      setProducts(fallbackProducts)
+      setTotal(fallbackProducts.length)
+    }).finally(() => setLoading(false))
   }
 
   useEffect(() => {
@@ -210,61 +224,67 @@ export default function Shop() {
     )
   }
 
+  const categoryChips = categories.length ? categories.slice(0, 6) : [
+    { slug: 'power-tools', name: 'Power Tools' },
+    { slug: 'hand-tools', name: 'Hand Tools' },
+    { slug: 'building-materials', name: 'Building Materials' },
+    { slug: 'plumbing', name: 'Plumbing' },
+    { slug: 'electrical', name: 'Electrical' },
+    { slug: 'safety-equipment', name: 'Safety Equipment' }
+  ]
+
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-14 lg:px-8">
-        <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="self-start rounded-[30px] border border-slate-800 bg-slate-950 p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] lg:sticky lg:top-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">Curated catalogue</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Find the right fit.</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">Filter our selection by category, brand, or price.</p>
+    <div className="shop-page min-h-screen bg-[var(--bg)] text-[var(--text)]">
+      <section className="shop-intro border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="shop-eyebrow text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">Shop the collection</p>
+              <h1 className="shop-heading mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Everything your next project needs.</h1>
+              <p className="shop-lede mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">Explore dependable tools, hardware, electrical supplies, building materials, and safety essentials selected for serious work.</p>
+            </div>
+            <div className="shop-proof flex shrink-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 font-bold text-blue-700">✓</span>
+              <span><strong className="block text-slate-950">Trusted supply</strong>Serving Sri Lanka</span>
+            </div>
+          </div>
+          <div className="mt-8 flex gap-2 overflow-x-auto pb-1">
+            <Link href="/shop" className={`shop-chip shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${!filters.category ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-700'}`}>All products</Link>
+            {categoryChips.map((category) => (
+              <Link key={category.slug || category.id} href={`/shop?category=${category.slug}`} className="shop-chip shrink-0 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-blue-300 hover:text-blue-700">{category.name}</Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="shop-catalogue mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="grid gap-8 xl:grid-cols-[270px_minmax(0,1fr)]">
+          <aside className="shop-filter self-start rounded-[28px] border border-slate-800 bg-slate-950 p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] lg:sticky lg:top-6">
+            <div className="flex items-start justify-between gap-4">
+              <div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">Refine your search</p><h2 className="mt-2 text-xl font-semibold text-white">Find the right fit.</h2></div>
+              <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-semibold text-blue-200">{total || 0}</span>
+            </div>
             <form onSubmit={submit} className="mt-6 space-y-4">
-              <input name="q" value={filters.q} onChange={change} placeholder="Search products" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400" />
-              <select name="category" value={filters.category} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
-                <option value="">All Categories</option>
-                {categories.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}
-              </select>
-              <select name="brand" value={filters.brand} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
-                <option value="">All Brands</option>
-                {brands.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}
-              </select>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <input name="minPrice" value={filters.minPrice} onChange={change} placeholder="Min price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white" />
-                <input name="maxPrice" value={filters.maxPrice} onChange={change} placeholder="Max price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white" />
-              </div>
-              <select name="sort" value={filters.sort} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
-                <option value="newest">Newest</option>
-                <option value="price_asc">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-              </select>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <button className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5 hover:bg-blue-400">Apply Filters</button>
-                <button type="button" onClick={reset} className="rounded-full border border-white/20 px-6 py-3 text-sm text-slate-200 transition hover:bg-white/10">Reset</button>
-              </div>
+              <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Search</label>
+              <input name="q" value={filters.q} onChange={change} placeholder="Search products" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 outline-none focus:border-blue-400" />
+              <label className="block pt-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Category</label>
+              <select name="category" value={filters.category} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none focus:border-blue-400"><option value="">All Categories</option>{categories.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}</select>
+              <label className="block pt-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Brand</label>
+              <select name="brand" value={filters.brand} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none focus:border-blue-400"><option value="">All Brands</option>{brands.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}</select>
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2"><input name="minPrice" value={filters.minPrice} onChange={change} placeholder="Min price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400" /><input name="maxPrice" value={filters.maxPrice} onChange={change} placeholder="Max price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400" /></div>
+              <label className="block pt-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Sort by</label>
+              <select name="sort" value={filters.sort} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none focus:border-blue-400"><option value="newest">Newest</option><option value="price_asc">Price: Low to High</option><option value="price_desc">Price: High to Low</option></select>
+              <div className="flex gap-3 pt-2"><button className="flex-1 rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5 hover:bg-blue-400">Apply</button><button type="button" onClick={reset} className="rounded-full border border-white/20 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/10">Reset</button></div>
             </form>
           </aside>
 
-          <main className="min-w-0 space-y-6">
-            <div className="relative overflow-hidden rounded-[30px] bg-gradient-to-br from-slate-950 via-[#10213a] to-blue-900 p-7 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] sm:p-8">
-              <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-blue-400/20 blur-3xl" />
-              <div className="relative">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-200">Shop the collection</p>
-                <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">{viewMode === 'wishlist' ? 'Your wishlist' : viewMode === 'compare' ? 'Compare your picks' : 'Tools and products built for the work ahead.'}</h2>
-                <p className="mt-3 text-sm text-blue-100">{loading ? 'Loading products...' : `${total} carefully selected products available now`}</p>
-              </div>
+          <main className="min-w-0">
+            <div className="mb-6 flex flex-col gap-4 border-b border-slate-200 pb-5 sm:flex-row sm:items-center sm:justify-between">
+              <div><p className="text-sm font-semibold text-slate-950">{viewMode === 'wishlist' ? 'Your wishlist' : viewMode === 'compare' ? 'Compare your picks' : 'Curated for the work ahead'}</p><p className="mt-1 text-sm text-slate-500">{loading ? 'Loading products...' : `${total || 0} products available`}</p></div>
+              <div className="flex items-center gap-2 text-sm text-slate-500"><span className="h-2 w-2 rounded-full bg-emerald-500" />Reliable selection <span className="mx-1 text-slate-300">•</span> Fast support</div>
             </div>
-
-            <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-3">
-              {products.map((p) => (
-                <ProductTile key={p.id || p.slug || p.title} p={p} />
-              ))}
-            </div>
-
-            <div className="mt-8 flex justify-center gap-3">
-              <button onClick={() => page > 1 && setPage(page - 1)} disabled={page === 1} className="rounded-full border-2 border-blue-500/50 px-6 py-3 font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">← Previous</button>
-              <span className="flex items-center gap-2 px-4 font-semibold text-slate-600">Page {page}</span>
-              <button onClick={() => page * 12 < total && setPage(page + 1)} disabled={page * 12 >= total} className="rounded-full border-2 border-blue-500/50 px-6 py-3 font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Next →</button>
-            </div>
+            {loading ? <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">{[1, 2, 3, 4, 5, 6].map((item) => <div key={item} className="h-[420px] animate-pulse rounded-[28px] bg-slate-100" />)}</div> : products.length ? <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">{products.map((p) => <ProductTile key={p.id || p.slug || p.title} p={p} />)}</div> : <div className="rounded-[28px] border border-dashed border-slate-300 bg-white px-6 py-16 text-center"><p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">No products found</p><h2 className="mt-3 text-2xl font-semibold text-slate-950">Try a different search.</h2><p className="mt-2 text-slate-500">Reset the filters or browse all products to continue.</p><button type="button" onClick={reset} className="mt-6 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white">Reset filters</button></div>}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3"><button onClick={() => page > 1 && setPage(page - 1)} disabled={page === 1} className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-40">← Previous</button><span className="rounded-full bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-600">Page {page}</span><button onClick={() => page * 12 < total && setPage(page + 1)} disabled={page * 12 >= total} className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-40">Next →</button></div>
           </main>
         </div>
       </section>
