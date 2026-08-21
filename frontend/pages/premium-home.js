@@ -251,14 +251,14 @@ function ProductCard({ item }) {
           goToProduct()
         }
       }}
-      className="group cursor-pointer overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_35px_95px_rgba(15,23,42,0.12)]"
+      className="product-card-surface group cursor-pointer overflow-hidden rounded-[30px] border border-slate-200/80 bg-white"
     >
       <div className="relative overflow-hidden image-mask">
-        <img src={normalizeImageUrl(item.image)} alt={item.title} loading="lazy" decoding="async" className="h-56 w-full object-cover transition duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/10 to-transparent" />
+        <img src={normalizeImageUrl(item.image)} alt={item.title} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full object-cover transition duration-700 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" />
         <div className="absolute inset-x-0 top-4 flex items-center justify-between px-4">
-          <span className="rounded-full bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.25em] text-blue-600">{item.brand}</span>
-          <span className="rounded-full bg-blue-400/95 px-3 py-1 text-xs font-semibold text-white">-{item.discount}%</span>
+          <span className="rounded-full border border-white/20 bg-slate-950/55 px-3 py-1 text-xs uppercase tracking-[0.25em] text-white backdrop-blur">{item.brand}</span>
+          <span className="rounded-full bg-blue-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">-{item.discount}%</span>
         </div>
       </div>
       <div className="p-6">
@@ -289,7 +289,7 @@ function ProductCard({ item }) {
             </button>
           </div>
         </div>
-        <p className="mt-4 text-sm text-slate-600">{item.stock}</p>
+        <p className="mt-4 inline-flex w-max items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />{item.stock}</p>
         <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-2xl font-semibold text-slate-900">{formatMoney(item.price)}</p>
@@ -299,7 +299,7 @@ function ProductCard({ item }) {
             <Link href={productHref} className="inline-flex min-w-[116px] items-center justify-center whitespace-nowrap rounded-full border border-blue-500/50 bg-blue-50 px-3 py-2 text-sm font-semibold text-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.12)] transition hover:-translate-y-0.5 hover:border-blue-600 hover:bg-blue-600 hover:text-white">
               View Product
             </Link>
-            <button type="button" onClick={handleAddToCart} disabled={adding} className="inline-flex min-w-[68px] items-center justify-center whitespace-nowrap rounded-full bg-blue-400 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_25px_rgba(96,165,250,0.25)] transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60">
+            <button type="button" onClick={handleAddToCart} disabled={adding} className="inline-flex min-w-[86px] items-center justify-center whitespace-nowrap rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)] transition hover:-translate-y-0.5 hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-60">
               {adding ? 'Adding...' : 'Add'}
             </button>
           </div>

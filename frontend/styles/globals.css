@@ -5,8 +5,8 @@
 :root {
   color-scheme: light;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-  --bg: #f8fafc;
-  --text: #0f172a;
+  --bg: #f4f7fb;
+  --text: #0b1220;
   --brand-900: #1e3a8a;
   --brand-800: #2563eb;
   --brand-700: #1d4ed8;
@@ -60,6 +60,8 @@ body {
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img {
@@ -69,7 +71,6 @@ img {
 
 * {
   box-sizing: border-box;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease, opacity .18s ease;
 }
 
 button, input, textarea, select {
@@ -134,7 +135,7 @@ select option {
 }
 
 .card-hover {
-  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, background-color .35s ease;
 }
 
 .card-hover:hover {
@@ -318,20 +319,9 @@ html.theme-dark select option {
   color: var(--text) !important;
 }
 
-html.theme-light .text-white,
-html.theme-light .text-slate-100,
-html.theme-light .text-slate-200,
-html.theme-light .text-slate-300,
-html.theme-light .text-gray-300,
-html.theme-light .text-gray-400,
 html.theme-light .text-gray-500,
-html.theme-light h1,
-html.theme-light h2,
-html.theme-light h3,
-html.theme-light h4,
-html.theme-light h5,
-html.theme-light h6 {
-  color: #0f172a !important;
+html.theme-light .text-gray-400 {
+  color: #64748b;
 }
 
 html.theme-light .text-yellow-400,
@@ -511,11 +501,53 @@ html.theme-light ::-webkit-scrollbar-thumb:hover {
   animation: scrollBrands 24s linear infinite;
 }
 
-.prefers-reduced-motion * {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-  scroll-behavior: auto !important;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.product-card-surface {
+  box-shadow: 0 22px 70px rgba(15, 23, 42, 0.07);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.product-card-surface:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 90px rgba(37, 99, 235, 0.14);
+}
+
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: .45rem;
+  height: 2px;
+  border-radius: 99px;
+  background: #2563eb;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card-surface,
+  .nav-link-underline::after {
+    transition: none;
+  }
 }
 
 /* Hero headline font fix */

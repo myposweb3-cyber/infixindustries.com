@@ -76,7 +76,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <header
-        className="sticky top-0 z-50 border-b backdrop-blur-xl header-dark"
+        className={`sticky top-0 z-50 border-b backdrop-blur-xl header-dark transition-shadow duration-300 ${scrolled ? 'shadow-[0_16px_40px_rgba(15,23,42,0.10)]' : 'shadow-none'}`}
         style={{
           backgroundColor: headerBgDark,
           borderColor: 'var(--border)',
@@ -94,7 +94,7 @@ export default function Layout({ children }) {
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div className="relative flex min-h-12 items-center justify-center gap-4 lg:min-h-0 lg:flex-row lg:items-center lg:justify-between">
               <Link href="/" className="flex items-center justify-center" onClick={closeMenu}>
-                <BrandLogo className="h-16 w-[210px] sm:h-16 sm:w-[260px] lg:h-20 lg:w-[320px]" />
+                <BrandLogo className="h-12 w-[190px] sm:h-14 sm:w-[220px] lg:h-16 lg:w-[250px]" />
               </Link>
 
               {/* Desktop action buttons */}
@@ -132,7 +132,7 @@ export default function Layout({ children }) {
               </button>
             </div>
 
-            <form onSubmit={submitSearch} className="w-full rounded-[24px] border border-slate-300 bg-white p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] sm:rounded-full">
+            <form onSubmit={submitSearch} className="w-full rounded-[22px] border border-slate-200 bg-slate-50 p-2 shadow-[0_12px_34px_rgba(15,23,42,0.06)] sm:rounded-full">
               <div className="grid gap-3 sm:grid-cols-[220px_minmax(0,1fr)_auto] items-center">
                 <div className="relative min-w-0">
                   <select value={searchCategory} onChange={(event) => setSearchCategory(event.target.value)} className="w-full appearance-none rounded-full bg-slate-50 py-3 pl-4 pr-10 text-sm text-slate-900 outline-none border-0">
@@ -182,10 +182,11 @@ export default function Layout({ children }) {
               <nav className="hidden lg:flex w-full overflow-x-auto text-sm">
                 <div className="flex flex-wrap items-center gap-3 sm:justify-end">
                   {navLinks.map((link) => (
-                    <Link key={link.href} href={link.href} onClick={closeMenu} className={`rounded-full px-4 py-3 transition ${isActiveLink(link.href) ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
+                    <Link key={link.href} href={link.href} onClick={closeMenu} aria-current={isActiveLink(link.href) ? 'page' : undefined} className={`nav-link-underline rounded-full px-4 py-3 transition ${isActiveLink(link.href) ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
                       {link.label}
                     </Link>
                   ))}
+                  <Link href="/contact" onClick={closeMenu} className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-blue-600">Get in touch</Link>
                   {user?.role === 'admin' && (
                     <Link href="/admin" className="rounded-full border border-blue-300 px-4 py-3 text-sm text-blue-700 transition hover:bg-blue-50" onClick={closeMenu}>Admin</Link>
                   )}
@@ -197,19 +198,20 @@ export default function Layout({ children }) {
             </div>
           </div>
 
-          {mobileMenuOpen && (
-            <div className="lg:hidden mt-3 rounded-[24px] border border-slate-300 bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+          <div className={`overflow-hidden transition-[max-height,opacity,transform] duration-300 lg:hidden ${mobileMenuOpen ? 'max-h-[420px] translate-y-0 opacity-100' : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'}`} aria-hidden={!mobileMenuOpen}>
+            <div className="mt-3 rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_16px_40px_rgba(15,23,42,0.10)]">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   {navLinks.map((link) => (
-                    <Link key={link.href} href={link.href} onClick={() => { closeMenu(); setMobileMenuOpen(false); }} className={`block rounded-full px-4 py-3 text-sm transition ${isActiveLink(link.href) ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
+                    <Link key={link.href} href={link.href} onClick={() => { closeMenu(); setMobileMenuOpen(false); }} className={`block rounded-2xl px-4 py-3 text-sm transition ${isActiveLink(link.href) ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
                       {link.label}
                     </Link>
                   ))}
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white">Get in touch</Link>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  <Link href="/shop?view=wishlist" onClick={() => setMobileMenuOpen(false)} className="rounded-full border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition hover:border-blue-400 hover:bg-slate-50">Wishlist</Link>
-                  <Link href="/shop?view=compare" onClick={() => setMobileMenuOpen(false)} className="rounded-full border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition hover:border-blue-400 hover:bg-slate-50">Compare</Link>
+                <div className="flex flex-wrap gap-2 border-t border-slate-100 pt-3">
+                  <Link href="/shop?view=wishlist" onClick={() => setMobileMenuOpen(false)} className="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition hover:border-blue-400">Wishlist</Link>
+                  <Link href="/shop?view=compare" onClick={() => setMobileMenuOpen(false)} className="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 transition hover:border-blue-400">Compare</Link>
                   <Link href="/cart" onClick={() => setMobileMenuOpen(false)} className="relative rounded-full bg-gradient-to-r from-[#2563eb] to-[#3b82f6] px-4 py-3 text-sm font-semibold text-white transition hover:brightness-110">
                     Cart
                     <span className="absolute -right-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-slate-900">3</span>
@@ -217,7 +219,7 @@ export default function Layout({ children }) {
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
           {megaOpen && (
             <div className="mega-menu mt-3 rounded-[32px] border border-slate-300 bg-white p-6 shadow-[0_12px_32px_rgba(0,0,0,0.08)]">

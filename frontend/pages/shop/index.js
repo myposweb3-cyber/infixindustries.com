@@ -172,17 +172,18 @@ export default function Shop() {
         tabIndex={0}
         onClick={goToProduct}
         onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); goToProduct() } }}
-        className="group cursor-pointer relative overflow-hidden rounded-[24px] bg-gradient-to-b from-white to-slate-50 shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-blue-400/20"
+        className="product-card-surface group relative cursor-pointer overflow-hidden rounded-[30px] border border-slate-200/80 bg-white"
       >
-        <div className="relative h-56 w-full overflow-hidden bg-slate-200 rounded-t-[24px] border-b-2 border-blue-200/50">
-          <img src={normalizeImageUrl(p.image)} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-          {discount > 0 && (<div className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-red-500 to-rose-600 px-3 py-1 text-xs font-bold text-white shadow-lg">Save {discount}%</div>)}
+        <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
+          <img src={normalizeImageUrl(p.image)} alt={p.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-80"></div>
+          {discount > 0 && (<div className="absolute right-4 top-4 rounded-full bg-blue-500 px-3 py-1.5 text-xs font-bold text-white shadow-lg">Save {discount}%</div>)}
+          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-slate-950/55 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">{p.brand || 'Infix selection'}</span>
         </div>
-        <div className="flex flex-col gap-3 p-5">
+        <div className="flex flex-col gap-4 p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h3 className="min-h-[3rem] text-lg font-semibold leading-tight text-slate-900 line-clamp-2 group-hover:text-blue-600 transition-colors">{p.title}</h3>
+              <h3 className="min-h-[3.25rem] text-xl font-semibold leading-tight text-slate-950 line-clamp-2 group-hover:text-blue-600 transition-colors">{p.title}</h3>
               <div className="flex items-baseline gap-2">
                 <p className="text-2xl font-bold text-blue-600">{formatMoney(p.discount_price || p.price || 0)}</p>
                 {discount > 0 && <p className="text-sm text-slate-500 line-through">{formatMoney(p.price || 0)}</p>}
@@ -196,10 +197,10 @@ export default function Shop() {
           <div className="h-px bg-gradient-to-r from-blue-400/30 via-blue-400/15 to-transparent"></div>
           <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-2 items-center justify-between">
             <div>
-              <p className="text-sm text-slate-500">{p.short_description || ''}</p>
+              <p className="line-clamp-2 text-sm leading-6 text-slate-500">{p.short_description || 'Reliable product selection for professional and everyday projects.'}</p>
             </div>
             <div className="flex gap-2">
-              <button onClick={(ev) => { ev.preventDefault(); ev.stopPropagation(); addToCart(p) }} disabled={addingProductId === p.id} className="rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-blue-500/30 transition hover:shadow-xl disabled:opacity-70">{addingProductId === p.id ? 'Adding...' : 'Add'}</button>
+              <button onClick={(ev) => { ev.preventDefault(); ev.stopPropagation(); addToCart(p) }} disabled={addingProductId === p.id} className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-blue-600 disabled:opacity-70">{addingProductId === p.id ? 'Adding...' : 'Add'}</button>
               <Link href={`/product/${p.slug || p.id}`} className="inline-flex items-center justify-center rounded-full border border-blue-500/50 bg-blue-50 px-3 py-2 text-sm font-semibold text-blue-600 shadow-[0_10px_24px_rgba(37,99,235,0.12)] transition hover:bg-blue-600 hover:text-white">View</Link>
             </div>
           </div>
@@ -212,42 +213,47 @@ export default function Shop() {
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-14 lg:px-8">
         <div className="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="self-start rounded-[28px] border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-6">
-            <h2 className="text-xl font-semibold text-slate-900">Filter products</h2>
+          <aside className="self-start rounded-[30px] border border-slate-800 bg-slate-950 p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] lg:sticky lg:top-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-300">Curated catalogue</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Find the right fit.</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">Filter our selection by category, brand, or price.</p>
             <form onSubmit={submit} className="mt-6 space-y-4">
-              <input name="q" value={filters.q} onChange={change} placeholder="Search products" className="w-full rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-900" />
-              <select name="category" value={filters.category} onChange={change} className="w-full rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-900">
+              <input name="q" value={filters.q} onChange={change} placeholder="Search products" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400" />
+              <select name="category" value={filters.category} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
                 <option value="">All Categories</option>
                 {categories.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}
               </select>
-              <select name="brand" value={filters.brand} onChange={change} className="w-full rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-900">
+              <select name="brand" value={filters.brand} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
                 <option value="">All Brands</option>
                 {brands.map((x) => <option key={x.id} value={x.slug}>{x.name}</option>)}
               </select>
               <div className="grid gap-3 sm:grid-cols-2">
-                <input name="minPrice" value={filters.minPrice} onChange={change} placeholder="Min price" className="w-full rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-900" />
-                <input name="maxPrice" value={filters.maxPrice} onChange={change} placeholder="Max price" className="w-full rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-900" />
+                <input name="minPrice" value={filters.minPrice} onChange={change} placeholder="Min price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white" />
+                <input name="maxPrice" value={filters.maxPrice} onChange={change} placeholder="Max price" className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white" />
               </div>
-              <select name="sort" value={filters.sort} onChange={change} className="w-full rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-900">
+              <select name="sort" value={filters.sort} onChange={change} className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white">
                 <option value="newest">Newest</option>
                 <option value="price_asc">Price: Low to High</option>
                 <option value="price_desc">Price: High to Low</option>
               </select>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <button className="rounded-full bg-blue-400 px-6 py-3 text-sm font-semibold text-white">Apply Filters</button>
-                <button type="button" onClick={reset} className="rounded-full border px-6 py-3 text-sm">Reset</button>
+                <button className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5 hover:bg-blue-400">Apply Filters</button>
+                <button type="button" onClick={reset} className="rounded-full border border-white/20 px-6 py-3 text-sm text-slate-200 transition hover:bg-white/10">Reset</button>
               </div>
             </form>
           </aside>
 
           <main className="min-w-0 space-y-6">
-            <div className="rounded-[28px] bg-slate-50 p-5">
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Shop</p>
-              <h2 className="mt-3 text-2xl font-semibold text-slate-900 sm:text-3xl">{viewMode === 'wishlist' ? 'Wishlist' : viewMode === 'compare' ? 'Compare' : 'Curated premium products'}</h2>
-              <p className="mt-2 text-sm text-slate-600">{loading ? 'Loading products...' : `${total} products found`}</p>
+            <div className="relative overflow-hidden rounded-[30px] bg-gradient-to-br from-slate-950 via-[#10213a] to-blue-900 p-7 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] sm:p-8">
+              <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-blue-400/20 blur-3xl" />
+              <div className="relative">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-200">Shop the collection</p>
+                <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">{viewMode === 'wishlist' ? 'Your wishlist' : viewMode === 'compare' ? 'Compare your picks' : 'Tools and products built for the work ahead.'}</h2>
+                <p className="mt-3 text-sm text-blue-100">{loading ? 'Loading products...' : `${total} carefully selected products available now`}</p>
+              </div>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-3">
               {products.map((p) => (
                 <ProductTile key={p.id || p.slug || p.title} p={p} />
               ))}
