@@ -755,7 +755,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Frequently asked</p>
-              <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">A clearer way to get started.</h2>
+              <h2 className="faq-heading mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">A clearer way to get started.</h2>
               <p className="mt-5 max-w-lg text-base leading-8 text-slate-600">Have a question about our products, services, or partnerships? Start here, then reach out when you are ready.</p>
             </div>
             <div className="space-y-3">

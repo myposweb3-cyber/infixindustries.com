@@ -42,7 +42,7 @@ export default function About() {
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-[0_28px_80px_rgba(15,23,42,0.07)] sm:p-10 fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">About Us</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Reliable products. Competitive solutions. Professional service.</h2>
+            <h2 className="about-us-heading mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Reliable products. Competitive solutions. Professional service.</h2>
             <div className="mt-7 space-y-5 text-base leading-8 text-slate-600">
               <p>We are committed to providing reliable products, competitive solutions, and professional service to dealers, contractors, businesses, and customers across Sri Lanka.</p>
               <p>With a strong focus on quality, innovation, and continuous development, we aim to expand our product portfolio, strengthen our manufacturing capabilities, and build long-term partnerships throughout the country.</p>

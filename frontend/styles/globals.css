@@ -239,6 +239,12 @@ select option {
   opacity: 1 !important;
 }
 
+.about-us-heading,
+.faq-heading {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
 .section-subtitle {
   color: rgba(15, 23, 42, 0.68);
 }
@@ -346,7 +352,12 @@ html.theme-dark .rounded-full.bg-gradient-to-r {
   color: #fff !important;
 }
 
-html.theme-dark h1,h2,h3,h4,h5,h6 {
+html.theme-dark h1,
+html.theme-dark h2,
+html.theme-dark h3,
+html.theme-dark h4,
+html.theme-dark h5,
+html.theme-dark h6 {
   color: #ffffff !important;
 }
 
