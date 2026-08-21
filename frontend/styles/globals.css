@@ -392,7 +392,6 @@ html.theme-light .hover\:bg-gray-50:hover { background-color: #f8fafc !important
 html.theme-light .hover\:brightness-95:hover { filter: brightness(0.95); }
 
 /* Light mode box and panel styling */
-html.theme-light .rounded-\[32px\] { color: #0f172a !important; }
 html.theme-light .rounded-\[32px\].bg-\[\#111111\] { background-color: #ffffff !important; }
 
 html.theme-light .shadow-\[0_30px_80px_rgba\(255\,199\,0\,0\.12\)\]:hover {
@@ -403,12 +402,8 @@ html.theme-light .shadow-\[0_30px_80px_rgba\(255\,199\,0\,0\.12\)\]:hover {
 html.theme-light [disabled] { opacity: 0.6; }
 
 /* Light mode link colors */
-html.theme-light a.hover\:text-white:hover { color: #0f172a !important; }
 
 /* Badge and pill styling for light mode */
-html.theme-light .px-3.py-2.rounded-full {
-  color: #0f172a !important;
-}
 
 /* Light mode input placeholders with focus */
 html.theme-light input:focus::placeholder,
@@ -417,15 +412,10 @@ html.theme-light textarea:focus::placeholder {
 }
 
 /* Specific style fixes for light mode sections */
-html.theme-light section { color: #0f172a !important; }
 
 /* Light mode specific dark color mappings */
-html.theme-light [style*="color: rgb(239, 246, 255)"] { color: #0f172a !important; }
-html.theme-light [style*="color: #ebf6ff"] { color: #0f172a !important; }
 
 /* Light mode grid and layout text */
-html.theme-light .grid { color: #0f172a !important; }
-html.theme-light .gap-2 > * { color: inherit; }
 
 /* Premium home page specific fixes for light mode */
 html.theme-light [class*="bg-[radial-gradient"]  {
@@ -433,8 +423,6 @@ html.theme-light [class*="bg-[radial-gradient"]  {
 }
 
 /* Light mode specific gradients */
-html.theme-light .bg-gradient-to-r { background: linear-gradient(to right, #f8fafc, #f1f5f9) !important; }
-html.theme-light .bg-gradient-to-b { background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important; }
 
 /* Light mode scrollbar styling */
 html.theme-light ::-webkit-scrollbar {
