@@ -325,10 +325,10 @@ export default function Home() {
   const heroImageGrid = heroSlides.length
     ? heroSlides.slice(0, 4)
     : [
-        { image: 'https://images.unsplash.com/photo-1515263487990-61e7be6d2782?auto=format&fit=crop&w=900&q=80' },
-        { image: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=80' },
-        { image: 'https://images.unsplash.com/photo-1525286116112-b59af11adad1?auto=format&fit=crop&w=900&q=80' },
-        { image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=80' }
+        { image: '/images/hero-hardware.webp', title: 'Hardware selected for real work' },
+        { image: '/images/hero-workshop.jpg', title: 'Tools that keep projects moving' },
+        { image: '/images/hero-materials.jpg', title: 'Materials for stronger builds' },
+        { image: '/images/hero-hardware.webp', title: 'Dependable supply, from one partner' }
       ]
 
   useEffect(() => {
@@ -484,6 +484,7 @@ export default function Home() {
 
   const categoryDisplay = categories.length ? categories : defaultCategoryCards
   const currentBestSellers = bestSellers.length ? bestSellers : defaultBestSellers
+  const displayHeroSlides = heroSlides.length ? heroSlides : heroImageGrid
 
   return (
     <div className="bg-[var(--bg)] text-[var(--text)]" ref={containerRef}>
@@ -528,7 +529,7 @@ export default function Home() {
               
               <div className="relative overflow-hidden rounded-[36px] border border-white/15 bg-slate-900 shadow-[0_40px_120px_rgba(2,8,23,0.45)]">
                 <div className="relative h-[560px] w-full overflow-hidden">
-                  {heroSlides.map((slide, index) => (
+                  {displayHeroSlides.map((slide, index) => (
                     <img
                       key={slide.id || index}
                       src={normalizeImageUrl(slide.image)}
@@ -541,24 +542,24 @@ export default function Home() {
                   ))}
                 </div>
 
-                {heroSlides.length > 1 && (
+                {displayHeroSlides.length > 1 && (
                   <>
                     <button
-                      onClick={() => setCurrentHeroIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+                      onClick={() => setCurrentHeroIndex((prev) => (prev - 1 + displayHeroSlides.length) % displayHeroSlides.length)}
                       className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur transition hover:bg-blue-500"
                       aria-label="Previous slide"
                     >
                       ❮
                     </button>
                     <button
-                      onClick={() => setCurrentHeroIndex((prev) => (prev + 1) % heroSlides.length)}
+                      onClick={() => setCurrentHeroIndex((prev) => (prev + 1) % displayHeroSlides.length)}
                       className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur transition hover:bg-blue-500"
                       aria-label="Next slide"
                     >
                       ❯
                     </button>
                     <div className="absolute bottom-24 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-                      {heroSlides.map((_, index) => (
+                      {displayHeroSlides.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => setCurrentHeroIndex(index)}
@@ -576,7 +577,7 @@ export default function Home() {
                   <div className="flex flex-col gap-4 text-white sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300">Featured selection</p>
-                      <p className="mt-2 text-base font-bold line-clamp-2">{activeHero?.title}</p>
+                      <p className="mt-2 text-base font-bold line-clamp-2">{activeHero?.title || 'Reliable products for the work ahead'}</p>
                     </div>
                     <Link href={activeHero?.link || '/shop'} className="inline-flex w-max items-center justify-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-400">View selection</Link>
                   </div>

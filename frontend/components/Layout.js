@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
 import BrandLogo from './BrandLogo'
@@ -28,16 +28,26 @@ export default function Layout({ children }) {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [headerVisible, setHeaderVisible] = useState(true)
+  const lastScrollY = useRef(0)
   const [categories, setCategories] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [searchCategory, setSearchCategory] = useState('')
 
   useEffect(() => {
-    const updateScrolledState = () => setScrolled((window.scrollY || window.pageYOffset || 0) > 12)
-    updateScrolledState()
-    window.addEventListener('scroll', updateScrolledState, { passive: true })
-    return () => window.removeEventListener('scroll', updateScrolledState)
-  }, [])
+    const updateHeaderState = () => {
+      const currentY = window.scrollY || window.pageYOffset || 0
+      const delta = currentY - lastScrollY.current
+      setScrolled(currentY > 12)
+      if (currentY <= 24 || delta < -4 || mobileMenuOpen) setHeaderVisible(true)
+      else if (delta > 4 && currentY > 120) setHeaderVisible(false)
+      lastScrollY.current = currentY
+    }
+
+    updateHeaderState()
+    window.addEventListener('scroll', updateHeaderState, { passive: true })
+    return () => window.removeEventListener('scroll', updateHeaderState)
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -76,7 +86,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <header
-        className={`sticky top-0 z-50 border-b backdrop-blur-xl header-dark transition-shadow duration-300 ${scrolled ? 'shadow-[0_16px_40px_rgba(15,23,42,0.10)]' : 'shadow-none'}`}
+        className={`sticky top-0 z-50 border-b backdrop-blur-xl header-dark transition-[transform,box-shadow,background-color] duration-300 ${headerVisible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? 'shadow-[0_16px_40px_rgba(15,23,42,0.10)]' : 'shadow-none'}`}
         style={{
           backgroundColor: headerBgDark,
           borderColor: 'var(--border)',
