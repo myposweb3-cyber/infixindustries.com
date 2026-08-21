@@ -10,10 +10,11 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^2.0.0",
     "@stripe/stripe-js": "^2.0.0",
-    "lenis": "^1.0.42",
     "autoprefixer": "^10.4.16",
     "axios": "^1.4.0",
     "gsap": "^3.12.2",
+    "lenis": "^1.0.42",
+    "motion": "^12.43.0",
     "next": "^14.2.15",
     "postcss": "^8.4.31",
     "react": "18.2.0",

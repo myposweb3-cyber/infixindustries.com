@@ -6,6 +6,8 @@ import { normalizeImageUrl } from '../lib/imageUrl'
 import { formatMoney } from '../lib/currency'
 import { useAuth } from '../hooks/useAuth'
 import { useRouter } from 'next/router'
+import ShinyText from '../components/reactbits/ShinyText'
+import SpotlightCard from '../components/reactbits/SpotlightCard'
 
 const defaultBestSellers = [
   { title: 'Premium Drill Set', brand: 'DeWalt', price: 219, image: 'https://images.unsplash.com/photo-1581091870620-6501c8a508f3?auto=format&fit=crop&w=900&q=80' },
@@ -482,34 +484,36 @@ export default function Home() {
       </div>
 
       <main>
-        <section className="relative overflow-visible border-b border-slate-300 bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
-          <div className="absolute left-0 top-0 h-40 w-40 rounded-full bg-blue-400/10 blur-3xl" />
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+        <section className="relative overflow-hidden border-b border-slate-800 bg-[#07111f] px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-28">
+          <div className="absolute -right-32 -top-28 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
+          <div className="absolute -bottom-48 left-1/3 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(148,163,184,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.12)_1px,transparent_1px)] [background-size:48px_48px]" />
+          <div className="relative mx-auto max-w-7xl">
+            <div className="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
               <div className="space-y-8">
                 <div>
-                  <span className="inline-flex items-center rounded-full bg-blue-400/10 px-4 py-2 text-xs uppercase tracking-[0.32em] text-blue-600">Manufacturers • Importers • Distributors</span>
-                  <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Quality products. Dependable solutions. A stronger Sri Lanka.</h1>
-                  <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">Infix Industries connects quality PVC, hardware, industrial, and related products with dealers, contractors, businesses, and customers across Sri Lanka.</p>
+                  <span className="inline-flex items-center rounded-full border border-blue-300/20 bg-blue-300/10 px-4 py-2 text-xs uppercase tracking-[0.32em] text-blue-200"><ShinyText text="Manufacturers • Importers • Distributors" color="#9db2cc" shineColor="#ffffff" speed={3} pauseOnHover /></span>
+                  <h1 className="mt-6 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">Quality products. <span className="text-blue-300">Dependable solutions.</span> A stronger Sri Lanka.</h1>
+                  <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300">Infix Industries connects quality PVC, hardware, industrial, and related products with dealers, contractors, businesses, and customers across Sri Lanka.</p>
                 </div>
                 <div className="flex flex-wrap gap-4">
-                  <Link href="/shop" className="ripple-btn inline-flex items-center justify-center rounded-full bg-blue-400 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:brightness-95">Shop Now</Link>
-                  <Link href="#services" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50">Learn More</Link>
+                  <Link href="/shop" className="ripple-btn inline-flex items-center justify-center rounded-full bg-blue-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:bg-blue-400">Explore products</Link>
+                  <Link href="#services" className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10">Discover our services</Link>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-3xl border border-slate-300 bg-white p-5">
-                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Reliable supply</p>
-                    <p className="mt-2 text-base text-slate-900">Quality products for growing businesses.</p>
+                  <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                    <p className="text-sm uppercase tracking-[0.3em] text-blue-300">Reliable supply</p>
+                    <p className="mt-2 text-base text-slate-200">Quality products for growing businesses.</p>
                   </div>
-                  <div className="rounded-3xl border border-slate-300 bg-white p-5">
-                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Local focus</p>
-                    <p className="mt-2 text-base text-slate-900">Professional service across Sri Lanka.</p>
+                  <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                    <p className="text-sm uppercase tracking-[0.3em] text-blue-300">Local focus</p>
+                    <p className="mt-2 text-base text-slate-200">Professional service across Sri Lanka.</p>
                   </div>
                 </div>
               </div>
 
               
-              <div className="relative overflow-hidden rounded-[36px] border border-slate-300 bg-white shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
+              <div className="relative overflow-hidden rounded-[36px] border border-white/15 bg-slate-900 shadow-[0_40px_120px_rgba(2,8,23,0.45)]">
                 <div className="relative h-[560px] w-full overflow-hidden">
                   {heroSlides.map((slide, index) => (
                     <img
@@ -528,14 +532,14 @@ export default function Home() {
                   <>
                     <button
                       onClick={() => setCurrentHeroIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-                      className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-900 transition hover:bg-white"
+                      className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur transition hover:bg-blue-500"
                       aria-label="Previous slide"
                     >
                       ❮
                     </button>
                     <button
                       onClick={() => setCurrentHeroIndex((prev) => (prev + 1) % heroSlides.length)}
-                      className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-900 transition hover:bg-white"
+                      className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/60 text-white backdrop-blur transition hover:bg-blue-500"
                       aria-label="Next slide"
                     >
                       ❯
@@ -555,13 +559,13 @@ export default function Home() {
                   </>
                 )}
 
-                <div className="absolute inset-x-6 bottom-6 rounded-[32px] border border-slate-300 bg-white/95 p-6 text-sm shadow-2xl backdrop-blur-xl">
-                  <div className="flex flex-col gap-4 text-slate-900">
+                <div className="absolute inset-x-6 bottom-6 rounded-[32px] border border-white/15 bg-slate-950/75 p-6 text-sm shadow-2xl backdrop-blur-xl">
+                  <div className="flex flex-col gap-4 text-white sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-blue-400 font-semibold">Best-selling pick</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300">Featured selection</p>
                       <p className="mt-2 text-base font-bold line-clamp-2">{activeHero?.title}</p>
                     </div>
-                    <Link href={activeHero?.link || '/shop'} className="inline-flex w-max items-center justify-center gap-2 rounded-full bg-blue-400 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95">Shop Deal</Link>
+                    <Link href={activeHero?.link || '/shop'} className="inline-flex w-max items-center justify-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-400">View selection</Link>
                   </div>
                 </div>
               </div>
@@ -584,22 +588,22 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="services" className="fade-up bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+        <section id="services" className="fade-up bg-[#0b1626] px-4 py-20 text-white sm:px-6 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">What we do</p>
-                <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Services built around reliable supply.</h2>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">What we do</p>
+                <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Services built around reliable supply.</h2>
               </div>
-              <p className="max-w-2xl text-base leading-8 text-slate-600">From manufacturing and importing to nationwide distribution, Infix Industries connects quality products with the people and businesses that depend on them.</p>
+              <p className="max-w-2xl text-base leading-8 text-slate-300">From manufacturing and importing to nationwide distribution, Infix Industries connects quality products with the people and businesses that depend on them.</p>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {serviceCards.map((service) => (
-                <article key={service.title} className="group rounded-[32px] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_28px_70px_rgba(37,99,235,0.1)]">
-                  <div className="flex items-center justify-between"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-xl text-white transition duration-300 group-hover:rotate-6">{service.icon}</span><span className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{service.eyebrow}</span></div>
-                  <h3 className="mt-8 text-2xl font-semibold text-slate-950">{service.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{service.text}</p>
-                </article>
+                <SpotlightCard key={service.title} className="rounded-[32px] border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1" spotlightColor="rgba(96, 165, 250, 0.24)">
+                  <div className="flex items-center justify-between"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500 text-xl text-white transition duration-300 hover:rotate-6">{service.icon}</span><span className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">{service.eyebrow}</span></div>
+                  <h3 className="mt-8 text-2xl font-semibold text-white">{service.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-300">{service.text}</p>
+                </SpotlightCard>
               ))}
             </div>
           </div>
@@ -615,12 +619,12 @@ export default function Home() {
               </div>
               <div className="grid gap-4 md:grid-cols-3">
                 {eventCards.map((event) => (
-                  <article key={event.title} className="rounded-[28px] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/10">
+                  <SpotlightCard key={event.title} className="rounded-[28px] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1" spotlightColor="rgba(34, 211, 238, 0.2)">
                     <span className="text-sm font-semibold text-blue-300">{event.date}</span>
                     <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">{event.label}</p>
                     <h3 className="mt-3 text-xl font-semibold text-white">{event.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-slate-300">{event.text}</p>
-                  </article>
+                  </SpotlightCard>
                 ))}
               </div>
             </div>
