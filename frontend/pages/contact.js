@@ -31,7 +31,7 @@ export default function Contact() {
                   <svg className="h-6 w-6 flex-none text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M9 3v2m6-2v2M4 9h16v11H4z"/></svg>
                   <div>
                     <div className="font-medium text-slate-900">Phone / WhatsApp</div>
-                    <div className="mt-1 text-sm">077 231 0421 • 074 085 8726</div>
+                    <a href="tel:+94772310421" className="mt-1 inline-flex text-sm font-semibold text-blue-700 hover:text-blue-800">077 231 0421</a>
                   </div>
                 </div>
 

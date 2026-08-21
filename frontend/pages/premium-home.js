@@ -1,42 +1,11 @@
 ﻿import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { normalizeImageUrl } from '../lib/imageUrl'
 import { formatMoney } from '../lib/currency'
 import { useAuth } from '../hooks/useAuth'
 import { useRouter } from 'next/router'
-
-const promoBanners = [
-  {
-    title: 'Power Tools Sale',
-    description: 'Save up to 35% on premium drills, drivers, and compressors.',
-    badge: 'Up to 35% OFF',
-    image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80',
-    cta: 'Shop Power'
-  },
-  {
-    title: 'Building Materials',
-    description: 'Trusted quality timber, hardware and masonry essentials.',
-    badge: 'Build Better',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80',
-    cta: 'Explore Building'
-  },
-  {
-    title: 'Electrical Essentials',
-    description: 'High-performance cabling, switches and safety components.',
-    badge: 'Electrify Deals',
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c39?auto=format&fit=crop&w=900&q=80',
-    cta: 'Browse Electrical'
-  },
-  {
-    title: 'Garden Collection',
-    description: 'Durable outdoor tools, irrigation and landscape supplies.',
-    badge: 'Fresh Outdoors',
-    image: 'https://images.unsplash.com/photo-1495688734822-86f1574fa6b6?auto=format&fit=crop&w=900&q=80',
-    cta: 'Shop Garden'
-  }
-]
 
 const defaultBestSellers = [
   { title: 'Premium Drill Set', brand: 'DeWalt', price: 219, image: 'https://images.unsplash.com/photo-1581091870620-6501c8a508f3?auto=format&fit=crop&w=900&q=80' },
@@ -95,6 +64,18 @@ const trustCards = [
   { title: 'Islandwide Delivery', content: 'Fast shipping across the country.', icon: '🚚' },
   { title: 'Secure Payments', content: 'Encrypted checkout with trusted gateways.', icon: '🔒' },
   { title: 'Expert Support', content: 'Live guidance for professional projects.', icon: '💬' }
+]
+
+const serviceCards = [
+  { eyebrow: '01', title: 'Manufacturing', text: 'Developing quality PVC and related products with a practical focus on consistency, durability, and dependable supply.', icon: '◈' },
+  { eyebrow: '02', title: 'Importing', text: 'Sourcing reliable products and trusted brands to give businesses, contractors, and customers access to competitive solutions.', icon: '↗' },
+  { eyebrow: '03', title: 'Distribution', text: 'Connecting dealers, businesses, and customers across Sri Lanka with professional service and dependable delivery.', icon: '◎' }
+]
+
+const eventCards = [
+  { date: '01', label: 'Industry connection', title: 'Dealer & partner meetups', text: 'Building stronger relationships with dealers, suppliers, contractors, and business partners.' },
+  { date: '02', label: 'Product development', title: 'New product showcases', text: 'Introducing new additions to our PVC, hardware, industrial, and future product categories.' },
+  { date: '03', label: 'Continuous growth', title: 'A stronger Sri Lankan network', text: 'Expanding our capabilities and distribution network to serve more industries and communities.' }
 ]
 
 function StarRating({ value }) {
@@ -488,13 +469,12 @@ export default function Home() {
 
   const categoryDisplay = categories.length ? categories : defaultCategoryCards
   const currentBestSellers = bestSellers.length ? bestSellers : defaultBestSellers
-  const featuredColumns = useMemo(() => (featuredProducts.length ? featuredProducts : defaultFeaturedProducts).slice(0, 8), [featuredProducts])
 
   return (
     <div className="bg-[var(--bg)] text-[var(--text)]" ref={containerRef}>
       <Head>
-        <title>Premium Hardware Store</title>
-        <meta name="description" content="Premium hardware marketplace with fast search, curated tools, and trusted brands." />
+        <title>Infix Industries | Manufacturers, Importers & Distributors</title>
+        <meta name="description" content="Infix Industries manufactures, imports, and distributes quality PVC, hardware, industrial, and related products across Sri Lanka." />
       </Head>
 
       <div className="fixed inset-x-0 top-0 z-50 h-1 bg-transparent">
@@ -508,22 +488,22 @@ export default function Home() {
             <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
               <div className="space-y-8">
                 <div>
-                  <span className="inline-flex items-center rounded-full bg-blue-400/10 px-4 py-2 text-xs uppercase tracking-[0.32em] text-blue-400">Industrial premium hardware</span>
-                  <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Premium tools, trusted brands, and industrial-grade performance.</h1>
-                  <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">Build smarter with a curated marketplace of power tools, construction essentials, and professional-grade hardware designed for speed, reliability, and safety.</p>
+                  <span className="inline-flex items-center rounded-full bg-blue-400/10 px-4 py-2 text-xs uppercase tracking-[0.32em] text-blue-600">Manufacturers • Importers • Distributors</span>
+                  <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Quality products. Dependable solutions. A stronger Sri Lanka.</h1>
+                  <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600">Infix Industries connects quality PVC, hardware, industrial, and related products with dealers, contractors, businesses, and customers across Sri Lanka.</p>
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/shop" className="ripple-btn inline-flex items-center justify-center rounded-full bg-blue-400 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:brightness-95">Shop Now</Link>
-                  <Link href="#promo" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50">Learn More</Link>
+                  <Link href="#services" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50">Learn More</Link>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-3xl border border-slate-300 bg-white p-5">
-                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Pro assurance</p>
-                    <p className="mt-2 text-base text-slate-900">Genuine tools and expert service.</p>
+                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Reliable supply</p>
+                    <p className="mt-2 text-base text-slate-900">Quality products for growing businesses.</p>
                   </div>
                   <div className="rounded-3xl border border-slate-300 bg-white p-5">
-                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Easy returns</p>
-                    <p className="mt-2 text-base text-slate-900">Hassle-free exchanges within 30 days.</p>
+                    <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Local focus</p>
+                    <p className="mt-2 text-base text-slate-900">Professional service across Sri Lanka.</p>
                   </div>
                 </div>
               </div>
@@ -604,45 +584,46 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="featured-products" className="fade-up bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+        <section id="services" className="fade-up bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div className="max-w-2xl">
-                <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Featured Products</p>
-                <h2 className="mt-3 text-4xl font-semibold text-slate-900">Premium gear built for performance</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">High-performance tools and accessories designed for serious projects, dependable results, and lasting value.</p>
+            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">What we do</p>
+                <h2 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Services built around reliable supply.</h2>
               </div>
-              <Link href="/shop" className="rounded-full border border-slate-300 bg-slate-100 px-5 py-3 text-sm text-slate-700 transition hover:bg-slate-200 hover:text-slate-900">View full catalog</Link>
+              <p className="max-w-2xl text-base leading-8 text-slate-600">From manufacturing and importing to nationwide distribution, Infix Industries connects quality products with the people and businesses that depend on them.</p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-              {featuredColumns.map((item) => (
-                <ProductCard key={`${item.slug || item.title}`} item={item} />
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {serviceCards.map((service) => (
+                <article key={service.title} className="group rounded-[32px] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_28px_70px_rgba(37,99,235,0.1)]">
+                  <div className="flex items-center justify-between"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-xl text-white transition duration-300 group-hover:rotate-6">{service.icon}</span><span className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{service.eyebrow}</span></div>
+                  <h3 className="mt-8 text-2xl font-semibold text-slate-950">{service.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{service.text}</p>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="promo" className="fade-up mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-blue-400">Promotions</p>
-              <h2 className="mt-3 text-4xl font-semibold text-slate-900">Seasonal offers for premium projects</h2>
+        <section id="events" className="fade-up px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl rounded-[40px] bg-slate-950 p-8 text-white shadow-[0_40px_100px_rgba(15,23,42,0.18)] sm:p-12">
+            <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">Events & updates</p>
+                <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">Growing together, one connection at a time.</h2>
+                <p className="mt-5 text-base leading-8 text-slate-300">Stay close to the conversations, product developments, and partnerships shaping the next chapter of Infix Industries.</p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {eventCards.map((event) => (
+                  <article key={event.title} className="rounded-[28px] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:bg-white/10">
+                    <span className="text-sm font-semibold text-blue-300">{event.date}</span>
+                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">{event.label}</p>
+                    <h3 className="mt-3 text-xl font-semibold text-white">{event.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-slate-300">{event.text}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-            <p className="max-w-xl text-sm leading-6 text-slate-600">Curated deals on top brands and essential equipment for every workflow.</p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-4">
-            {promoBanners.map((promo) => (
-              <article key={promo.title} className="group relative overflow-hidden rounded-[36px] bg-white shadow-[0_30px_80px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:shadow-[0_35px_100px_rgba(15,23,42,0.12)]">
-                <img src={normalizeImageUrl(promo.image)} alt={promo.title} loading="lazy" decoding="async" className="h-64 w-full object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                <div className="relative p-6">
-                  <span className="rounded-full bg-blue-400/95 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">{promo.badge}</span>
-                  <h3 className="mt-5 text-2xl font-semibold text-slate-900">{promo.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{promo.description}</p>
-                  <Link href={`/shop?category=${encodeURIComponent(promo.title.replace(/\s+/g, ' '))}`} className="mt-6 inline-flex rounded-full bg-blue-400 px-5 py-3 text-sm font-semibold text-white transition hover:brightness-95">{promo.cta}</Link>
-                </div>
-              </article>
-            ))}
           </div>
         </section>
 

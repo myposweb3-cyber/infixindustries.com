@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
 import BrandLogo from './BrandLogo'
@@ -28,50 +28,15 @@ export default function Layout({ children }) {
   const [megaOpen, setMegaOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [hideHeader, setHideHeader] = useState(false)
   const [categories, setCategories] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [searchCategory, setSearchCategory] = useState('')
-  const lastScrollY = useRef(0)
-  const scrollFrame = useRef(null)
 
   useEffect(() => {
-    const getScrollY = () => {
-      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0
-    }
-
-    const updateHeader = () => {
-      const currentY = getScrollY()
-      setScrolled(currentY > 12)
-
-      const scrollDelta = currentY - lastScrollY.current
-      const hideThreshold = 8
-
-      if (scrollDelta > hideThreshold && currentY > 80) {
-        setHideHeader(true)
-      } else if (scrollDelta < -hideThreshold || currentY < 22) {
-        setHideHeader(false)
-      }
-
-      lastScrollY.current = currentY
-    }
-
-    const handleScroll = () => {
-      if (scrollFrame.current) return
-      scrollFrame.current = window.requestAnimationFrame(() => {
-        scrollFrame.current = null
-        updateHeader()
-      })
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    lastScrollY.current = getScrollY()
-    updateHeader()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (scrollFrame.current) window.cancelAnimationFrame(scrollFrame.current)
-    }
+    const updateScrolledState = () => setScrolled((window.scrollY || window.pageYOffset || 0) > 12)
+    updateScrolledState()
+    window.addEventListener('scroll', updateScrolledState, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrolledState)
   }, [])
 
   useEffect(() => {
@@ -115,14 +80,12 @@ export default function Layout({ children }) {
         style={{
           backgroundColor: headerBgDark,
           borderColor: 'var(--border)',
-          transform: hideHeader ? 'translate3d(0, -100%, 0)' : 'translate3d(0, 0, 0)',
-          transition: 'transform .38s cubic-bezier(.22, 1, .36, 1), background-color .3s ease',
-          willChange: 'transform'
+          transition: 'background-color .3s ease'
         }}
       >
         <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-slate-300">
-            <span className="hidden sm:inline-flex text-slate-400">Call us: +94 74 085 8726</span>
+            <span className="hidden sm:inline-flex text-slate-400">Call us: 077 231 0421</span>
             <span className="hidden md:inline-flex text-slate-400">24/7 support · Secure checkout</span>
           </div>
         </div>
@@ -313,7 +276,7 @@ export default function Layout({ children }) {
           </div>
           <div>
             <h4 className="text-sm uppercase tracking-[0.3em] text-blue-400">Contact</h4>
-            <p className="mt-5 text-sm leading-6 text-slate-600">103/3 farm road<br />Dalupotha, Negombo<br />+94 74 085 8726<br />info@infix.lk</p>
+            <p className="mt-5 text-sm leading-6 text-slate-600">103/3 farm road<br />Dalupotha, Negombo<br />077 231 0421<br />info@infix.lk</p>
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-300 pt-8 text-sm text-slate-600 sm:flex-row">
